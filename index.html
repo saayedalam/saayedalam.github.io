@@ -369,6 +369,21 @@
     .toggle-btn { padding: 0.35rem 0.65rem; }
   }
 </style>
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  if (html.classList.contains('light')) {
+    html.classList.remove('light');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    html.classList.add('light');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'light');
+  }
+}
+</script>
 </head>
 <body>
 
@@ -713,20 +728,6 @@ function animateBars() {
     setTimeout(() => { bar.style.width = (parseFloat(bar.dataset.w) * 100) + '%'; }, i * 55);
     i++;
   });
-}
-
-function toggleTheme() {
-  const html = document.documentElement;
-  const btn = document.getElementById('theme-toggle');
-  if (html.classList.contains('light')) {
-    html.classList.remove('light');
-    btn.textContent = '🌙';
-    localStorage.setItem('theme', 'dark');
-  } else {
-    html.classList.add('light');
-    btn.textContent = '☀️';
-    localStorage.setItem('theme', 'light');
-  }
 }
 
 

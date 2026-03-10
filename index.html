@@ -745,7 +745,7 @@ function toggleMobileNav() {
       <div class="skill-chips">
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">SQL</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">PostgreSQL</a>
-        <span class="skill-chip">BigQuery</span>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">BigQuery</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Window Functions</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">CTEs</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Pivot Queries</a>
@@ -756,7 +756,7 @@ function toggleMobileNav() {
       <div class="skill-group-title">BI & Visualization</div>
       <div class="skill-chips">
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Tableau</a>
-        <span class="skill-chip">Power BI</span>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Power BI</a>
         <a href="meditation-trends.html" class="skill-chip skill-link" title="See this skill in action → Meditation Trend Pulse">Streamlit</a>
         <span class="skill-chip">Dashboard Design</span>
         <span class="skill-chip">Data Storytelling</span>
@@ -791,14 +791,14 @@ function toggleMobileNav() {
     <div class="skill-group" data-mode="ae">
       <div class="skill-group-title">Data Engineering</div>
       <div class="skill-chips">
-        <span class="skill-chip">dbt Cloud</span>
-        <span class="skill-chip">BigQuery</span>
-        <span class="skill-chip">ELT Pipelines</span>
-        <span class="skill-chip">Dimensional Modeling</span>
-        <span class="skill-chip">Star Schema</span>
-        <span class="skill-chip">Data Quality Testing</span>
-        <span class="skill-chip">Model Documentation</span>
-        <span class="skill-chip">DAG Lineage</span>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">dbt Cloud</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">BigQuery</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">ELT Pipelines</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Dimensional Modeling</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Star Schema</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Data Quality Testing</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Model Documentation</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">DAG Lineage</a>
       </div>
     </div>
 
@@ -833,10 +833,10 @@ function toggleMobileNav() {
         <span class="skill-chip">Fintech</span>
         <span class="skill-chip">Banking</span>
         <span class="skill-chip">Data Warehousing</span>
-        <span class="skill-chip">Star Schema</span>
-        <span class="skill-chip">ELT Pipelines</span>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Star Schema</a>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">ELT Pipelines</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Risk Analytics</a>
-        <span class="skill-chip">Model Documentation</span>
+        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Model Documentation</a>
       </div>
     </div>
 
@@ -917,6 +917,8 @@ function setMode(mode) {
   const text = '&nbsp;&nbsp;' + unique.join(' · ') + ' ·';
   document.getElementById('ticker-text').innerHTML = text + text;
   const grid = document.getElementById('projects-grid');
+  // Switch to 2-col grid in AE mode (only 2 projects), 3-col in DA mode
+  grid.style.gridTemplateColumns = mode === 'ae' ? 'repeat(2, 1fr)' : '';
   Array.from(grid.querySelectorAll('.project-card')).forEach(card => {
     const cardModes = card.dataset.modes.split(' ');
     card.classList.toggle('hidden', !cardModes.includes(mode));

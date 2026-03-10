@@ -4,9 +4,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Saayed Alam — Data Analyst</title>
-<meta name="description" content="Saayed Alam — Data Analyst · SQL · Python · BI. Based in Toronto, open to remote. Previously at Ipsos serving Visa, Microsoft & Google." />
+<meta name="description" content="Saayed Alam — Data Analyst · SQL · Python · Tableau. Based in Toronto, open to remote. Previously at Ipsos serving Visa and Microsoft." />
 <meta property="og:title" content="Saayed Alam — Data Analyst" />
-<meta property="og:description" content="Data Analyst · SQL · Python · BI. Formerly at Ipsos. Visa, Microsoft & Google client work. Based in Toronto, open to remote." />
+<meta property="og:description" content="Data Analyst · SQL · Python · Tableau. Formerly at Ipsos. Visa and Microsoft client work. Based in Toronto, open to remote." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://saayedalam.me" />
 <!-- Google tag (gtag.js) -->
@@ -269,6 +269,7 @@ function toggleMobileNav() {
   .badge-ml{border-color:var(--accent4);color:var(--accent4)}
   .badge-sql{border-color:var(--accent2);color:var(--accent2)}
   .badge-python{border-color:var(--accent3);color:var(--accent3)}
+  .badge-streamlit{border-color:#58a6ff;color:#58a6ff}
   .badge-tableau{border-color:#e97627;color:#e97627}
   .project-name { font-family: var(--sans); font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.3; }
   .project-desc { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
@@ -314,7 +315,7 @@ function toggleMobileNav() {
   a.skill-link::after {
     content: ' ↗';
     font-size: 9px;
-    opacity: 0;
+    opacity: 0.5;
     transition: opacity 0.2s;
   }
   a.skill-link:hover::after { opacity: 1; }
@@ -489,7 +490,7 @@ function toggleMobileNav() {
       <span class="hl">Alam</span>
     </div>
 
-    <div class="hero-role" id="hero-role">Data Analyst · SQL · Python · BI</div>
+    <div class="hero-role" id="hero-role">Data Analyst · SQL · Python · Tableau</div>
 
     <div class="hero-grid">
       <div class="hero-stat">
@@ -501,13 +502,13 @@ function toggleMobileNav() {
         <span class="hero-stat-label">Visa · Microsoft</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-val" id="s3v">6K+</span>
-        <span class="hero-stat-label" id="s3l">Hospitals Analyzed</span>
+        <span class="hero-stat-val" id="s3v">Ipsos</span>
+        <span class="hero-stat-label" id="s3l">Fortune 500 Clients</span>
       </div>
     </div>
 
     <div class="about-text">
-      <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> serving Fortune 500 brands like <strong>Visa and Microsoft</strong>. I translate complex datasets into clear decisions — across SQL, Python, Tableau, Power BI, and ML.</p>
+      <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> serving Fortune 500 brands like <strong>Visa and Microsoft</strong>. I translate complex datasets into clear decisions — across SQL, Python, Excel, Tableau, and Power BI.</p>
       <p style="margin-top:0.75rem">Targeting roles in <strong>fintech, banking, and market research</strong> where rigorous analysis drives real outcomes.</p>
     </div>
 
@@ -568,7 +569,7 @@ function toggleMobileNav() {
       <div class="project-name">CMS Hospital SQL Analysis</div>
       <div class="project-desc">Used 20+ advanced SQL queries to analyze 6,000+ US hospitals — uncovering regional infrastructure gaps, service disparities, and quality patterns. Findings visualized in a Tableau story designed for non-technical decision makers.</div>
       <div class="project-tags">
-        <span class="tag">PostgreSQL</span><span class="tag">JupyterLab</span><span class="tag">Tableau</span><span class="tag">Window Fns</span><span class="tag">Healthcare</span>
+        <span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">Tableau</span><span class="tag">Healthcare</span>
       </div>
       <div class="project-links">
         <a href="hospital-sql.html" class="project-link link-demo">› Case Study</a>
@@ -582,17 +583,18 @@ function toggleMobileNav() {
         <div class="project-icon">〜</div>
         <div class="project-badges">
           <span class="project-badge badge-python">Python</span>
+          <span class="project-badge badge-streamlit">Streamlit</span>
         </div>
       </div>
       <div class="project-name">Meditation Trend Pulse</div>
       <div class="project-desc">Tracked shifting global interest in meditation across 50+ countries using Google Trends data — with Prophet forecasting to project future momentum. Automated daily pipeline feeds a live multi-page Streamlit dashboard.</div>
       <div class="project-tags">
-        <span class="tag">pytrends</span><span class="tag">Prophet</span><span class="tag">Streamlit</span><span class="tag">Forecasting</span><span class="tag">Automation</span>
+        <span class="tag">Python</span><span class="tag">Prophet</span><span class="tag">Streamlit</span><span class="tag">Forecasting</span><span class="tag">Automation</span>
       </div>
       <div class="project-links">
-        <a href="https://github.com/saayedalam/Meditation-Trend-Pulse" class="project-link link-github" target="_blank">⌥ GitHub</a>
         <a href="meditation-trends.html" class="project-link link-demo">› Case Study</a>
-        <a href="https://meditationtrendpulse.streamlit.app/" class="project-link link-demo" target="_blank">↗ Dashboard</a>
+        <a href="https://github.com/saayedalam/Meditation-Trend-Pulse" class="project-link link-github" target="_blank">⌥ GitHub</a>
+        <a href="https://meditationtrendpulse.streamlit.app/" class="project-link link-tableau" target="_blank">↗ Dashboard</a>
       </div>
     </div>
 
@@ -616,9 +618,9 @@ function toggleMobileNav() {
         <div class="exp-location">Toronto, ON</div>
       </div>
       <div class="exp-bullets">
-        <div class="exp-bullet">Built end-to-end ML pipeline predicting loan default risk across 300K+ applicants using LightGBM and SHAP, with Tableau dashboard for non-technical stakeholders.</div>
-        <div class="exp-bullet">Analyzed 6,000+ CMS hospitals using 20+ advanced SQL queries — window functions, CTEs, pivots — to surface regional infrastructure gaps visualized in Tableau.</div>
-        <div class="exp-bullet">Developed automated Google Trends pipeline with Prophet forecasting and live Streamlit dashboard tracking global meditation interest across 50+ countries.</div>
+        <div class="exp-bullet">Built end-to-end ML pipeline predicting loan default risk across 300K+ applicants using LightGBM and SHAP, with Tableau dashboard for non-technical stakeholders. <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Analyzed 6,000+ CMS hospitals using 20+ advanced SQL queries — window functions, CTEs, pivots — to surface regional infrastructure gaps visualized in Tableau. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Developed automated Google Trends pipeline with Prophet forecasting and live Streamlit dashboard tracking global meditation interest across 50+ countries. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
       </div>
       <div class="exp-tags">
         <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Streamlit</span><span class="tag">Prophet</span>
@@ -697,8 +699,8 @@ function toggleMobileNav() {
     <div class="skill-group">
       <div class="skill-group-title">SQL & Databases</div>
       <div class="skill-chips">
-        <a href="hospital-sql.html" class="skill-chip primary skill-link" title="See this skill in action → Hospital SQL project">SQL</a>
-        <a href="hospital-sql.html" class="skill-chip primary skill-link" title="See this skill in action → Hospital SQL project">PostgreSQL</a>
+        <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">SQL</a>
+        <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">PostgreSQL</a>
         <span class="skill-chip">BigQuery</span>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Window Functions</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">CTEs</a>
@@ -709,8 +711,8 @@ function toggleMobileNav() {
     <div class="skill-group">
       <div class="skill-group-title">BI & Visualization</div>
       <div class="skill-chips">
-        <a href="credit-risk.html" class="skill-chip primary skill-link" title="See this skill in action → Credit Risk project">Tableau</a>
-        <span class="skill-chip primary">Power BI</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Tableau</a>
+        <span class="skill-chip">Power BI</span>
         <a href="meditation-trends.html" class="skill-chip skill-link" title="See this skill in action → Meditation Trend Pulse">Streamlit</a>
         <span class="skill-chip">Dashboard Design</span>
         <span class="skill-chip">Data Storytelling</span>
@@ -720,7 +722,7 @@ function toggleMobileNav() {
     <div class="skill-group">
       <div class="skill-group-title">Python & ML</div>
       <div class="skill-chips">
-        <a href="credit-risk.html" class="skill-chip primary skill-link" title="See this skill in action → Credit Risk project">Python</a>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Python</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Pandas</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">NumPy</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">LightGBM</a>
@@ -733,7 +735,7 @@ function toggleMobileNav() {
     <div class="skill-group" data-mode="da">
       <div class="skill-group-title">Analysis & Stats</div>
       <div class="skill-chips">
-        <span class="skill-chip primary">A/B Testing</span>
+        <span class="skill-chip">A/B Testing</span>
         <span class="skill-chip">Hypothesis Testing</span>
         <span class="skill-chip">Research Analytics</span>
         <span class="skill-chip">KPI Reporting</span>
@@ -745,8 +747,8 @@ function toggleMobileNav() {
     <div class="skill-group" data-mode="ae">
       <div class="skill-group-title">Data Engineering</div>
       <div class="skill-chips">
-        <span class="skill-chip primary">dbt</span>
-        <span class="skill-chip primary">BigQuery</span>
+        <span class="skill-chip">dbt</span>
+        <span class="skill-chip">BigQuery</span>
         <span class="skill-chip">Data Modeling</span>
         <span class="skill-chip">Pipeline Design</span>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
@@ -757,7 +759,7 @@ function toggleMobileNav() {
     <div class="skill-group">
       <div class="skill-group-title">Workflow & Tools</div>
       <div class="skill-chips">
-        <span class="skill-chip primary">Git / GitHub</span>
+        <span class="skill-chip">Git / GitHub</span>
         <span class="skill-chip">JupyterLab</span>
         <span class="skill-chip">Excel / VBA</span>
         <span class="skill-chip">Notion</span>
@@ -769,8 +771,8 @@ function toggleMobileNav() {
     <div class="skill-group" data-mode="da">
       <div class="skill-group-title">Domain Knowledge</div>
       <div class="skill-chips">
-        <span class="skill-chip primary">Fintech</span>
-        <span class="skill-chip primary">Banking</span>
+        <span class="skill-chip">Fintech</span>
+        <span class="skill-chip">Banking</span>
         <span class="skill-chip">Market Research</span>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Healthcare Analytics</a>
         <span class="skill-chip">Survey Methodology</span>
@@ -782,8 +784,8 @@ function toggleMobileNav() {
     <div class="skill-group" data-mode="ae">
       <div class="skill-group-title">Domain Knowledge</div>
       <div class="skill-chips">
-        <span class="skill-chip primary">Fintech</span>
-        <span class="skill-chip primary">Banking</span>
+        <span class="skill-chip">Fintech</span>
+        <span class="skill-chip">Banking</span>
         <span class="skill-chip">Data Warehousing</span>
         <span class="skill-chip">Star Schema</span>
         <span class="skill-chip">ELT Pipelines</span>
@@ -832,9 +834,9 @@ function toggleMobileNav() {
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const modes = {
   da: {
-    role: 'Data Analyst · SQL · Python · BI',
+    role: 'Data Analyst · SQL · Python · Tableau',
     badge: '● DA Profile', badgeColor: 'var(--accent2)',
-    s3v: '6K+', s3l: 'Hospitals Analyzed',
+    s3v: 'Ipsos', s3l: 'Fortune 500 Clients',
     tr: '"Data Analyst"', ts: '["SQL","Python","Tableau","Power BI"]',
     tt: '["fintech","banking","market-research","healthcare"]',
     note: 'I\'m actively looking for <strong style="color:var(--text)">Data Analyst roles</strong> in fintech, banking, market research, and healthcare — in Toronto or remote. If you\'re hiring or want to connect, I respond within 24 hours.',
@@ -843,7 +845,7 @@ const modes = {
   ae: {
     role: 'Analytics Engineer · dbt · BigQuery · Power BI',
     badge: '● AE Profile', badgeColor: 'var(--accent4)',
-    s3v: 'F500', s3l: 'Clients Served',
+    s3v: 'Ipsos', s3l: 'Fortune 500 Clients',
     tr: '"Analytics Engineer"', ts: '["dbt","BigQuery","SQL","Power BI"]',
     tt: '["fintech","banking","data-engineering"]',
     note: 'I\'m actively looking for <strong style="color:var(--text)">Analytics Engineering roles</strong> in fintech and banking — in Toronto or remote. If you\'re hiring or want to connect, I respond within 24 hours.',

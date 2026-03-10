@@ -862,7 +862,7 @@ function toggleMobileNav() {
       <span class="contact-icon">⌥</span>
       <div class="contact-info"><span class="contact-type">GitHub</span><span class="contact-value">github.com/saayedalam</span></div>
     </a>
-    <a class="contact-card" id="resume-link" href="DA_Master_Resume.pdf" download target="_blank">
+    <a class="contact-card" id="resume-link" href="resume/DA_Master_Resume.pdf" download target="_blank">
       <span class="contact-icon">📄</span>
       <div class="contact-info"><span class="contact-type">Resume</span><span class="contact-value">Download PDF</span></div>
     </a>
@@ -945,7 +945,7 @@ function setMode(mode) {
 
   // Resume link
   const resumeLink = document.getElementById('resume-link');
-  if (resumeLink) resumeLink.href = mode === 'ae' ? 'AE_Master_Resume.pdf' : 'DA_Master_Resume.pdf';
+  if (resumeLink) resumeLink.href = mode === 'ae' ? 'resume/AE_Master_Resume.pdf' : 'resume/DA_Master_Resume.pdf';
   document.querySelectorAll('.skill-fill').forEach(b => b.style.width = '0%');
   setTimeout(animateBars, 80);
 }

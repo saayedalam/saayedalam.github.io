@@ -116,8 +116,10 @@ function toggleMobileNav() {
   .nav-links a:hover { color: var(--accent); }
   .nav-links a.active { color: var(--accent); border-bottom-color: var(--accent); }
 
-  .profile-toggle { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
-  .toggle-btn { padding: 0.35rem 1rem; background: transparent; color: var(--muted); border: none; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; transition: all 0.2s; white-space: nowrap; }
+  .profile-toggle { display: flex; align-items: center; border: 1px solid var(--border); border-radius: 2px; position: relative; }
+  .toggle-btn { position: relative; }
+  .toggle-btn[data-tip]:hover::after { content: attr(data-tip); position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--surface2); border: 1px solid var(--border); color: var(--text); font-size: 10px; letter-spacing: 0.06em; padding: 0.3rem 0.6rem; white-space: nowrap; pointer-events: none; z-index: 200; }
+  .toggle-btn { padding: 0.35rem 1rem; background: transparent; color: var(--muted); border: none; cursor: pointer; font-family: var(--mono); font-size: 11px; letter-spacing: 0.08em; transition: all 0.2s; white-space: nowrap; overflow: visible; }
   .toggle-btn.active { background: var(--accent); color: var(--bg); font-weight: 700; }
   .toggle-btn:not(.active):hover { color: var(--text); background: var(--surface2); }
   .toggle-sep { width: 1px; background: var(--border); align-self: stretch; }
@@ -178,9 +180,9 @@ function toggleMobileNav() {
   .hero-role::before { content: '›'; color: var(--accent2); }
 
   .hero-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; border: 1px solid var(--border); background: var(--border); }
-  .hero-stat { background: var(--surface); padding: 1rem 1.25rem; display: flex; flex-direction: column; gap: 0.2rem; }
-  .hero-stat-val { font-family: var(--sans); font-size: 1.6rem; font-weight: 700; color: var(--accent); line-height: 1; }
-  .hero-stat-label { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; margin-top: 0.2rem; }
+  .hero-stat { background: var(--surface); padding: 0.6rem 1rem; display: flex; flex-direction: column; gap: 0.1rem; }
+  .hero-stat-val { font-family: var(--sans); font-size: 1.2rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .hero-stat-label { font-size: 10px; color: var(--muted); letter-spacing: 0.06em; margin-top: 0.15rem; }
   .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
   .btn { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.65rem 1.4rem; font-family: var(--mono); font-size: 12px; letter-spacing: 0.06em; text-decoration: none; border: 1px solid; transition: all 0.2s; cursor: pointer; background: transparent; }
   .btn-primary { border-color: var(--accent); color: var(--accent); }
@@ -327,15 +329,15 @@ function toggleMobileNav() {
   <a href="#intro" class="nav-logo">saayedalam<span>.me</span></a>
   <div class="nav-right">
     <ul class="nav-links">
-      <li><a href="#experience">experience</a></li>
       <li><a href="#projects">projects</a></li>
+      <li><a href="#experience">experience</a></li>
       <li><a href="#skills">skills</a></li>
       <li><a href="#contact">contact</a></li>
     </ul>
     <div class="profile-toggle">
-      <button class="toggle-btn active" id="btn-da" onclick="setMode('da')">DA</button>
+      <button class="toggle-btn active" id="btn-da" onclick="setMode('da')" data-tip="Data Analyst">DA</button>
       <div class="toggle-sep"></div>
-      <button class="toggle-btn" id="btn-ae" onclick="setMode('ae')">AE</button>
+      <button class="toggle-btn" id="btn-ae" onclick="setMode('ae')" data-tip="Analytics Engineer">AE</button>
     </div>
     <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
     <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
@@ -346,8 +348,8 @@ function toggleMobileNav() {
 
 <!-- MOBILE MENU -->
 <div id="mobile-menu">
-  <a href="#experience" onclick="toggleMobileNav()">experience</a>
   <a href="#projects" onclick="toggleMobileNav()">projects</a>
+  <a href="#experience" onclick="toggleMobileNav()">projects</a>
   <a href="#skills" onclick="toggleMobileNav()">skills</a>
   <a href="#contact" onclick="toggleMobileNav()">contact</a>
   <div style="display:flex;gap:0.75rem;padding-top:0.5rem;">
@@ -370,7 +372,6 @@ function toggleMobileNav() {
   <div class="intro-left">
     <div class="hero-top">
       <span class="status-pill"><span class="status-dot"></span>Actively Looking · Toronto · Open to Remote</span>
-      <span class="mode-badge" id="mode-badge" style="border-color:var(--accent2);color:var(--accent2)">● DA Profile</span>
     </div>
 
     <div class="hero-name">
@@ -387,7 +388,7 @@ function toggleMobileNav() {
       </div>
       <div class="hero-stat">
         <span class="hero-stat-val">F500</span>
-        <span class="hero-stat-label">Visa · Microsoft · Google</span>
+        <span class="hero-stat-label">Visa · Microsoft</span>
       </div>
       <div class="hero-stat">
         <span class="hero-stat-val" id="s3v">6K+</span>
@@ -395,15 +396,8 @@ function toggleMobileNav() {
       </div>
     </div>
 
-    <div class="client-strip">
-      <span class="client-chip">Visa</span>
-      <span class="client-chip">Microsoft</span>
-      <span class="client-chip">Google</span>
-      <span class="client-chip">Ipsos</span>
-    </div>
-
     <div class="about-text">
-      <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> for Fortune 500 brands. I translate complex datasets into clear decisions — across SQL, Python, Tableau, Power BI, and ML.</p>
+      <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> serving Fortune 500 brands like <strong>Visa and Microsoft</strong>. I translate complex datasets into clear decisions — across SQL, Python, Tableau, Power BI, and ML.</p>
       <p style="margin-top:0.75rem">Targeting roles in <strong>fintech, banking, and market research</strong> where rigorous analysis drives real outcomes.</p>
     </div>
 
@@ -424,6 +418,73 @@ function toggleMobileNav() {
   <a href="#experience" class="scroll-arrow">
     <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
   </a>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects">
+  <div class="section-label">projects</div>
+  <h2 class="section-heading">Featured Work</h2>
+  <div class="section-divider"></div>
+  <div class="projects-grid fade-in" id="projects-grid">
+
+    <div class="project-card flagship" data-modes="da ae" data-order-da="0" data-order-ae="0">
+      <span class="flagship-label">flagship</span>
+      <div class="project-header">
+        <div class="project-icon">◈</div>
+        <div class="project-badges">
+          <span class="project-badge badge-ml">ML</span>
+          <span class="project-badge badge-tableau">Tableau</span>
+        </div>
+      </div>
+      <div class="project-name">Interpretable Credit Risk Scoring</div>
+      <div class="project-desc">Predicted loan default risk across 300K+ applicants using LightGBM — then made the model explainable with SHAP so non-technical stakeholders could act on it. Live Tableau dashboard covers model results, feature importance, and risk segmentation.</div>
+      <div class="project-tags">
+        <span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Python</span><span class="tag">Tableau</span><span class="tag">PD Modeling</span><span class="tag">Fintech</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/saayedalam/Interpretable-Home-Credit-Risk" class="project-link link-github" target="_blank">⌥ GitHub</a>
+        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/LoanDefaultRiskAnalysisModelResultsSHAPMetrics/0-Overview" class="project-link link-tableau" target="_blank">↗ Live Dashboard</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-modes="da ae" data-order-da="1" data-order-ae="1">
+      <div class="project-header">
+        <div class="project-icon">⬕</div>
+        <div class="project-badges">
+          <span class="project-badge badge-sql">SQL</span>
+          <span class="project-badge badge-tableau">Tableau</span>
+        </div>
+      </div>
+      <div class="project-name">CMS Hospital SQL Analysis</div>
+      <div class="project-desc">Used 20+ advanced SQL queries to analyze 6,000+ US hospitals — uncovering regional infrastructure gaps, service disparities, and quality patterns. Findings visualized in a Tableau story designed for non-technical decision makers.</div>
+      <div class="project-tags">
+        <span class="tag">PostgreSQL</span><span class="tag">JupyterLab</span><span class="tag">Tableau</span><span class="tag">Window Fns</span><span class="tag">Healthcare</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/saayedalam/CMS-Hospital-SQL-Analysis" class="project-link link-github" target="_blank">⌥ GitHub</a>
+        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/CMSHospitalDataDashboardSQLAnalysisVisualization/Story1" class="project-link link-tableau" target="_blank">↗ Live Dashboard</a>
+      </div>
+    </div>
+
+    <div class="project-card" data-modes="da ae" data-order-da="2" data-order-ae="2">
+      <div class="project-header">
+        <div class="project-icon">〜</div>
+        <div class="project-badges">
+          <span class="project-badge badge-python">Python</span>
+        </div>
+      </div>
+      <div class="project-name">Meditation Trend Pulse</div>
+      <div class="project-desc">Tracked shifting global interest in meditation across 50+ countries using Google Trends data — with Prophet forecasting to project future momentum. Automated daily pipeline feeds a live multi-page Streamlit dashboard.</div>
+      <div class="project-tags">
+        <span class="tag">pytrends</span><span class="tag">Prophet</span><span class="tag">Streamlit</span><span class="tag">Forecasting</span><span class="tag">Automation</span>
+      </div>
+      <div class="project-links">
+        <a href="https://github.com/saayedalam/Meditation-Trend-Pulse" class="project-link link-github" target="_blank">⌥ GitHub</a>
+        <a href="https://meditationtrendpulse.streamlit.app/" class="project-link link-demo" target="_blank">▶ Live App</a>
+      </div>
+    </div>
+
+  </div>
 </section>
 
 <!-- EXPERIENCE -->
@@ -489,73 +550,6 @@ function toggleMobileNav() {
       </div>
       <div class="exp-tags">
         <span class="tag">Excel</span><span class="tag">Salesforce</span><span class="tag">Google Analytics</span><span class="tag">OSINT</span><span class="tag">Risk Analysis</span>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects">
-  <div class="section-label">projects</div>
-  <h2 class="section-heading">Featured Work</h2>
-  <div class="section-divider"></div>
-  <div class="projects-grid fade-in" id="projects-grid">
-
-    <div class="project-card flagship" data-modes="da ae" data-order-da="0" data-order-ae="0">
-      <span class="flagship-label">flagship</span>
-      <div class="project-header">
-        <div class="project-icon">◈</div>
-        <div class="project-badges">
-          <span class="project-badge badge-ml">ML</span>
-          <span class="project-badge badge-tableau">Tableau</span>
-        </div>
-      </div>
-      <div class="project-name">Interpretable Credit Risk Scoring</div>
-      <div class="project-desc">Predicted loan default risk across 300K+ applicants using LightGBM — then made the model explainable with SHAP so non-technical stakeholders could act on it. Live Tableau dashboard covers model results, feature importance, and risk segmentation.</div>
-      <div class="project-tags">
-        <span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Python</span><span class="tag">Tableau</span><span class="tag">PD Modeling</span><span class="tag">Fintech</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/saayedalam/Interpretable-Home-Credit-Risk" class="project-link link-github" target="_blank">⌥ GitHub</a>
-        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/LoanDefaultRiskAnalysisModelResultsSHAPMetrics/0-Overview" class="project-link link-tableau" target="_blank">↗ Live Dashboard</a>
-      </div>
-    </div>
-
-    <div class="project-card" data-modes="da ae" data-order-da="1" data-order-ae="1">
-      <div class="project-header">
-        <div class="project-icon">⬕</div>
-        <div class="project-badges">
-          <span class="project-badge badge-sql">SQL</span>
-          <span class="project-badge badge-tableau">Tableau</span>
-        </div>
-      </div>
-      <div class="project-name">CMS Hospital SQL Analysis</div>
-      <div class="project-desc">Used 20+ advanced SQL queries to analyze 6,000+ US hospitals — uncovering regional infrastructure gaps, service disparities, and quality patterns. Findings visualized in a Tableau story designed for non-technical decision makers.</div>
-      <div class="project-tags">
-        <span class="tag">PostgreSQL</span><span class="tag">JupyterLab</span><span class="tag">Tableau</span><span class="tag">Window Fns</span><span class="tag">Healthcare</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/saayedalam/CMS-Hospital-SQL-Analysis" class="project-link link-github" target="_blank">⌥ GitHub</a>
-        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/CMSHospitalDataDashboardSQLAnalysisVisualization/Story1" class="project-link link-tableau" target="_blank">↗ Live Dashboard</a>
-      </div>
-    </div>
-
-    <div class="project-card" data-modes="da ae" data-order-da="2" data-order-ae="2">
-      <div class="project-header">
-        <div class="project-icon">〜</div>
-        <div class="project-badges">
-          <span class="project-badge badge-python">Python</span>
-        </div>
-      </div>
-      <div class="project-name">Meditation Trend Pulse</div>
-      <div class="project-desc">Tracked shifting global interest in meditation across 50+ countries using Google Trends data — with Prophet forecasting to project future momentum. Automated daily pipeline feeds a live multi-page Streamlit dashboard.</div>
-      <div class="project-tags">
-        <span class="tag">pytrends</span><span class="tag">Prophet</span><span class="tag">Streamlit</span><span class="tag">Forecasting</span><span class="tag">Automation</span>
-      </div>
-      <div class="project-links">
-        <a href="https://github.com/saayedalam/Meditation-Trend-Pulse" class="project-link link-github" target="_blank">⌥ GitHub</a>
-        <a href="https://meditationtrendpulse.streamlit.app/" class="project-link link-demo" target="_blank">▶ Live App</a>
       </div>
     </div>
 
@@ -751,7 +745,7 @@ function setMode(mode) {
   ['btn-ae','mob-btn-ae'].forEach(id => { const el = document.getElementById(id); if(el) el.classList.toggle('active', mode === 'ae'); });
   document.getElementById('hero-role').textContent = m.role;
   const badge = document.getElementById('mode-badge');
-  badge.textContent = m.badge; badge.style.borderColor = m.badgeColor; badge.style.color = m.badgeColor;
+  if (badge) { badge.textContent = m.badge; badge.style.borderColor = m.badgeColor; badge.style.color = m.badgeColor; }
   document.getElementById('s3v').textContent = m.s3v;
   document.getElementById('s3l').textContent = m.s3l;
   document.getElementById('contact-note').innerHTML = m.note;

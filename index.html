@@ -188,19 +188,32 @@ function toggleMobileNav() {
   .btn-secondary:hover { border-color: var(--muted); color: var(--text); } 50%{transform:translateX(-50%) translateY(6px)} }
 
   /* RIGHT SIDE — photo + bio + terminal */
-  .photo-block { position: relative; width: 100%; max-width: 320px; margin: 0 auto; }
-  .photo-frame { position: absolute; inset: -8px; border: 1px dashed var(--accent); opacity: 0.45; pointer-events: none; }
-  .photo-status {
-    position: absolute; bottom: -8px; left: -8px;
-    background: var(--bg); border: 1px solid rgba(63,185,80,0.5);
-    color: var(--accent2); font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; padding: 0.28rem 0.75rem;
-    display: flex; align-items: center; gap: 0.5rem;
-    white-space: nowrap;
+  .photo-block {
+    width: 100%; max-width: 320px; margin: 0 auto;
+    padding: 10px;
+    border: 1px dashed var(--accent);
+    opacity: 1;
   }
-  html.light .photo-status { background: #ffffff; }
+  .photo-inner {
+    position: relative;
+    line-height: 0;
+  }
+  .photo-block img {
+    width: 100%; display: block;
+    filter: grayscale(20%) contrast(1.05);
+    border: 1px solid var(--border);
+    transition: filter 0.3s;
+  }
+  .photo-status {
+    position: absolute; bottom: 0; left: 0; right: 0;
+    background: rgba(8,12,16,0.78);
+    border-top: 1px solid rgba(63,185,80,0.4);
+    color: var(--accent2); font-size: 10px; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 0.4rem 0.85rem;
+    display: flex; align-items: center; gap: 0.5rem;
+  }
+  html.light .photo-status { background: rgba(255,255,255,0.85); }
   .photo-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; flex-shrink: 0; }
-  .photo-block img { width: 100%; display: block; filter: grayscale(20%) contrast(1.05); border: 1px solid var(--border); transition: filter 0.3s; }
   html.light .photo-block img { filter: grayscale(10%) contrast(1.02); }
 
 
@@ -477,9 +490,10 @@ function toggleMobileNav() {
   <!-- RIGHT: photo only -->
   <div class="intro-right">
     <div class="photo-block">
-      <img src="photo.JPG" alt="Saayed Alam" />
-      <div class="photo-frame"></div>
-      <div class="photo-status"><span class="photo-status-dot"></span>Actively Looking · Toronto · Open to Remote</div>
+      <div class="photo-inner">
+        <img src="photo.JPG" alt="Saayed Alam" />
+        <div class="photo-status"><span class="photo-status-dot"></span>Actively Looking · Toronto · Open to Remote</div>
+      </div>
     </div>
   </div>
 </section>

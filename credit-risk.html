@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Interpretable Credit Risk Scoring — Saayed Alam</title>
+<meta name="description" content="Case study: Predicting loan default risk across 300K+ applicants using LightGBM and SHAP, with Tableau dashboards for risk teams."/>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#080c10;--surface:#0d1117;--surface2:#161b22;
+  --border:#21262d;--accent:#58a6ff;--accent2:#3fb950;
+  --text:#e6edf3;--muted:#7d8590;
+  --mono:'JetBrains Mono',monospace;--sans:'Syne',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(88,166,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(88,166,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:rgba(8,12,16,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+.nav-logo{font-weight:700;font-size:13px;color:var(--accent);letter-spacing:0.05em;text-decoration:none;}
+.nav-logo span{color:var(--muted);}
+.nav-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.nav-back:hover{color:var(--accent);}
+
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem 4rem;}
+
+/* HEADER */
+.case-label{font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;}
+.case-label::before{content:'//';color:var(--muted);}
+.case-title{font-family:var(--sans);font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;}
+.case-subtitle{font-size:13px;color:var(--muted);line-height:1.7;max-width:620px;margin-bottom:1.25rem;}
+.case-meta{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
+.meta-tag{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;border:1px solid var(--border);color:var(--muted);background:var(--surface2);}
+.meta-tag.hi{border-color:var(--accent);color:var(--accent);}
+.case-links{display:flex;gap:0.75rem;flex-wrap:wrap;padding-bottom:2.5rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem;}
+.case-link{font-size:11px;text-decoration:none;letter-spacing:0.06em;display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border:1px solid;transition:all 0.2s;}
+.lp{border-color:var(--accent);color:var(--accent);}
+.lp:hover{background:var(--accent);color:var(--bg);}
+.ls{border-color:var(--border);color:var(--muted);}
+.ls:hover{border-color:var(--muted);color:var(--text);}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2.5rem;}
+.stat-box{background:var(--surface);padding:1.25rem;display:flex;flex-direction:column;gap:0.25rem;}
+.stat-val{font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--accent);line-height:1;}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.2rem;}
+
+/* SECTION TITLE */
+.st{font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.st::before{content:'//';color:var(--muted);}
+.st::after{content:'';flex:1;height:1px;background:var(--border);}
+.cs{margin-bottom:2.5rem;}
+
+/* CAROUSEL */
+.carousel{border:1px solid var(--border);background:var(--surface);margin-bottom:2.5rem;position:relative;}
+.carousel-header{background:var(--surface2);border-bottom:1px solid var(--border);padding:0.6rem 1rem;display:flex;align-items:center;justify-content:space-between;}
+.carousel-dots-row{display:flex;align-items:center;gap:0.75rem;}
+.browser-dots{display:flex;gap:0.4rem;}
+.bd{width:10px;height:10px;border-radius:50%;}
+.bd-r{background:#f78166;}.bd-y{background:#e3b341;}.bd-g{background:#3fb950;}
+.carousel-tab-label{font-size:11px;color:var(--muted);letter-spacing:0.05em;}
+.carousel-open{font-size:11px;color:var(--accent);text-decoration:none;letter-spacing:0.05em;}
+.carousel-open:hover{text-decoration:underline;}
+
+.carousel-track-wrap{overflow:hidden;position:relative;}
+.carousel-track{display:flex;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
+.carousel-slide{min-width:100%;position:relative;}
+.carousel-slide img{width:100%;display:block;}
+.slide-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(8,12,16,0.82);border-top:1px solid var(--border);padding:0.5rem 1rem;font-size:11px;color:var(--muted);letter-spacing:0.04em;}
+
+/* CAROUSEL CONTROLS */
+.carousel-controls{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;border-top:1px solid var(--border);}
+.carousel-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:0.08em;padding:0.35rem 0.85rem;cursor:pointer;transition:all 0.2s;}
+.carousel-btn:hover{border-color:var(--accent);color:var(--accent);}
+.carousel-btn:disabled{opacity:0.25;cursor:default;}
+.carousel-dots{display:flex;gap:0.5rem;align-items:center;}
+.cdot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:all 0.2s;border:none;padding:0;}
+.cdot.active{background:var(--accent);width:18px;border-radius:3px;}
+.carousel-counter{font-size:11px;color:var(--muted);}
+
+/* PROCESS */
+.process-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+.process-step{background:var(--surface);padding:1.25rem 1.5rem;display:grid;grid-template-columns:40px 1fr;gap:1rem;align-items:start;transition:background 0.2s;}
+.process-step:hover{background:var(--surface2);}
+.step-num{font-family:var(--sans);font-size:1.1rem;font-weight:800;color:var(--accent);opacity:0.35;line-height:1;padding-top:0.15rem;}
+.step-title{font-size:13px;color:var(--text);font-weight:600;margin-bottom:0.3rem;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+.step-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.5rem;}
+.step-tag{font-size:10px;padding:0.15rem 0.5rem;background:var(--surface2);border:1px solid var(--border);color:var(--muted);}
+
+/* FINDINGS */
+.findings-list{display:flex;flex-direction:column;gap:0.5rem;}
+.finding{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent2);padding:1rem 1.25rem;font-size:12.5px;color:#8b949e;line-height:1.7;}
+.finding strong{color:var(--text);}
+
+/* PROSE */
+.prose{font-size:13px;color:#8b949e;line-height:1.85;}
+.prose p+p{margin-top:1rem;}
+.prose strong{color:var(--text);}
+
+/* FOOTER */
+.case-footer{border-top:1px solid var(--border);padding-top:2rem;margin-top:3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.footer-back:hover{color:var(--accent);}
+.footer-note{font-size:11px;color:var(--muted);}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){
+  main{padding:4rem 1rem 3rem;}
+  nav{padding:0 1rem;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .process-step{grid-template-columns:30px 1fr;}
+}
+</style>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">saayedalam<span>.me</span></a>
+  <a href="index.html#projects" class="nav-back">← back to portfolio</a>
+</nav>
+
+<main>
+
+  <!-- HEADER -->
+  <div class="fade-in">
+    <div class="case-label">Case Study · Flagship Project</div>
+    <h1 class="case-title">Interpretable Credit Risk Scoring</h1>
+    <p class="case-subtitle">A machine learning pipeline that predicts loan default probability across 300K+ applicants — then makes every prediction explainable to risk managers, auditors, and product teams using SHAP and Tableau.</p>
+    <div class="case-meta">
+      <span class="meta-tag hi">LightGBM</span>
+      <span class="meta-tag hi">SHAP</span>
+      <span class="meta-tag">Python</span>
+      <span class="meta-tag">Tableau</span>
+      <span class="meta-tag">Optuna</span>
+      <span class="meta-tag">Home Credit Dataset</span>
+      <span class="meta-tag">Fintech · Risk</span>
+    </div>
+    <div class="case-links">
+      <a href="https://public.tableau.com/app/profile/saayed.alam/viz/LoanDefaultRiskAnalysisModelResultsSHAPMetrics/0-Overview" target="_blank" class="case-link lp">↗ Live Dashboard</a>
+      <a href="https://github.com/saayedalam/Interpretable-Home-Credit-Risk" target="_blank" class="case-link ls">⌥ GitHub Repo</a>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row fade-in">
+    <div class="stat-box"><span class="stat-val">300K+</span><span class="stat-label">Loan Applicants</span></div>
+    <div class="stat-box"><span class="stat-val">0.30</span><span class="stat-label">Optimized Threshold</span></div>
+    <div class="stat-box"><span class="stat-val">6</span><span class="stat-label">Dashboard Views</span></div>
+    <div class="stat-box"><span class="stat-val">SHAP</span><span class="stat-label">Explainability Layer</span></div>
+  </div>
+
+  <!-- CAROUSEL -->
+  <div class="cs fade-in">
+    <div class="st">Dashboard Walkthrough</div>
+    <div class="carousel">
+      <div class="carousel-header">
+        <div class="carousel-dots-row">
+          <div class="browser-dots"><span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span></div>
+          <span class="carousel-tab-label" id="tab-label">0 — Overview</span>
+        </div>
+        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/LoanDefaultRiskAnalysisModelResultsSHAPMetrics/0-Overview" target="_blank" class="carousel-open">↗ Open in Tableau</a>
+      </div>
+      <div class="carousel-track-wrap">
+        <div class="carousel-track" id="carousel-track">
+          <div class="carousel-slide">
+            <img src="assets/cr-0-overview.png" alt="Overview — Dashboard Home"/>
+            <div class="slide-caption">Overview — Dashboard home with navigation to all 5 views</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/cr-1-shap-global.png" alt="SHAP Global Feature Importance"/>
+            <div class="slide-caption">SHAP Global Importance — Top features ranked by mean absolute SHAP value across all applicants</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/cr-2-score-outcome.png" alt="Score by Actual Outcome"/>
+            <div class="slide-caption">Score by Actual Outcome — Predicted risk score distributions by true default vs. non-default</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/cr-3-shap-risk.png" alt="SHAP by Risk Group"/>
+            <div class="slide-caption">SHAP by Risk Group — Feature impact segmented across Low, Medium, and High risk bands</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/cr-4-feature-impact.png" alt="Feature Impact on Score"/>
+            <div class="slide-caption">Feature Impact on Score — SHAP contribution vs. predicted probability for each applicant</div>
+          </div>
+          <div class="carousel-slide">
+            <img src="assets/cr-5-confusion.png" alt="Confusion Matrix and Metrics"/>
+            <div class="slide-caption">Confusion Matrix & Metrics — Prediction outcomes and model performance breakdown for auditors</div>
+          </div>
+        </div>
+      </div>
+      <div class="carousel-controls">
+        <button class="carousel-btn" id="prev-btn" disabled>← prev</button>
+        <div class="carousel-dots" id="carousel-dots"></div>
+        <button class="carousel-btn" id="next-btn">next →</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="cs fade-in">
+    <div class="st">The Problem</div>
+    <div class="prose">
+      <p>Many loan applicants — particularly those with limited or no formal credit history — are denied financing not because they're high risk, but because traditional scoring models can't assess them. The <strong>Home Credit dataset</strong> represents exactly this population: 300K+ applicants where standard bureau data is thin or absent.</p>
+      <p>The challenge isn't just prediction accuracy. In regulated financial environments, a model that says "denied" without explanation is unusable. <strong>Risk managers need to know why. Auditors need documentation. Product teams need actionable thresholds.</strong> A black-box ML model, no matter how accurate, fails all three.</p>
+    </div>
+  </div>
+
+  <!-- APPROACH -->
+  <div class="cs fade-in">
+    <div class="st">Approach</div>
+    <div class="process-list">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Data Cleaning & Feature Engineering</div>
+          <div class="step-desc">Handled missing values, encoded categorical variables, and addressed class imbalance in the raw Home Credit dataset. Structured outputs into analysis-ready formats.</div>
+          <div class="step-tags"><span class="step-tag">Pandas</span><span class="step-tag">NumPy</span><span class="step-tag">Class Imbalance</span><span class="step-tag">Encoding</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">LightGBM Modeling with Optuna Tuning</div>
+          <div class="step-desc">Trained a LightGBM classifier with automated hyperparameter optimization via Optuna. Tuned the decision threshold to 0.30 to maximize recall — prioritizing detection of actual defaulters over false precision.</div>
+          <div class="step-tags"><span class="step-tag">LightGBM</span><span class="step-tag">Optuna</span><span class="step-tag">Threshold Tuning</span><span class="step-tag">AUC-ROC</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">SHAP Explainability Layer</div>
+          <div class="step-desc">Applied SHAP to generate both global feature importance and individual prediction explanations. Computed SHAP values by risk band so stakeholders can see how risk drivers differ across segments — not just the global picture.</div>
+          <div class="step-tags"><span class="step-tag">SHAP</span><span class="step-tag">Global Importance</span><span class="step-tag">Risk Segmentation</span><span class="step-tag">Local Explanations</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Tableau-Ready Exports & Dashboard</div>
+          <div class="step-desc">Structured all model outputs into clean CSV exports purpose-built for Tableau. Built a 6-view interactive dashboard that lets risk teams explore predictions, SHAP values, and model performance without touching any code.</div>
+          <div class="step-tags"><span class="step-tag">Tableau Public</span><span class="step-tag">CSV Exports</span><span class="step-tag">Dashboard Design</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINDINGS -->
+  <div class="cs fade-in">
+    <div class="st">Key Findings</div>
+    <div class="findings-list">
+      <div class="finding">A threshold of <strong>0.30 rather than the default 0.50</strong> significantly improved recall — catching more actual defaulters at the cost of some precision. In credit risk, missing a true default is far more costly than a false positive.</div>
+      <div class="finding"><strong>External credit scores (EXT_SOURCE_2, EXT_SOURCE_3) and credit annuity ratio</strong> emerged as the strongest global predictors — consistent with domain intuition, which validates the model's behavior to risk managers.</div>
+      <div class="finding">SHAP values revealed that <strong>the same features drive risk differently across Low, Medium, and High risk bands</strong> — a finding that wouldn't surface from global importance alone, with direct implications for segmented lending policy.</div>
+      <div class="finding">The confusion matrix shows <strong>843 true positives vs. 4,122 false negatives</strong> at threshold 0.30 — a deliberate trade-off favoring default detection in a class-imbalanced dataset (91% non-default).</div>
+      <div class="finding">Exporting structured CSVs from the modeling pipeline into Tableau made the model's outputs <strong>accessible to compliance, product, and executive audiences</strong> — no code required.</div>
+    </div>
+  </div>
+
+  <!-- BUSINESS IMPLICATION -->
+  <div class="cs fade-in">
+    <div class="st">Business Implication</div>
+    <div class="prose">
+      <p>This project demonstrates that interpretability isn't a trade-off against accuracy — it's a requirement for deployment. A model that risk teams don't trust won't be used, regardless of its AUC score.</p>
+      <p>The SHAP + Tableau layer transforms a machine learning output into a <strong>decision support tool</strong> that risk managers can act on, auditors can review, and executives can understand. In a regulated lending environment, that's the difference between a proof of concept and a production-ready system.</p>
+    </div>
+  </div>
+
+  <div class="case-footer fade-in">
+    <a href="index.html#projects" class="footer-back">← back to all projects</a>
+    <span class="footer-note">Built by Saayed Alam · 2025</span>
+  </div>
+
+</main>
+
+<script>
+// Carousel
+const slides = document.querySelectorAll('.carousel-slide');
+const track = document.getElementById('carousel-track');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const dotsContainer = document.getElementById('carousel-dots');
+const tabLabel = document.getElementById('tab-label');
+
+const labels = [
+  '0 — Overview',
+  '1 — SHAP Global Importance',
+  '2 — Score by Actual Outcome',
+  '3 — SHAP by Risk Group',
+  '4 — Feature Impact on Score',
+  '5 — Confusion Matrix & Metrics'
+];
+
+let current = 0;
+
+// Build dots
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'cdot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+});
+
+function goTo(n) {
+  current = n;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  tabLabel.textContent = labels[current];
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === slides.length - 1;
+  document.querySelectorAll('.cdot').forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+prevBtn.addEventListener('click', () => goTo(current - 1));
+nextBtn.addEventListener('click', () => goTo(current + 1));
+
+// Keyboard nav
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+  if (e.key === 'ArrowRight' && current < slides.length - 1) goTo(current + 1);
+});
+
+// Touch swipe
+let touchStartX = 0;
+track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+track.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (dx < -50 && current < slides.length - 1) goTo(current + 1);
+  if (dx > 50 && current > 0) goTo(current - 1);
+}, {passive:true});
+
+// Fade in observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

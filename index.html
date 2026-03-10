@@ -70,7 +70,6 @@ function toggleMobileNav() {
   html { scroll-behavior: smooth; }
   html.light body::before { background-image: linear-gradient(rgba(9,105,218,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(9,105,218,0.05) 1px, transparent 1px); background-size: 40px 40px; }
   html.light body::after { display: none; }
-  @media(max-width: 600px) { .skills-layout { grid-template-columns: 1fr; } }
 
   body {
     background: var(--bg); color: var(--text);
@@ -298,6 +297,21 @@ function toggleMobileNav() {
   .contact-note { grid-column: 1/-1; background: var(--surface2); border-top: 1px solid var(--border); border-left: 3px solid var(--accent2); padding: 0.9rem 1.25rem; font-size: 12px; color: var(--muted); line-height: 1.6; }
 
   .contact-info { display: flex; flex-direction: column; gap: 0.1rem; }
+
+  /* BACK TO TOP */
+  .back-to-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 200;
+    width: 40px; height: 40px;
+    background: var(--surface2); border: 1px solid var(--border);
+    color: var(--muted); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: all; }
+  .back-to-top:hover { border-color: var(--accent); color: var(--accent); background: var(--surface); }
+  .back-to-top svg { width: 16px; height: 16px; stroke: currentColor; fill: none; }
+
   /* FOOTER */
   footer { position: relative; z-index: 1; border-top: 1px solid var(--border); padding: 1.5rem 2rem; display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; font-size: 11px; color: var(--muted); }
 
@@ -307,18 +321,71 @@ function toggleMobileNav() {
 
   /* RESPONSIVE */
   @media(max-width: 768px) {
+    /* NAV */
+    nav { padding: 0 1rem; }
     .nav-links { display: none; }
     .profile-toggle { display: none; }
     .hamburger { display: flex; }
-    #intro { grid-template-columns: 1fr; padding-top: 90px; }
-    .intro-photo-row { flex-direction: column; }
-    .photo-block { max-width: 120px; }
-    .contact-grid { grid-template-columns: 1fr 1fr; }
-    .hero-grid { grid-template-columns: 1fr 1fr; }
-    .edu-grid { grid-template-columns: 1fr; }
-    nav { padding: 0 1rem; }
+
+    /* TICKER — add top breathing room so status pill doesn't collide */
+    .ticker { top: 56px; }
+
+    /* INTRO — stack columns, photo first */
+    #intro {
+      display: flex;
+      flex-direction: column;
+      padding-top: 100px;
+      gap: 1.5rem;
+      min-height: unset;
+    }
+    .intro-right { order: -1; display: flex; justify-content: center; }
+    .photo-block { max-width: 130px; margin: 0 auto; }
+    .intro-left { display: flex; flex-direction: column; gap: 1.25rem; }
+
+    /* STATS — replace grid with a compact inline row */
+    .hero-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      background: transparent;
+      border: none;
+    }
+    .hero-stat {
+      flex: 1 1 auto;
+      min-width: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 0.5rem 0.75rem;
+      display: flex;
+      flex-direction: row;
+      align-items: baseline;
+      gap: 0.4rem;
+    }
+    .hero-stat-val { font-size: 1rem; }
+    .hero-stat-label { font-size: 10px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* EXPERIENCE */
     .exp-card { grid-template-columns: 1fr; }
     .exp-period, .exp-location { text-align: left; }
+
+    /* EDUCATION */
+    .edu-grid { grid-template-columns: 1fr; }
+
+    /* SKILLS — single column, no overflow */
+    .skills-layout { grid-template-columns: 1fr !important; }
+    .skill-chips { flex-wrap: wrap; }
+
+    /* CONTACT — stack to 2 cols, no overflow */
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+    }
+    .contact-card { min-width: 0; overflow: hidden; }
+    .contact-value { font-size: 10px; word-break: break-all; }
+
+    /* GENERAL */
+    section { padding: 2rem 1rem; }
+    .back-to-top { bottom: 1rem; right: 1rem; }
   }
 </style>
 </head>
@@ -805,6 +872,17 @@ setMode('da');
     document.getElementById('theme-toggle').textContent = '☀️';
   }
 })();
+
+// Back to top visibility
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('back-to-top');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
 </script>
+
+<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+  <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="18 15 12 9 6 15"/></svg>
+</button>
+
 </body>
 </html>

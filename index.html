@@ -507,9 +507,13 @@ function toggleMobileNav() {
       </div>
     </div>
 
-    <div class="about-text">
+    <div class="about-text" id="bio-da">
       <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> serving Fortune 500 brands like <strong>Visa and Microsoft</strong>. I translate complex datasets into clear decisions — across SQL, Python, Excel, Tableau, and Power BI.</p>
       <p style="margin-top:0.75rem">Targeting roles in <strong>fintech, banking, and market research</strong> where rigorous analysis drives real outcomes.</p>
+    </div>
+    <div class="about-text" id="bio-ae" style="display:none">
+      <p>Data Analyst with 3+ years of experience transitioning into Analytics Engineering — applying hands-on work with <strong>dbt Cloud, BigQuery, and ELT pipelines</strong> to build tested, documented, and BI-ready data models. Comfortable bridging the gap between raw data and business-ready datasets.</p>
+      <p style="margin-top:0.75rem">Open to <strong>Analytics Engineering roles across industries</strong> where strong SQL foundations, data modeling instincts, and a bias toward clean, maintainable pipelines are valued.</p>
     </div>
 
     <div class="hero-cta">
@@ -537,7 +541,28 @@ function toggleMobileNav() {
   <div class="section-divider"></div>
   <div class="projects-grid fade-in" id="projects-grid">
 
-    <div class="project-card flagship" data-modes="da ae" data-order-da="0" data-order-ae="0">
+    <div class="project-card flagship" data-modes="ae" data-order-ae="0">
+      <span class="flagship-label">flagship</span>
+      <div class="project-header">
+        <div class="project-icon">⬡</div>
+        <div class="project-badges">
+          <span class="project-badge badge-sql">dbt</span>
+          <span class="project-badge badge-tableau" style="border-color:#f0b429;color:#f0b429">BigQuery</span>
+        </div>
+      </div>
+      <div class="project-name">Fintech Analytics Engineering Platform</div>
+      <div class="project-desc">End-to-end analytics engineering platform for U.S. mortgage credit risk — built on dbt Cloud and BigQuery with tested, documented, BI-ready marts and a live Power BI dashboard tracking delinquency trends by state and lending channel.</div>
+      <div class="project-tags">
+        <span class="tag">dbt Cloud</span><span class="tag">BigQuery</span><span class="tag">Power BI</span><span class="tag">ELT</span><span class="tag">Dimensional Modeling</span>
+      </div>
+      <div class="project-links">
+        <a href="fintech-ae.html" class="project-link link-demo">› Case Study</a>
+        <a href="https://github.com/saayedalam/Fintech-Analytics-Engineering-Platform" class="project-link link-github" target="_blank">⌥ GitHub</a>
+        <a href="https://github.com/saayedalam/Fintech-Analytics-Engineering-Platform/tree/main/power" class="project-link link-tableau" target="_blank">↗ Dashboard</a>
+      </div>
+    </div>
+
+    <div class="project-card flagship" data-modes="da" data-order-da="0">
       <span class="flagship-label">flagship</span>
       <div class="project-header">
         <div class="project-icon">◈</div>
@@ -578,7 +603,7 @@ function toggleMobileNav() {
       </div>
     </div>
 
-    <div class="project-card" data-modes="da ae" data-order-da="2" data-order-ae="2">
+    <div class="project-card" data-modes="da" data-order-da="2">
       <div class="project-header">
         <div class="project-icon">〜</div>
         <div class="project-badges">
@@ -617,13 +642,22 @@ function toggleMobileNav() {
         <div class="exp-period">Jan 2025 — Present</div>
         <div class="exp-location">Toronto, ON</div>
       </div>
-      <div class="exp-bullets">
+      <div class="exp-bullets" id="ind-bullets-da">
         <div class="exp-bullet">Built end-to-end ML pipeline predicting loan default risk across 300K+ applicants using LightGBM and SHAP, with Tableau dashboard for non-technical stakeholders. <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
         <div class="exp-bullet">Analyzed 6,000+ CMS hospitals using 20+ advanced SQL queries — window functions, CTEs, pivots — to surface regional infrastructure gaps visualized in Tableau. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
         <div class="exp-bullet">Developed automated Google Trends pipeline with Prophet forecasting and live Streamlit dashboard tracking global meditation interest across 50+ countries. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
       </div>
-      <div class="exp-tags">
+      <div class="exp-bullets" id="ind-bullets-ae" style="display:none">
+        <div class="exp-bullet">Designed end-to-end analytics engineering workflow for U.S. mortgage credit risk using dbt Cloud and BigQuery — built tested, version-controlled, and documented semantic marts for BI consumption. <a href="fintech-ae.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Engineered automated data pipeline tracking global mindfulness trends via Google Trends API — implemented Prophet forecasting and deployed a live Streamlit dashboard with daily automated cron updates. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Implemented ELT pipelines and dimensional modeling via complex SQL transformations across 6,000+ hospitals — optimized 28+ queries supporting a multi-view Tableau reporting suite. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Built and tuned a credit risk model using LightGBM and Optuna — integrated SHAP explainability and deployed results to interactive dashboards improving model governance. <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+      </div>
+      <div class="exp-tags" id="ind-tags-da">
         <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Streamlit</span><span class="tag">Prophet</span>
+      </div>
+      <div class="exp-tags" id="ind-tags-ae" style="display:none">
+        <span class="tag">dbt Cloud</span><span class="tag">BigQuery</span><span class="tag">Power BI</span><span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Streamlit</span><span class="tag">Prophet</span>
       </div>
     </div>
 
@@ -636,15 +670,25 @@ function toggleMobileNav() {
         <div class="exp-period">Aug 2022 — Jan 2025</div>
         <div class="exp-location">Toronto, ON</div>
       </div>
-      <div class="exp-bullets">
+      <div class="exp-bullets" id="ipsos-bullets-da">
         <div class="exp-bullet">Delivered analytics and reporting for Fortune 500 clients including Visa and Microsoft, supporting brand performance tracking and strategic decision-making.</div>
         <div class="exp-bullet">Selected as SME to operationalize a Random Forest–based driver analysis solution — co-authored internal training materials and supported model interpretation across teams.</div>
         <div class="exp-bullet">Led high-volume production of 30+ survey-based reports per month while managing multiple concurrent projects under tight client deadlines.</div>
         <div class="exp-bullet">Built Excel automation to validate incoming survey datasets, reducing manual errors and improving processing speed across the data quality pipeline.</div>
         <div class="exp-bullet">Trusted to own the Visa account end-to-end — technical deliverables, stakeholder communication, and offshore team coordination.</div>
       </div>
-      <div class="exp-tags">
+      <div class="exp-bullets" id="ipsos-bullets-ae" style="display:none">
+        <div class="exp-bullet">Executed data ingestion and transformation for Tier-1 clients (Visa, Microsoft) — standardizing raw unstructured data into clean, analysis-ready datasets for downstream reporting.</div>
+        <div class="exp-bullet">Developed custom Excel-based automation tools to validate incoming datasets, significantly reducing manual error rates and processing time across the data quality pipeline.</div>
+        <div class="exp-bullet">Led operational adoption of a Random Forest model as primary technical resource — co-authored technical training documentation for internal teams.</div>
+        <div class="exp-bullet">Managed cross-functional data workflows with offshore processing teams, leading QA audits to ensure 100% data accuracy before modeling.</div>
+        <div class="exp-bullet">Orchestrated production of 30+ high-accuracy reports per month, managing full data lifecycle for 2–3 concurrent projects weekly.</div>
+      </div>
+      <div class="exp-tags" id="ipsos-tags-da">
         <span class="tag">Excel / VBA</span><span class="tag">Python</span><span class="tag">Random Forest</span><span class="tag">Reporting</span><span class="tag">Stakeholder Comms</span><span class="tag">QA</span>
+      </div>
+      <div class="exp-tags" id="ipsos-tags-ae" style="display:none">
+        <span class="tag">Data Ingestion</span><span class="tag">ELT</span><span class="tag">Excel / VBA</span><span class="tag">QA</span><span class="tag">Stakeholder Comms</span>
       </div>
     </div>
 
@@ -747,12 +791,14 @@ function toggleMobileNav() {
     <div class="skill-group" data-mode="ae">
       <div class="skill-group-title">Data Engineering</div>
       <div class="skill-chips">
-        <span class="skill-chip">dbt</span>
+        <span class="skill-chip">dbt Cloud</span>
         <span class="skill-chip">BigQuery</span>
-        <span class="skill-chip">Data Modeling</span>
-        <span class="skill-chip">Pipeline Design</span>
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
-        <span class="skill-chip">Lineage</span>
+        <span class="skill-chip">ELT Pipelines</span>
+        <span class="skill-chip">Dimensional Modeling</span>
+        <span class="skill-chip">Star Schema</span>
+        <span class="skill-chip">Data Quality Testing</span>
+        <span class="skill-chip">Model Documentation</span>
+        <span class="skill-chip">DAG Lineage</span>
       </div>
     </div>
 
@@ -816,7 +862,7 @@ function toggleMobileNav() {
       <span class="contact-icon">⌥</span>
       <div class="contact-info"><span class="contact-type">GitHub</span><span class="contact-value">github.com/saayedalam</span></div>
     </a>
-    <a class="contact-card" href="DA_Master_Resume.pdf" download target="_blank">
+    <a class="contact-card" id="resume-link" href="DA_Master_Resume.pdf" download target="_blank">
       <span class="contact-icon">📄</span>
       <div class="contact-info"><span class="contact-type">Resume</span><span class="contact-value">Download PDF</span></div>
     </a>
@@ -878,6 +924,26 @@ function setMode(mode) {
     card.style.order = card.dataset[key] ?? 99;
   });
   document.querySelectorAll('.skill-group[data-mode]').forEach(g => g.classList.toggle('hidden', g.dataset.mode !== mode));
+
+  // Bio
+  const bioDA = document.getElementById('bio-da');
+  const bioAE = document.getElementById('bio-ae');
+  if (bioDA) bioDA.style.display = mode === 'da' ? '' : 'none';
+  if (bioAE) bioAE.style.display = mode === 'ae' ? '' : 'none';
+
+  // Work history bullets
+  ['ind','ipsos'].forEach(prefix => {
+    ['bullets','tags'].forEach(type => {
+      const da = document.getElementById(prefix + '-' + type + '-da');
+      const ae = document.getElementById(prefix + '-' + type + '-ae');
+      if (da) da.style.display = mode === 'da' ? '' : 'none';
+      if (ae) ae.style.display = mode === 'ae' ? '' : 'none';
+    });
+  });
+
+  // Resume link
+  const resumeLink = document.getElementById('resume-link');
+  if (resumeLink) resumeLink.href = mode === 'ae' ? 'AE_Master_Resume.pdf' : 'DA_Master_Resume.pdf';
   document.querySelectorAll('.skill-fill').forEach(b => b.style.width = '0%');
   setTimeout(animateBars, 80);
 }

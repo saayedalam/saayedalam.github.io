@@ -450,12 +450,12 @@ function toggleMobileNav() {
       <li><a href="#contact">contact</a></li>
     </ul>
     <div class="profile-toggle">
-      <button class="toggle-btn active" id="btn-da" onclick="setMode('da')" data-tip="Data Analyst">DA</button>
+      <button type="button" class="toggle-btn active" id="btn-da" onclick="setMode('da')" data-tip="Data Analyst">DA</button>
       <div class="toggle-sep"></div>
-      <button class="toggle-btn" id="btn-ae" onclick="setMode('ae')" data-tip="Analytics Engineer">AE</button>
+      <button type="button" class="toggle-btn" id="btn-ae" onclick="setMode('ae')" data-tip="Analytics Engineer">AE</button>
     </div>
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
-    <button class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <button type="button" class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+    <button type="button" class="hamburger" onclick="toggleMobileNav()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -468,8 +468,8 @@ function toggleMobileNav() {
   <a href="#skills" onclick="toggleMobileNav()">skills</a>
   <a href="#contact" onclick="toggleMobileNav()">contact</a>
   <div style="display:flex;gap:0.75rem;padding-top:0.5rem;">
-    <button class="toggle-btn active" id="mob-btn-da" onclick="setMode('da');toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA</button>
-    <button class="toggle-btn" id="mob-btn-ae" onclick="setMode('ae');toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">AE</button>
+    <button type="button" class="toggle-btn active" id="mob-btn-da" onclick="setMode('da');toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA</button>
+    <button type="button" class="toggle-btn" id="mob-btn-ae" onclick="setMode('ae');toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">AE</button>
   </div>
 </div>
 
@@ -487,10 +487,10 @@ function toggleMobileNav() {
   <div class="intro-left">
 
 
-    <div class="hero-name">
+    <h1 class="hero-name" aria-label="Saayed Alam">
       Saayed<br/>
       <span class="hl">Alam</span>
-    </div>
+    </h1>
 
     <div class="hero-role" id="hero-role">Data Analyst · SQL · Python · Tableau</div>
 
@@ -1002,7 +1002,7 @@ window.addEventListener('scroll', () => {
 });
 </script>
 
-<button class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
+<button type="button" class="back-to-top" id="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="Back to top">
   <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="18 15 12 9 6 15"/></svg>
 </button>
 

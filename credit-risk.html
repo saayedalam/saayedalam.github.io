@@ -31,6 +31,7 @@ body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(
 
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:rgba(8,12,16,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+  html.light nav{background:rgba(255,255,255,0.92);}
 .nav-logo{font-weight:700;font-size:13px;color:var(--accent);letter-spacing:0.05em;text-decoration:none;}
 .nav-logo span{color:var(--muted);}
 .nav-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
@@ -184,7 +185,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
   <a href="index.html" class="nav-logo">saayedalam<span>.me</span></a>
   <div style="display:flex;align-items:center;gap:0.75rem;">
     <a href="index.html#projects" class="nav-back">← back to portfolio</a>
-    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+    <button type="button" class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
   </div>
 </nav>
 
@@ -247,7 +248,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
 
   <!-- SCREENSHOT WALKTHROUGH -->
   <div class="cs fade-in">
-    <button class="collapsible-toggle" id="screenshots-toggle" onclick="toggleScreenshots()">
+    <button type="button" class="collapsible-toggle" id="screenshots-toggle" onclick="toggleScreenshots()">
       <span>// Screenshot Walkthrough</span>
       <span class="collapsible-icon" id="screenshots-icon">▸ show</span>
     </button>
@@ -289,9 +290,9 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
         </div>
       </div>
       <div class="carousel-controls">
-        <button class="carousel-btn" id="prev-btn" disabled>← prev</button>
+        <button type="button" class="carousel-btn" id="prev-btn" disabled>← prev</button>
         <div class="carousel-dots" id="carousel-dots"></div>
-        <button class="carousel-btn" id="next-btn">next →</button>
+        <button type="button" class="carousel-btn" id="next-btn">next →</button>
       </div>
     </div>
     </div><!-- end collapsible-body -->

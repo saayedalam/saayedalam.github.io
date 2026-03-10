@@ -365,7 +365,8 @@ function toggleMobileNav() {
       min-height: unset;
     }
     .intro-right { order: -1; display: flex; justify-content: center; }
-    .photo-block { max-width: 130px; margin: 0 auto; }
+    .photo-block { max-width: 100%; margin: 0 auto; }
+    .photo-status, .photo-corner-tag { font-size: 8px; padding: 0.25rem 0.5rem; letter-spacing: 0.06em; }
     .intro-left { display: flex; flex-direction: column; gap: 1.25rem; }
 
     /* STATS — replace grid with a compact inline row */
@@ -503,8 +504,8 @@ function toggleMobileNav() {
     <div class="photo-block">
       <div class="photo-inner">
         <img src="photo.JPG" alt="Saayed Alam" />
-        <div class="photo-corner-tag">DA · 2025</div>
-        <div class="photo-status"><span class="photo-status-dot"></span>Actively Looking · Toronto · Open to Remote</div>
+        <div class="photo-corner-tag">Toronto · Open to Remote</div>
+        <div class="photo-status"><span class="photo-status-dot"></span>Actively Looking</div>
       </div>
     </div>
   </div>

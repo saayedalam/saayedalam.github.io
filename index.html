@@ -22,12 +22,29 @@
     --accent4: #d2a8ff;
     --text: #e6edf3;
     --muted: #7d8590;
+    --nav-bg: rgba(8,12,16,0.92);
     --mono: 'JetBrains Mono', monospace;
     --sans: 'Syne', sans-serif;
   }
 
+  html.light {
+    --bg: #ffffff;
+    --surface: #f6f8fa;
+    --surface2: #eaeef2;
+    --border: #d0d7de;
+    --accent: #0969da;
+    --accent2: #1a7f37;
+    --accent3: #cf222e;
+    --accent4: #8250df;
+    --text: #1f2328;
+    --muted: #656d76;
+    --nav-bg: rgba(255,255,255,0.92);
+  }
+
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
+  html.light body::before { background-image: linear-gradient(rgba(9,105,218,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(9,105,218,0.05) 1px, transparent 1px); background-size: 40px 40px; }
+  html.light body::after { display: none; }
 
   body {
     background: var(--bg);
@@ -36,6 +53,7 @@
     font-size: 14px;
     line-height: 1.6;
     overflow-x: hidden;
+    transition: background 0.3s ease, color 0.3s ease;
   }
 
   body::before {
@@ -44,6 +62,7 @@
     background-image:
       linear-gradient(rgba(88,166,255,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(88,166,255,0.03) 1px, transparent 1px);
+    transition: opacity 0.3s;
     background-size: 40px 40px;
     pointer-events: none; z-index: 0;
   }
@@ -61,7 +80,7 @@
     z-index: 100;
     display: flex; align-items: center; justify-content: space-between;
     padding: 0 2rem; height: 56px;
-    background: rgba(8,12,16,0.92);
+    background: var(--nav-bg);
     backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
   }
@@ -87,6 +106,22 @@
   .toggle-btn.active { background: var(--accent); color: var(--bg); font-weight: 700; }
   .toggle-btn:not(.active):hover { color: var(--text); background: var(--surface2); }
   .toggle-sep { width: 1px; background: var(--border); align-self: stretch; }
+
+
+  /* THEME TOGGLE */
+  .theme-toggle {
+    display: flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px;
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 14px;
+    transition: all 0.2s;
+    flex-shrink: 0;
+  }
+  .theme-toggle:hover { border-color: var(--accent); color: var(--accent); }
 
   /* TICKER */
   .ticker {
@@ -193,7 +228,9 @@
     display: block;
     filter: grayscale(20%) contrast(1.05);
     border: 1px solid var(--border);
+    transition: filter 0.3s;
   }
+  html.light .photo-block img { filter: grayscale(10%) contrast(1.02); }
   .photo-block::before {
     content: '';
     position: absolute;
@@ -350,6 +387,7 @@
       <div class="toggle-sep"></div>
       <button class="toggle-btn" id="btn-ae" onclick="setMode('ae')">AE</button>
     </div>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark mode">🌙</button>
   </div>
 </nav>
 
@@ -581,10 +619,10 @@
   <div class="section-divider"></div>
 
   <div class="contact-grid fade-in">
-    <a class="contact-card" href="mailto:saayedalam@gmail.com">
+    <a class="contact-card" href="/cdn-cgi/l/email-protection#87f4e6e6fee2e3e6ebe6eac7e0eae6eeeba9e4e8ea">
       <span class="contact-icon">@</span>
       <span class="contact-type">Email</span>
-      <span class="contact-value">saayedalam@gmail.com</span>
+      <span class="contact-value"><span class="__cf_email__" data-cfemail="a5d6c4c4dcc0c1c4c9c4c8e5c2c8c4ccc98bc6cac8">[email&#160;protected]</span></span>
     </a>
     <a class="contact-card" href="https://linkedin.com/in/saayedalam" target="_blank">
       <span class="contact-icon">in</span>
@@ -612,7 +650,7 @@
   <span style="color:var(--border)">saayedalam.me</span>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 const modes = {
   da: {
     role: 'Data Analyst · SQL · Python · BI',
@@ -677,17 +715,22 @@ function animateBars() {
   });
 }
 
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  if (html.classList.contains('light')) {
+    html.classList.remove('light');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    html.classList.add('light');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+
+
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (e.isIntersecting) {
-      e.target.classList.add('visible');
-      if (e.target.id === 'skills-grid') animateBars();
-    }
-  });
-}, { threshold: 0.1 });
-
-document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
-setMode('da');
-</script>
-</body>
-</html>

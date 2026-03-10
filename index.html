@@ -202,13 +202,6 @@ function toggleMobileNav() {
   .client-chip { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; padding: 0.2rem 0.55rem; border: 1px solid var(--border); color: var(--muted); background: var(--surface2); }
 
   /* TERMINAL */
-  .terminal-block { background: var(--surface); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
-  .terminal-bar { background: var(--surface2); padding: 0.6rem 1rem; display: flex; align-items: center; gap: 0.5rem; border-bottom: 1px solid var(--border); }
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot-r{background:#f78166} .dot-y{background:#e3b341} .dot-g{background:#3fb950}
-  .terminal-body { padding: 1.25rem 1.5rem; }
-  .terminal-line { font-size: 12px; line-height: 2.1; }
-  .t-p{color:var(--accent2)} .t-c{color:var(--text)} .t-o{color:var(--muted)} .t-v{color:var(--accent4)} .t-s{color:var(--accent2)}
 
   /* EXPERIENCE */
   .experience-list { display: flex; flex-direction: column; gap: 1px; background: var(--border); border: 1px solid var(--border); }
@@ -367,7 +360,7 @@ function toggleMobileNav() {
   <div class="intro-left">
     <div class="hero-top">
       <span class="status-dot"></span>
-      <span>Actively Looking · Toronto · Open to Remote</span>
+      <span>actively looking · Toronto · Open to Remote</span>
       <span class="mode-badge" id="mode-badge" style="border-color:var(--accent2);color:var(--accent2)">● DA Profile</span>
     </div>
 
@@ -419,25 +412,6 @@ function toggleMobileNav() {
         </div>
       </div>
     </div>
-
-    <div class="terminal-block">
-      <div class="terminal-bar">
-        <span class="dot dot-r"></span><span class="dot dot-y"></span><span class="dot dot-g"></span>
-        <span style="margin-left:0.5rem;font-size:11px;color:var(--muted)">saayed@portfolio ~ zsh</span>
-      </div>
-      <div class="terminal-body">
-        <div class="terminal-line"><span class="t-p">❯ </span><span class="t-c">cat profile.json</span></div>
-        <div class="terminal-line"><span class="t-o">{</span></div>
-        <div class="terminal-line">&nbsp;&nbsp;<span class="t-v">"role"</span><span class="t-o">:</span> <span class="t-s" id="tr">"Data Analyst"</span><span class="t-o">,</span></div>
-        <div class="terminal-line">&nbsp;&nbsp;<span class="t-v">"stack"</span><span class="t-o">:</span> <span class="t-s" id="ts">["SQL","Python","Tableau","Power BI"]</span><span class="t-o">,</span></div>
-        <div class="terminal-line">&nbsp;&nbsp;<span class="t-v">"background"</span><span class="t-o">:</span> <span class="t-s">"Ipsos · Fortune 500"</span><span class="t-o">,</span></div>
-        <div class="terminal-line">&nbsp;&nbsp;<span class="t-v">"target"</span><span class="t-o">:</span> <span class="t-s" id="tt">["fintech","banking","market-research","healthcare"]</span><span class="t-o">,</span></div>
-        <div class="terminal-line">&nbsp;&nbsp;<span class="t-v">"currently"</span><span class="t-o">:</span> <span class="t-s">"building portfolio · open to work"</span><span class="t-o">,</span></div>
-        <div class="terminal-line">&nbsp;&nbsp;<span class="t-v">"open_to_work"</span><span class="t-o">:</span> <span style="color:var(--accent2)">true</span></div>
-        <div class="terminal-line"><span class="t-o">}</span></div>
-      </div>
-    </div>
-  </div>
 
   <a href="#experience" class="scroll-arrow">
     <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
@@ -772,9 +746,6 @@ function setMode(mode) {
   badge.textContent = m.badge; badge.style.borderColor = m.badgeColor; badge.style.color = m.badgeColor;
   document.getElementById('s3v').textContent = m.s3v;
   document.getElementById('s3l').textContent = m.s3l;
-  document.getElementById('tr').textContent = m.tr;
-  document.getElementById('ts').textContent = m.ts;
-  document.getElementById('tt').textContent = m.tt;
   document.getElementById('contact-note').innerHTML = m.note;
   document.getElementById('ticker-text').innerHTML = m.ticker;
   const grid = document.getElementById('projects-grid');

@@ -145,7 +145,7 @@ function toggleMobileNav() {
   @keyframes marquee { 0%{transform:translateX(0)} 100%{transform:translateX(-50%)} }
 
   /* SECTIONS */
-  section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 4rem 2rem; }
+  section { position: relative; z-index: 1; max-width: 1100px; margin: 0 auto; padding: 2.5rem 2rem; }
 
   .section-label { font-size: 11px; letter-spacing: 0.2em; color: var(--accent); text-transform: uppercase; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
   .section-label::before { content: '//'; color: var(--muted); }
@@ -163,10 +163,12 @@ function toggleMobileNav() {
     position: relative;
   }
   .intro-left { display: flex; flex-direction: column; gap: 1.5rem; }
-  .intro-right { display: flex; flex-direction: column; gap: 1.5rem; }
+  .intro-right { display: flex; align-items: center; justify-content: center; }
 
   .hero-top { display: flex; align-items: center; gap: 0.75rem; font-size: 12px; color: var(--muted); flex-wrap: wrap; }
-  .status-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; flex-shrink: 0; }
+  .status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; flex-shrink: 0; }
+  .status-pill { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.3); color: var(--accent2); font-size: 11px; letter-spacing: 0.08em; padding: 0.3rem 0.75rem; }
+  html.light .status-pill { background: rgba(26,127,55,0.08); border-color: rgba(26,127,55,0.3); }
   @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
   .mode-badge { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.7rem; border: 1px solid; transition: color 0.4s, border-color 0.4s; }
 
@@ -192,7 +194,7 @@ function toggleMobileNav() {
   @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
 
   /* RIGHT SIDE — photo + bio + terminal */
-  .photo-block { position: relative; width: 100%; max-width: 220px; flex-shrink: 0; }
+  .photo-block { position: relative; width: 100%; max-width: 340px; margin: 0 auto; }
   .photo-block img { width: 100%; display: block; filter: grayscale(20%) contrast(1.05); border: 1px solid var(--border); transition: filter 0.3s; }
   html.light .photo-block img { filter: grayscale(10%) contrast(1.02); }
   .photo-block::before { content: ''; position: absolute; inset: -4px; border: 1px solid var(--accent); opacity: 0.25; pointer-events: none; }
@@ -364,11 +366,10 @@ function toggleMobileNav() {
 <!-- INTRO -->
 <section id="intro" style="position:relative;">
 
-  <!-- LEFT: identity + stats + CTA -->
+  <!-- LEFT: identity + stats + CTA + bio -->
   <div class="intro-left">
     <div class="hero-top">
-      <span class="status-dot"></span>
-      <span>actively looking · Toronto · Open to Remote</span>
+      <span class="status-pill"><span class="status-dot"></span>Actively Looking · Toronto · Open to Remote</span>
       <span class="mode-badge" id="mode-badge" style="border-color:var(--accent2);color:var(--accent2)">● DA Profile</span>
     </div>
 
@@ -394,32 +395,31 @@ function toggleMobileNav() {
       </div>
     </div>
 
+    <div class="client-strip">
+      <span class="client-chip">Visa</span>
+      <span class="client-chip">Microsoft</span>
+      <span class="client-chip">Google</span>
+      <span class="client-chip">Ipsos</span>
+    </div>
+
+    <div class="about-text">
+      <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> for Fortune 500 brands. I translate complex datasets into clear decisions — across SQL, Python, Tableau, Power BI, and ML.</p>
+      <p style="margin-top:0.75rem">Targeting roles in <strong>fintech, banking, and market research</strong> where rigorous analysis drives real outcomes.</p>
+    </div>
+
     <div class="hero-cta">
       <a href="#experience" class="btn btn-primary">› view my work</a>
       <a href="#contact" class="btn btn-secondary">› get in touch</a>
     </div>
   </div>
 
-  <!-- RIGHT: photo + bio + terminal -->
+  <!-- RIGHT: photo only -->
   <div class="intro-right">
-    <div class="intro-photo-row">
-      <div class="photo-block">
-        <img src="photo.jpg" alt="Saayed Alam" />
-        <span class="photo-name-tag">Saayed Alam · Toronto</span>
-      </div>
-      <div class="intro-bio">
-        <div class="client-strip">
-          <span class="client-chip">Visa</span>
-          <span class="client-chip">Microsoft</span>
-          <span class="client-chip">Google</span>
-          <span class="client-chip">Ipsos</span>
-        </div>
-        <div class="about-text">
-          <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> for Fortune 500 brands. I translate complex datasets into clear decisions — across SQL, Python, Tableau, Power BI, and ML.</p>
-          <p style="margin-top:0.75rem">Targeting roles in <strong>fintech, banking, and market research</strong> where rigorous analysis drives real outcomes.</p>
-        </div>
-      </div>
+    <div class="photo-block">
+      <img src="photo.jpg" alt="Saayed Alam" />
+      <span class="photo-name-tag">Saayed Alam · Toronto</span>
     </div>
+  </div>
 
   <a href="#experience" class="scroll-arrow">
     <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>

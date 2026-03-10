@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>404 — Page Not Found · Saayed Alam</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2QNCLVX354"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2QNCLVX354');
+</script>
+<style>
+:root {
+  --bg:#080c10;--surface:#0d1117;--surface2:#161b22;
+  --border:#21262d;--accent:#58a6ff;--accent2:#3fb950;
+  --text:#e6edf3;--muted:#7d8590;
+  --mono:'JetBrains Mono',monospace;--sans:'Syne',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;}
+
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(88,166,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(88,166,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+
+.container{position:relative;z-index:1;text-align:center;padding:2rem;max-width:480px;display:flex;flex-direction:column;align-items:center;gap:1.5rem;}
+
+.error-code{font-family:var(--sans);font-size:clamp(6rem,20vw,10rem);font-weight:800;line-height:1;letter-spacing:-0.04em;color:var(--surface2);position:relative;user-select:none;}
+.error-code::after{content:'404';position:absolute;inset:0;background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;opacity:0.15;}
+
+.error-label{font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;}
+.error-label::before{content:'//';color:var(--muted);}
+
+.error-title{font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--text);}
+
+.error-desc{font-size:12px;color:var(--muted);line-height:1.75;max-width:360px;}
+
+.error-code-block{background:var(--surface);border:1px solid var(--border);padding:0.75rem 1.25rem;font-size:12px;color:var(--muted);text-align:left;width:100%;letter-spacing:0.03em;}
+.error-code-block .kw{color:var(--accent);}
+.error-code-block .str{color:var(--accent2);}
+.error-code-block .cm{color:var(--muted);opacity:0.6;}
+
+.error-links{display:flex;gap:0.75rem;flex-wrap:wrap;justify-content:center;}
+.error-link{font-size:11px;text-decoration:none;letter-spacing:0.06em;padding:0.45rem 1.1rem;border:1px solid;transition:all 0.2s;}
+.link-home{border-color:var(--accent);color:var(--accent);}
+.link-home:hover{background:var(--accent);color:var(--bg);}
+.link-projects{border-color:var(--border);color:var(--muted);}
+.link-projects:hover{border-color:var(--muted);color:var(--text);}
+
+.glitch{animation:glitch 4s infinite;}
+@keyframes glitch{
+  0%,90%,100%{transform:translate(0);}
+  92%{transform:translate(-2px,1px);}
+  94%{transform:translate(2px,-1px);}
+  96%{transform:translate(-1px,2px);}
+  98%{transform:translate(1px,-1px);}
+}
+
+html.light {
+  --bg:#ffffff;--surface:#f6f8fa;--surface2:#eaeef2;
+  --border:#d0d7de;--accent:#0969da;--accent2:#1a7f37;
+  --text:#1f2328;--muted:#656d76;
+}
+html.light body::before{background-image:linear-gradient(rgba(9,105,218,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(9,105,218,0.05) 1px,transparent 1px);}
+.theme-toggle{position:fixed;top:1rem;right:1rem;display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:14px;transition:all 0.2s;z-index:10;}
+.theme-toggle:hover{border-color:var(--accent);}
+</style>
+</head>
+<body>
+
+<button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+<div class="container">
+  <div class="error-code glitch">404</div>
+
+  <div class="error-label">Page Not Found</div>
+
+  <div class="error-title">This query returned no results.</div>
+
+  <p class="error-desc">The page you're looking for doesn't exist or may have moved. Check the URL or head back to the portfolio.</p>
+
+  <div class="error-code-block">
+    <span class="cm">-- attempted query</span><br/>
+    <span class="kw">SELECT</span> * <span class="kw">FROM</span> pages<br/>
+    <span class="kw">WHERE</span> url = <span class="str">'<span id="bad-url">...</span>'</span><br/>
+    <span class="kw">LIMIT</span> 1;<br/><br/>
+    <span class="cm">-- result: 0 rows returned</span>
+  </div>
+
+  <div class="error-links">
+    <a href="index.html" class="error-link link-home">← back to portfolio</a>
+    <a href="index.html#projects" class="error-link link-projects">↗ view projects</a>
+  </div>
+</div>
+
+<script>
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  if (html.classList.contains('light')) {
+    html.classList.remove('light');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme','dark');
+  } else {
+    html.classList.add('light');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme','light');
+  }
+}
+(function(){
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.classList.add('light');
+    document.getElementById('theme-toggle').textContent = '☀️';
+  }
+})();
+
+  // Show the bad URL in the SQL block
+  const urlEl = document.getElementById('bad-url');
+  if (urlEl) urlEl.textContent = window.location.pathname;
+</script>
+
+</body>
+</html>

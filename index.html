@@ -187,12 +187,7 @@ function toggleMobileNav() {
   .btn-primary { border-color: var(--accent); color: var(--accent); }
   .btn-primary:hover { background: var(--accent); color: var(--bg); }
   .btn-secondary { border-color: var(--border); color: var(--muted); }
-  .btn-secondary:hover { border-color: var(--muted); color: var(--text); }
-
-  /* SCROLL ARROW */
-  .scroll-arrow { position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 0.4rem; color: var(--muted); font-size: 11px; letter-spacing: 0.1em; text-decoration: none; animation: bounce 2s infinite; }
-  .scroll-arrow svg { width: 16px; height: 16px; stroke: var(--muted); fill: none; }
-  @keyframes bounce { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(6px)} }
+  .btn-secondary:hover { border-color: var(--muted); color: var(--text); } 50%{transform:translateX(-50%) translateY(6px)} }
 
   /* RIGHT SIDE — photo + bio + terminal */
   .photo-block { position: relative; width: 100%; max-width: 340px; margin: 0 auto; }
@@ -481,10 +476,6 @@ function toggleMobileNav() {
       <span class="photo-name-tag">Saayed Alam · Toronto</span>
     </div>
   </div>
-
-  <a href="#experience" class="scroll-arrow">
-    <svg viewBox="0 0 24 24" stroke-width="1.5"><polyline points="6 9 12 15 18 9"/></svg>
-  </a>
 </section>
 
 <!-- PROJECTS -->

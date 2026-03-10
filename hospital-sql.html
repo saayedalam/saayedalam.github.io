@@ -75,7 +75,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
 .cs{margin-bottom:2.5rem;}
 
 /* TABLEAU EMBED */
-.tableau-wrap{border:1px solid var(--border);margin-bottom:0;background:var(--surface);}
+.tableau-wrap{border:1px solid var(--border);margin-bottom:1rem;background:var(--surface);}
 .tableau-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:0.6rem 1rem;display:flex;align-items:center;justify-content:space-between;}
 .tableau-bar-left{display:flex;align-items:center;gap:0.75rem;}
 .tableau-label{font-size:11px;color:var(--muted);letter-spacing:0.05em;}
@@ -90,7 +90,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
 .tableau-note{background:var(--surface2);border-top:1px solid var(--border);padding:0.5rem 1rem;font-size:10px;color:var(--muted);letter-spacing:0.05em;}
 
 /* COLLAPSIBLE */
-.collapsible-toggle{width:100%;background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:0.75rem 1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all 0.2s;margin-top:0;}
+.collapsible-toggle{width:100%;background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:0.75rem 1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all 0.2s;margin-top:0.75rem;}
 .collapsible-toggle:hover{border-color:var(--accent);color:var(--accent);}
 .collapsible-icon{font-size:11px;letter-spacing:0.1em;color:var(--accent);}
 .collapsible-body{overflow:hidden;max-height:0;transition:max-height 0.4s ease;}
@@ -156,6 +156,41 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
   .stats-row{grid-template-columns:1fr 1fr;}
   .process-step{grid-template-columns:30px 1fr;}
 }
+
+  /* SQL SLIDER */
+  .sql-slider { border:1px solid var(--border); background:var(--surface); margin-bottom:0; }
+  .sql-slider-header { background:var(--surface2); border-bottom:1px solid var(--border); padding:0.6rem 1rem; display:flex; align-items:center; justify-content:space-between; }
+  .sql-slider-header-left { display:flex; align-items:center; gap:0.75rem; }
+  .sql-query-label { font-size:11px; color:var(--muted); letter-spacing:0.05em; }
+  .sql-nb-link { font-size:11px; color:var(--accent); text-decoration:none; letter-spacing:0.05em; }
+  .sql-nb-link:hover { text-decoration:underline; }
+
+  .sql-slide-body { padding:1.25rem 1.5rem; display:flex; flex-direction:column; gap:1rem; min-height:340px; }
+  .sql-slide-meta { display:flex; align-items:center; gap:0.75rem; flex-wrap:wrap; }
+  .sql-qnum { font-family:var(--sans); font-size:1.4rem; font-weight:800; color:var(--accent); opacity:0.35; line-height:1; }
+  .sql-qtitle { font-family:var(--sans); font-size:1rem; font-weight:700; color:var(--text); }
+  .sql-concept-tag { font-size:10px; padding:0.15rem 0.55rem; border:1px solid rgba(88,166,255,0.4); color:var(--accent); background:rgba(88,166,255,0.07); letter-spacing:0.08em; text-transform:uppercase; }
+  html.light .sql-concept-tag { border-color:rgba(9,105,218,0.3); background:rgba(9,105,218,0.05); }
+
+  .sql-business-q { font-size:12px; color:var(--muted); line-height:1.6; border-left:2px solid var(--accent2); padding-left:0.75rem; }
+  .sql-business-q strong { color:var(--text); display:block; font-size:10px; letter-spacing:0.1em; text-transform:uppercase; margin-bottom:0.3rem; opacity:0.6; }
+
+  .sql-code-wrap { background:var(--bg); border:1px solid var(--border); padding:1rem 1.25rem; overflow-x:auto; position:relative; }
+  html.light .sql-code-wrap { background:#f6f8fa; }
+  .sql-code-wrap pre { font-family:var(--mono); font-size:12px; line-height:1.7; color:#8b949e; margin:0; white-space:pre; }
+  /* SQL syntax highlight via CSS */
+  .kw { color:var(--accent); font-weight:600; }
+  .fn { color:#d2a8ff; }
+  .str { color:var(--accent2); }
+  .cm { color:var(--muted); font-style:italic; }
+
+  .sql-controls { display:flex; align-items:center; justify-content:space-between; padding:0.75rem 1rem; border-top:1px solid var(--border); }
+  .sql-btn { background:none; border:1px solid var(--border); color:var(--muted); font-family:var(--mono); font-size:11px; letter-spacing:0.08em; padding:0.35rem 0.85rem; cursor:pointer; transition:all 0.2s; }
+  .sql-btn:hover { border-color:var(--accent); color:var(--accent); }
+  .sql-btn:disabled { opacity:0.25; cursor:default; }
+  .sql-progress { display:flex; align-items:center; gap:0.5rem; font-size:11px; color:var(--muted); }
+  .sql-progress-bar { width:120px; height:3px; background:var(--border); border-radius:2px; overflow:hidden; }
+  .sql-progress-fill { height:100%; background:var(--accent); border-radius:2px; transition:width 0.3s; }
 </style>
 </head>
 <body>
@@ -270,6 +305,34 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
     </div>
   </div>
 
+
+  <!-- SQL QUERY SLIDER -->
+  <div class="cs fade-in">
+    <div class="st">SQL Query Showcase</div>
+    <div class="sql-slider">
+      <div class="sql-slider-header">
+        <div class="sql-slider-header-left">
+          <div class="browser-dots"><span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span></div>
+          <span class="sql-query-label" id="sql-query-label">Query 1 of 28</span>
+        </div>
+        <a href="https://nbviewer.org/github/saayedalam/CMS-Hospital-SQL-Analysis/blob/cac15c757c06c62a16c2d769a65e05b3765a21d1/notebooks/02_sql_analysis.ipynb" target="_blank" class="sql-nb-link">⌥ Full notebook</a>
+      </div>
+      <div class="sql-slide-body" id="sql-slide-body">
+        <!-- populated by JS -->
+      </div>
+      <div class="sql-controls">
+        <div style="display:flex;gap:0.5rem;">
+          <button class="sql-btn" id="sql-home" onclick="sqlCurrent=0;renderSQLSlide(0)" title="Back to first query">⌂</button>
+          <button class="sql-btn" id="sql-prev" disabled>← prev</button>
+        </div>
+        <div class="sql-progress">
+          <div class="sql-progress-bar"><div class="sql-progress-fill" id="sql-progress-fill"></div></div>
+          <span id="sql-counter">1 / 28</span>
+        </div>
+        <button class="sql-btn" id="sql-next">next →</button>
+      </div>
+    </div>
+  </div>
   <!-- THE PROBLEM -->
   <div class="cs fade-in">
     <div class="st">The Problem</div>
@@ -425,6 +488,707 @@ track.addEventListener('touchend', e => {
   if (dx < -50 && current < slides.length - 1) goTo(current + 1);
   if (dx > 50 && current > 0) goTo(current - 1);
 }, {passive:true});
+
+
+// SQL keywords for syntax highlighting
+function highlightSQL(sql) {
+  const keywords = ['SELECT','FROM','WHERE','GROUP BY','ORDER BY','HAVING','JOIN','LEFT JOIN','INNER JOIN','ON','AS','COUNT','SUM','AVG','MAX','MIN','DISTINCT','LIMIT','WITH','RANK','ROW_NUMBER','NTILE','LAG','LEAD','OVER','PARTITION BY','CASE','WHEN','THEN','ELSE','END','AND','OR','NOT','IN','UNION','EXCEPT','INTERSECT','ROUND','LEFT','RIGHT','UPPER','LOWER','COALESCE','DESC','ASC','NULL','IS NULL','IS NOT NULL'];
+  let result = sql
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  // strings in quotes
+  result = result.replace(/"([^"]+)"/g, '<span class="str">"$1"</span>');
+  // keywords (whole word, case insensitive)
+  keywords.forEach(kw => {
+    const re = new RegExp('\\b(' + kw.replace(/\s+/g,'\\s+') + ')\\b', 'gi');
+    result = result.replace(re, '<span class="kw">$1</span>');
+  });
+  return result;
+}
+
+const sqlSlides = [
+  {
+    num: 1,
+    title: `Hospital Count by State`,
+    businessQ: `How many hospitals are there in each U.S. state?`,
+    sql: `SELECT
+    "State",
+    COUNT(*) AS hospital_count
+FROM
+    hospital_info
+GROUP BY
+    "State"
+ORDER BY
+    hospital_count DESC;`,
+    summary: ``,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 2,
+    title: `Hospital Count by Type`,
+    businessQ: `How many hospitals are there by type (e.g., Acute Care, Psychiatric, Children's)?`,
+    sql: `SELECT
+    "Hospital Type",
+    COUNT(*) AS hospital_count
+FROM
+    hospital_info
+GROUP BY
+    "Hospital Type"
+ORDER BY
+    hospital_count DESC;`,
+    summary: `Specialized types like **Veterans Administration (132)**, **Children’s (94)**, and **Department of Defense (32)** hospitals are far fewer in number. This distribution reflects a national emphasis on g`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 3,
+    title: `Emergency Services by State`,
+    businessQ: `Which U.S. states have the highest number of hospitals that offer emergency services?`,
+    sql: `SELECT
+    "State",
+    COUNT(*) AS hospital_count
+FROM
+    hospital_info
+WHERE
+    "Emergency Services" = 'Yes'
+GROUP BY
+    "State"
+ORDER BY
+    hospital_count DESC;`,
+    summary: `States with the highest number of hospitals offering **emergency services** include **Texas (383)**, **California (289)**, and **Florida (183)**. These states also led in total hospital count (Query 1`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 4,
+    title: `Hospitals Missing Overall Rating by State`,
+    businessQ: `Which states have the most hospitals with missing overall quality ratings?`,
+    sql: `SELECT
+    "State",
+    COUNT(*) AS hospitals_missing_rating
+FROM
+    hospital_info
+WHERE
+    "Hospital overall rating" IS NULL
+GROUP BY
+    "State"
+ORDER BY
+    hospitals_missing_rating DESC`,
+    summary: ``,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 5,
+    title: `Emergency Services Availability by Hospital Type`,
+    businessQ: `What percentage of hospitals within each hospital type offer emergency services?`,
+    sql: `SELECT
+    "Hospital Type",
+    COUNT(*) AS total_hospitals,
+    SUM(CASE WHEN "Emergency Services" = 'Yes' THEN 1 ELSE 0 END) AS with_emergency_services,
+    ROUND(
+        100.0 * SUM(CASE WHEN "Emergency Services" = 'Yes' THEN 1 ELSE 0 END) / COUNT(*),
+        1
+    ) AS percent_with_emergency
+FROM
+    hospital_info
+GROUP BY
+    "Hospital Type"
+ORDER BY
+    percent_with_emergency DESC;`,
+    summary: ``,
+    concepts: ["CASE WHEN"]
+  },
+  {
+    num: 6,
+    title: `Average Rating by Ownership Type`,
+    businessQ: `How do average hospital ratings differ based on the type of hospital ownership?`,
+    sql: `SELECT
+    "Hospital Ownership",
+    ROUND(AVG("Hospital overall rating")::numeric, 2) AS avg_rating,
+    COUNT(*) AS hospital_count
+FROM
+    hospital_info
+WHERE
+    "Hospital overall rating" IS NOT NULL
+GROUP BY
+    "Hospital Ownership"
+ORDER BY
+    avg_rating DESC;`,
+    summary: ``,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 7,
+    title: `Hospitals with 5-Star Rating by State`,
+    businessQ: `Which states have the highest number of top-rated (5-star) hospitals?`,
+    sql: `SELECT
+    "State",
+    COUNT(*) AS five_star_hospital_count
+FROM
+    hospital_info
+WHERE
+    "Hospital overall rating" = 5
+GROUP BY
+    "State"
+ORDER BY
+    five_star_hospital_count DESC;`,
+    summary: ``,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 8,
+    title: `Search Hospitals by Name (Keyword: "Children")`,
+    businessQ: `Which hospitals have the word “Children” in their name?`,
+    sql: `SELECT
+    "Facility ID",
+    "Facility Name",
+    "City/Town",
+    "State"
+FROM
+    hospital_info
+WHERE
+    "Facility Name" ILIKE %s
+LIMIT 20;`,
+    summary: `This query identified hospitals with **"Children"** in their facility names using a **case-insensitive search** (\`ILIKE\`). Results include institutions such as: - **Beacon Children's Hospital** (AL)`,
+    concepts: ["String Filter"]
+  },
+  {
+    num: 9,
+    title: `Average Hospital Rating by City (with ≥ 5 Hospitals)`,
+    businessQ: `Which cities have the highest average hospital ratings, considering only cities with at least five hospitals?`,
+    sql: `SELECT 
+    "City/Town" AS city,
+    ROUND(AVG("Hospital overall rating"::NUMERIC), 2) AS avg_rating,
+    COUNT(*) AS hospital_count
+FROM 
+    hospital_info
+WHERE 
+    "Hospital overall rating" IS NOT NULL
+GROUP BY 
+    "City/Town"
+HAVING 
+    COUNT(*) >= 5
+ORDER BY 
+    avg_rating DESC;`,
+    summary: ``,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 10,
+    title: `Facility Names Shared Across States`,
+    businessQ: `Are there hospital facility names that appear in more than one U.S. state?`,
+    sql: `SELECT
+    "Facility Name",
+    COUNT(DISTINCT "State") AS state_count
+FROM
+    hospital_info
+GROUP BY
+    "Facility Name"
+HAVING
+    COUNT(DISTINCT "State") > 1
+ORDER BY
+    state_count DESC,
+    "Facility Name"`,
+    summary: `Several hospital names are shared across multiple states, suggesting the presence of chain systems or commonly used naming conventions. The most widely shared name is **MEMORIAL HOSPITAL**, found in *`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 11,
+    title: `Duplicate Facility Names Across States (via Self Join)`,
+    businessQ: `Which hospitals share the same name but are located in different U.S. states?`,
+    sql: `SELECT DISTINCT
+    h1."Facility Name" AS facility_name,
+    h1."State" AS state_1,
+    h2."State" AS state_2
+FROM
+    hospital_info h1
+JOIN
+    hospital_info h2
+    ON h1."Facility Name" = h2."Facility Name"
+   AND h1."State" <> h2."State"
+ORDER BY
+    facility_name
+LIMIT 20;`,
+    summary: `Several hospitals share the **same facility name across different states**, such as **"CITIZENS MEDICAL CENTER"** appearing in **Texas, Kansas, and Louisiana**, and **"BLUE MOUNTAIN HOSPITAL"** in **U`,
+    concepts: ["JOIN"]
+  },
+  {
+    num: 12,
+    title: `Duplicate Facility Names Within the Same State`,
+    businessQ: `Are there hospitals with the same facility name more than once within a single U.S. state?`,
+    sql: `SELECT
+    "Facility Name" AS facility_name,
+    "State",
+    COUNT(*) AS facility_count
+FROM
+    hospital_info
+GROUP BY
+    "Facility Name", "State"
+HAVING
+    COUNT(*) > 1
+ORDER BY
+    facility_count DESC`,
+    summary: `Several hospitals share the same facility name **within the same state**, which may indicate **duplicate entries**, **multiple branches under the same name**, or **data inconsistencies**. For example,`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 13,
+    title: `States with Above-National-Average Hospital Ratings`,
+    businessQ: `Which states have an average hospital rating that exceeds the national average?`,
+    sql: `SELECT
+    "State",
+    ROUND(AVG("Hospital overall rating"::FLOAT)::NUMERIC, 2) AS avg_state_rating
+FROM
+    hospital_info
+WHERE
+    "Hospital overall rating" IS NOT NULL
+GROUP BY
+    "State"
+HAVING
+    AVG("Hospital overall rating"::FLOAT) > (
+        SELECT
+            AVG("Hospital overall rating"::FLOAT)
+        FROM
+            hospital_info
+        WHERE
+            "Hospital overall rating" IS NOT NULL
+    )
+ORDER BY
+    avg_state_rating DESC`,
+    summary: `States like **Utah (4.29)**, **South Dakota (4.23)**, and **Colorado (4.02)** have the highest average hospital ratings — significantly above the national average. These results help surface top-perfo`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 14,
+    title: `Top-Rated Hospitals in Each State`,
+    businessQ: `Which hospitals are the highest-rated in each U.S. state?`,
+    sql: `SELECT 
+    "Facility ID",
+    "Facility Name",
+    "City/Town",
+    "State",
+    "Hospital overall rating",
+    RANK() OVER (
+        PARTITION BY "State"
+        ORDER BY "Hospital overall rating"::FLOAT DESC
+    ) AS rating_rank
+FROM 
+    hospital_info
+WHERE 
+    "Hospital overall rating" IS NOT NULL`,
+    summary: `Several hospitals in each state have achieved the highest possible overall rating. For example, **Alabama (AL)** has multiple top-rated hospitals including **BALDWIN HEALTH**, **LAKELAND COMMUNITY HOS`,
+    concepts: ["Window Function"]
+  },
+  {
+    num: 15,
+    title: `Hospitals in the 10 Most Common Cities`,
+    businessQ: `Which hospitals are located in the cities that appear most frequently in the dataset?`,
+    sql: `SELECT DISTINCT 
+    "Facility ID", 
+    "Facility Name", 
+    "City/Town", 
+    "State"
+FROM 
+    hospital_info
+WHERE 
+    "City/Town" IN (
+        SELECT 
+            "City/Town"
+        FROM 
+            hospital_info
+        GROUP BY 
+            "City/Town"
+        ORDER BY 
+            COUNT(*) DESC
+        LIMIT 10
+    )
+ORDER BY 
+    "City/Town", 
+    "Facility Name"`,
+    summary: ``,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 16,
+    title: `Hospitals Grouped into 4 Performance Tiers`,
+    businessQ: `How can we categorize hospitals into four performance-based tiers using overall rating data?`,
+    sql: `SELECT
+    "Facility ID",
+    "Facility Name",
+    "City/Town",
+    "State",
+    "Hospital overall rating",
+    NTILE(4) OVER (
+        ORDER BY "Hospital overall rating"::INT DESC
+    ) AS performance_quartile
+FROM
+    hospital_info
+WHERE
+    "Hospital overall rating" IS NOT NULL
+ORDER BY
+    performance_quartile,
+    "Hospital overall rating"::INT DESC
+LIMIT
+    20;`,
+    summary: `The output lists hospitals grouped into four performance quartiles based on their overall rating. The **top quartile (performance_quartile = 1)** includes hospitals with the highest ratings, such as *`,
+    concepts: ["Window Function"]
+  },
+  {
+    num: 17,
+    title: `States with the Most 1-Star Hospitals Using a CTE`,
+    businessQ: `Which states have the highest number of hospitals rated with only one star?`,
+    sql: `WITH underperforming_hospitals AS (
+    SELECT *
+    FROM hospital_info
+    WHERE "Hospital overall rating" = '1'
+)
+SELECT
+    "State",
+    COUNT(*) AS one_star_count
+FROM
+    underperforming_hospitals
+GROUP BY
+    "State"
+ORDER BY
+    one_star_count DESC
+LIMIT 10;`,
+    summary: `The output reveals that **Florida (FL)**, **New York (NY)**, and **California (CA)** have the highest counts of 1-star hospitals, with Florida leading at **34** such hospitals. These states may requir`,
+    concepts: ["CTE"]
+  },
+  {
+    num: 18,
+    title: `Top-Rated Hospitals Within Each City`,
+    businessQ: `Which hospitals have the highest overall rating in their respective cities?`,
+    sql: `SELECT 
+    h."Facility ID", 
+    h."Facility Name", 
+    h."City/Town", 
+    h."State", 
+    h."Hospital overall rating"
+FROM 
+    hospital_info h
+WHERE 
+    h."Hospital overall rating" IS NOT NULL
+    AND h."Hospital overall rating" = (
+        SELECT MAX(h2."Hospital overall rating")
+        FROM hospital_info h2
+        WHERE h2."City/Town" = h."City/Town"
+    )
+ORDER BY 
+    h."City/Town" ASC
+LIMIT 20`,
+    summary: `The output lists hospitals that received the **highest overall rating within their respective cities**. For example, both **Chickasaw Nation Medical Center** and **Mercy Hospital Ada** in *Ada, OK* ha`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 19,
+    title: `Most Recent Facility in Each City`,
+    businessQ: `Which is the most recently added hospital facility in each city based on the highest Facility ID?`,
+    sql: `WITH ranked_hospitals AS (
+    SELECT *,
+           ROW_NUMBER() OVER (
+               PARTITION BY "City/Town"
+               ORDER BY "Facility ID" DESC
+           ) AS row_num
+    FROM
+        hospital_info
+)
+SELECT
+    "Facility ID", 
+    "Facility Name", 
+    "City/Town", 
+    "State", 
+    "Hospital overall rating"
+FROM
+    ranked_hospitals
+WHERE
+    row_num = 1
+ORDER BY
+    "City/Town"
+LIMIT 20`,
+    summary: `This output lists the **most recent facility in each city**, determined by the highest \`"Facility ID"\` value. Note that some facilities do not have an overall rating (\`NaN\`), which may indicate new or`,
+    concepts: ["CTE", "Window Function"]
+  },
+  {
+    num: 20,
+    title: `Cities with the Widest Range in Hospital Ratings`,
+    businessQ: `Which cities show the largest variation between their highest and lowest hospital overall ratings?`,
+    sql: `SELECT
+    "City/Town",
+    "State",
+    MAX(CAST("Hospital overall rating" AS FLOAT)) AS max_rating,
+    MIN(CAST("Hospital overall rating" AS FLOAT)) AS min_rating,
+    COUNT(*) AS hospital_count,
+    MAX(CAST("Hospital overall rating" AS FLOAT)) - MIN(CAST("Hospital overall rating" AS FLOAT)) AS rating_range
+FROM
+    hospital_info
+WHERE
+    "Hospital overall rating" IS NOT NULL
+GROUP BY
+    "City/Town",
+    "State"
+HAVING
+    COUNT(*) >= 2
+ORDER BY
+    rating_range DESC,
+    hospital_count DESC
+LIMIT 10;`,
+    summary: `Cities like **Chicago, IL**, **Los Angeles, CA**, and **New York, NY** exhibit the widest range in hospital overall ratings, from **1.0** up to the maximum of **5.0**. This indicates significant varia`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 21,
+    title: `Simulated Filtering of Facilities Joined After 2015`,
+    businessQ: `Which hospitals joined the dataset after the year 2015?`,
+    sql: `-- Join dates were simulated in Python using numpy (seed=42)
+-- This is the equivalent SQL for temporal filtering
+
+SELECT
+    "Facility ID",
+    "Facility Name",
+    "State",
+    "Hospital Type",
+    simulated_join_date
+FROM
+    hospital_info_with_dates
+WHERE
+    simulated_join_date > '2015-12-31'
+ORDER BY
+    simulated_join_date ASC
+LIMIT 20;`,
+    summary: `Simulates temporal filtering using randomly generated join dates. Equivalent to date-based WHERE clauses common in production healthcare datasets.`,
+    concepts: ["Date Filter", "Simulation"]
+  },
+  {
+    num: 22,
+    title: `Analyze Name Patterns Using SQL String Functions`,
+    businessQ: `How can we analyze hospital name patterns using string functions, such as extracting prefixes, measuring name length, and locating keywords?`,
+    sql: `SELECT
+    "Facility Name",
+    LEFT("Facility Name", 5) AS name_prefix,
+    CHAR_LENGTH("Facility Name") AS name_length,
+    POSITION('HOSPITAL' IN UPPER("Facility Name")) AS hospital_position
+FROM
+    hospital_info
+WHERE
+    POSITION('HOSPITAL' IN UPPER("Facility Name")) > 0
+ORDER BY
+    name_length DESC
+LIMIT 10`,
+    summary: `The analysis reveals patterns in hospital names, such as common prefixes like "**THE H**" or "**UT OF**," and varying name lengths ranging from **51** to **72** characters. The keyword "HOSPITAL" appe`,
+    concepts: ["Aggregation"]
+  },
+  {
+    num: 23,
+    title: `Compare 5-Star Hospitals Offering Emergency Services Using EXCEPT and UNION`,
+    businessQ: `Which hospitals have a 5-star rating but do **not** offer emergency services?`,
+    sql: `(
+    SELECT
+        "Facility ID",
+        "Facility Name",
+        "City/Town",
+        "State"
+    FROM
+        hospital_info
+    WHERE
+        "Hospital overall rating" = 5
+)
+EXCEPT
+(
+    SELECT
+        "Facility ID",
+        "Facility Name",
+        "City/Town",
+        "State"
+    FROM
+        hospital_info
+    WHERE
+        "Hospital overall rating" = 5
+        AND "Emergency Services" = 'Yes'
+)`,
+    summary: `This query identifies **5-star hospitals that do not offer emergency services**. It highlights facilities that achieve the highest rating for overall quality but lack emergency service capabilities, w`,
+    concepts: ["EXCEPT"]
+  },
+  {
+    num: 24,
+    title: `Pivot Hospital Ratings into Columns`,
+    businessQ: `How are hospital overall ratings distributed across the dataset, shown as counts per rating category?`,
+    sql: `SELECT
+    COUNT(*) AS total_hospitals,
+    SUM(CASE WHEN "Hospital overall rating" = 1 THEN 1 ELSE 0 END) AS rating_1,
+    SUM(CASE WHEN "Hospital overall rating" = 2 THEN 1 ELSE 0 END) AS rating_2,
+    SUM(CASE WHEN "Hospital overall rating" = 3 THEN 1 ELSE 0 END) AS rating_3,
+    SUM(CASE WHEN "Hospital overall rating" = 4 THEN 1 ELSE 0 END) AS rating_4,
+    SUM(CASE WHEN "Hospital overall rating" = 5 THEN 1 ELSE 0 END) AS rating_5
+FROM
+    hospital_info
+WHERE
+    "Hospital overall rating" IS NOT NULL`,
+    summary: `The pivot table shows the distribution of hospital overall ratings across the dataset. Out of **2,812** hospitals with available ratings, the largest group falls into the **3-star** category with **81`,
+    concepts: ["CASE WHEN"]
+  },
+  {
+    num: 25,
+    title: `Top States by Average Hospital Rating (Cities with ≥ 3 Hospitals)`,
+    businessQ: `Which states have the highest average hospital ratings, considering only cities with at least three hospitals?`,
+    sql: `WITH city_level AS (
+    SELECT
+        "City/Town",
+        "State",
+        AVG("Hospital overall rating"::FLOAT) AS avg_city_rating,
+        COUNT(*) AS hospital_count
+    FROM
+        hospital_info
+    WHERE
+        "Hospital overall rating" IS NOT NULL
+    GROUP BY
+        "City/Town",
+        "State"
+    HAVING
+        COUNT(*) >= 3
+),
+state_level AS (
+    SELECT
+        "State",
+        ROUND(AVG(avg_city_rating)::NUMERIC, 2) AS avg_state_rating
+    FROM
+        city_level
+    GROUP BY
+        "State"
+)
+SELECT
+    *
+FROM
+    state_level
+ORDER BY
+    avg_state_rating DESC
+LIMIT 10;`,
+    summary: `The states with the highest average hospital ratings, considering only cities with at least three hospitals, include **South Dakota (4.50)**, **North Dakota (4.33)**, and **Colorado (4.27)**. This sug`,
+    concepts: ["CTE"]
+  },
+  {
+    num: 26,
+    title: `Compare Hospitals Across States Using UNION and EXCEPT`,
+    businessQ: `How can we compare hospital lists between Illinois and Texas using set operations?`,
+    sql: `SELECT 
+    "Facility ID",
+    "Facility Name",
+    "City/Town",
+    "State"
+FROM 
+    hospital_info
+WHERE 
+    "State" = 'IL'
+
+UNION
+
+SELECT 
+    "Facility ID",
+    "Facility Name",
+    "City/Town",
+    "State"
+FROM 
+    hospital_info
+WHERE 
+    "State" = 'TX'
+ORDER BY 
+    "Facility Name"
+LIMIT 10;`,
+    summary: `The \`UNION\` query combines hospitals from **Illinois** and **Texas**, showing a merged list of facilities from both states sorted by name. The \`EXCEPT\` query identifies hospitals present in **Illinois`,
+    concepts: ["Set Operation"]
+  },
+  {
+    num: 27,
+    title: `Compare Hospital Ratings Within States Using LAG()`,
+    businessQ: `How does a hospital's current overall rating compare to the previous hospital's rating alphabetically within the same state?`,
+    sql: `SELECT 
+    "Facility ID",
+    "Facility Name",
+    "State",
+    "Hospital overall rating"::FLOAT AS current_rating,
+    LAG("Hospital overall rating"::FLOAT) OVER (
+        PARTITION BY "State"
+        ORDER BY "Facility Name"
+    ) AS previous_rating
+FROM 
+    hospital_info
+WHERE 
+    "Hospital overall rating" IS NOT NULL
+ORDER BY 
+    "State", 
+    "Facility Name"
+LIMIT 20;`,
+    summary: `This query uses the \`LAG()\` window function to compare each hospital's current overall rating with the previous hospital’s rating within the same state, ordered alphabetically by hospital name. This h`,
+    concepts: ["LAG/LEAD"]
+  },
+  {
+    num: 28,
+    title: `Hospital Ratings Distribution by Ownership Type`,
+    businessQ: `How are hospital ratings distributed across different hospital ownership types?`,
+    sql: `SELECT
+    "Hospital Ownership",
+    COUNT(*) AS total_hospitals,
+    SUM(CASE WHEN "Hospital overall rating" = '1' THEN 1 ELSE 0 END) AS one_star,
+    SUM(CASE WHEN "Hospital overall rating" = '2' THEN 1 ELSE 0 END) AS two_star,
+    SUM(CASE WHEN "Hospital overall rating" = '3' THEN 1 ELSE 0 END) AS three_star,
+    SUM(CASE WHEN "Hospital overall rating" = '4' THEN 1 ELSE 0 END) AS four_star,
+    SUM(CASE WHEN "Hospital overall rating" = '5' THEN 1 ELSE 0 END) AS five_star
+FROM
+    hospital_info
+GROUP BY
+    "Hospital Ownership"
+ORDER BY
+    total_hospitals DESC;`,
+    summary: `This query pivots hospital overall ratings into columns by ownership type, showing the count of hospitals for each star rating (1 to 5 stars). For example, **Voluntary non-profit - Private** owns the `,
+    concepts: ["CASE WHEN"]
+  },
+];
+
+let sqlCurrent = 0;
+
+function renderSQLSlide(idx) {
+  const q = sqlSlides[idx];
+  const body = document.getElementById('sql-slide-body');
+  const label = document.getElementById('sql-query-label');
+  const counter = document.getElementById('sql-counter');
+  const fill = document.getElementById('sql-progress-fill');
+
+  label.textContent = `Query ${q.num} of 28`;
+  counter.textContent = `${idx + 1} / ${sqlSlides.length}`;
+  fill.style.width = `${((idx + 1) / sqlSlides.length) * 100}%`;
+
+  document.getElementById('sql-prev').disabled = idx === 0;
+  document.getElementById('sql-home').disabled = idx === 0;
+  document.getElementById('sql-next').disabled = idx === sqlSlides.length - 1;
+
+  const conceptTags = q.concepts.map(c => `<span class="sql-concept-tag">${c}</span>`).join('');
+
+  body.innerHTML = `
+    <div class="sql-slide-meta">
+      <span class="sql-qnum">${String(q.num).padStart(2,'0')}</span>
+      <span class="sql-qtitle">${q.title}</span>
+    </div>
+    <div style="display:flex;flex-wrap:wrap;gap:0.35rem;">${conceptTags}</div>
+    ${q.businessQ ? `<div class="sql-business-q"><strong>Business Question</strong>${q.businessQ}</div>` : ''}
+    <div class="sql-code-wrap"><pre>${highlightSQL(q.sql)}</pre></div>
+  `;
+}
+
+document.getElementById('sql-prev').addEventListener('click', () => {
+  if (sqlCurrent > 0) { sqlCurrent--; renderSQLSlide(sqlCurrent); }
+});
+document.getElementById('sql-next').addEventListener('click', () => {
+  if (sqlCurrent < sqlSlides.length - 1) { sqlCurrent++; renderSQLSlide(sqlCurrent); }
+});
+
+// keyboard nav for sql slider (only when not in carousel)
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' && sqlCurrent > 0 && document.activeElement.tagName !== 'BUTTON') {
+    sqlCurrent--; renderSQLSlide(sqlCurrent);
+  }
+  if (e.key === 'ArrowRight' && sqlCurrent < sqlSlides.length - 1 && document.activeElement.tagName !== 'BUTTON') {
+    sqlCurrent++; renderSQLSlide(sqlCurrent);
+  }
+});
+
+renderSQLSlide(0);
 
 // Fade in
 const obs = new IntersectionObserver(entries => {

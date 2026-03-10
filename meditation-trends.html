@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Meditation Trend Pulse — Saayed Alam</title>
+<meta name="description" content="Case study: End-to-end data pipeline tracking global meditation trends via Google Trends, Prophet forecasting, and a live Streamlit dashboard."/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2QNCLVX354"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2QNCLVX354');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#080c10;--surface:#0d1117;--surface2:#161b22;
+  --border:#21262d;--accent:#58a6ff;--accent2:#3fb950;
+  --text:#e6edf3;--muted:#7d8590;
+  --mono:'JetBrains Mono',monospace;--sans:'Syne',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(88,166,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(88,166,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+
+/* LIGHT THEME */
+html.light{--bg:#ffffff;--surface:#f6f8fa;--surface2:#eaeef2;--border:#d0d7de;--accent:#0969da;--accent2:#1a7f37;--text:#1f2328;--muted:#656d76;}
+html.light body::before{background-image:linear-gradient(rgba(9,105,218,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(9,105,218,0.05) 1px,transparent 1px);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:rgba(8,12,16,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+html.light nav{background:rgba(255,255,255,0.92);}
+.nav-logo{font-weight:700;font-size:13px;color:var(--accent);letter-spacing:0.05em;text-decoration:none;}
+.nav-logo span{color:var(--muted);}
+.nav-right{display:flex;align-items:center;gap:0.75rem;}
+.nav-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.nav-back:hover{color:var(--accent);}
+.theme-toggle{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:14px;transition:all 0.2s;}
+.theme-toggle:hover{border-color:var(--accent);}
+
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem 4rem;}
+
+/* HEADER */
+.case-label{font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;}
+.case-label::before{content:'//';color:var(--muted);}
+.case-title{font-family:var(--sans);font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;}
+.case-subtitle{font-size:13px;color:var(--muted);line-height:1.7;max-width:620px;margin-bottom:1.25rem;}
+.case-meta{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
+.meta-tag{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;border:1px solid var(--border);color:var(--muted);background:var(--surface2);}
+.meta-tag.hi{border-color:var(--accent);color:var(--accent);}
+.case-links{display:flex;gap:0.75rem;flex-wrap:wrap;padding-bottom:2.5rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem;}
+.case-link{font-size:11px;text-decoration:none;letter-spacing:0.06em;display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border:1px solid;transition:all 0.2s;}
+.lp{border-color:var(--accent);color:var(--accent);}
+.lp:hover{background:var(--accent);color:var(--bg);}
+.ls{border-color:var(--border);color:var(--muted);}
+.ls:hover{border-color:var(--muted);color:var(--text);}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2.5rem;}
+.stat-box{background:var(--surface);padding:1.25rem;display:flex;flex-direction:column;gap:0.25rem;}
+.stat-val{font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--accent);line-height:1;}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.2rem;}
+
+/* SECTION TITLE */
+.st{font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.st::before{content:'//';color:var(--muted);}
+.st::after{content:'';flex:1;height:1px;background:var(--border);}
+.cs{margin-bottom:2.5rem;}
+
+/* EMBED */
+.embed-wrap{border:1px solid var(--border);margin-bottom:1rem;background:var(--surface);}
+.embed-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:0.6rem 1rem;display:flex;align-items:center;justify-content:space-between;}
+.embed-bar-left{display:flex;align-items:center;gap:0.75rem;}
+.embed-label{font-size:11px;color:var(--muted);letter-spacing:0.05em;}
+.embed-link{font-size:11px;color:var(--accent);text-decoration:none;letter-spacing:0.05em;}
+.embed-link:hover{text-decoration:underline;}
+.embed-container{position:relative;width:100%;background:var(--surface2);}
+.embed-container iframe{width:100%;border:none;display:block;min-height:650px;}
+.embed-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;background:var(--surface2);font-size:12px;color:var(--muted);letter-spacing:0.06em;pointer-events:none;transition:opacity 0.5s;}
+.embed-loading.hidden{opacity:0;}
+.embed-spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.embed-note{background:var(--surface2);border-top:1px solid var(--border);padding:0.5rem 1rem;font-size:10px;color:var(--muted);letter-spacing:0.05em;}
+.embed-blocked{display:none;padding:2.5rem 1.5rem;text-align:center;flex-direction:column;align-items:center;gap:1rem;}
+.embed-blocked p{font-size:12px;color:var(--muted);line-height:1.7;max-width:480px;}
+.embed-blocked a{color:var(--accent);text-decoration:none;font-size:12px;border:1px solid var(--accent);padding:0.45rem 1rem;transition:all 0.2s;display:inline-block;margin-top:0.5rem;}
+.embed-blocked a:hover{background:var(--accent);color:var(--bg);}
+
+/* COLLAPSIBLE */
+.collapsible-toggle{width:100%;background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:0.75rem 1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all 0.2s;margin-top:0.75rem;}
+.collapsible-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.collapsible-icon{font-size:11px;letter-spacing:0.1em;color:var(--accent);}
+.collapsible-body{overflow:hidden;max-height:0;transition:max-height 0.4s ease;}
+.collapsible-body.open{max-height:3000px;}
+
+/* PIPELINE STEPS */
+.process-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+.process-step{background:var(--surface);padding:1.25rem 1.5rem;display:grid;grid-template-columns:40px 1fr;gap:1rem;align-items:start;transition:background 0.2s;}
+.process-step:hover{background:var(--surface2);}
+.step-num{font-family:var(--sans);font-size:1.1rem;font-weight:800;color:var(--accent);opacity:0.35;line-height:1;padding-top:0.15rem;}
+.step-title{font-size:13px;color:var(--text);font-weight:600;margin-bottom:0.3rem;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+.step-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.5rem;}
+.step-tag{font-size:10px;padding:0.15rem 0.5rem;background:var(--surface2);border:1px solid var(--border);color:var(--muted);}
+
+/* DASHBOARD PAGES GRID */
+.pages-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);}
+.page-card{background:var(--surface);padding:1.25rem;display:flex;flex-direction:column;gap:0.4rem;transition:background 0.2s;}
+.page-card:hover{background:var(--surface2);}
+.page-icon{font-size:1.1rem;}
+.page-name{font-size:12px;color:var(--text);font-weight:600;}
+.page-desc{font-size:11px;color:var(--muted);line-height:1.6;}
+
+/* FINDINGS */
+.findings-list{display:flex;flex-direction:column;gap:0.5rem;}
+.finding{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent2);padding:1rem 1.25rem;font-size:12.5px;color:#8b949e;line-height:1.7;}
+.finding strong{color:var(--text);}
+
+/* PROSE */
+.prose{font-size:13px;color:#8b949e;line-height:1.85;}
+.prose p+p{margin-top:1rem;}
+.prose strong{color:var(--text);}
+
+/* FOOTER */
+.case-footer{border-top:1px solid var(--border);padding-top:2rem;margin-top:3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.footer-back:hover{color:var(--accent);}
+.footer-note{font-size:11px;color:var(--muted);}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){
+  main{padding:4rem 1rem 3rem;}
+  nav{padding:0 1rem;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .process-step{grid-template-columns:30px 1fr;}
+  .pages-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">saayedalam<span>.me</span></a>
+  <div class="nav-right">
+    <a href="index.html#projects" class="nav-back">← back to portfolio</a>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HEADER -->
+  <div class="fade-in">
+    <div class="case-label">Case Study · End-to-End Pipeline</div>
+    <h1 class="case-title">Meditation Trend Pulse</h1>
+    <p class="case-subtitle">An automated end-to-end data pipeline tracking global interest in meditation, mindfulness, and breathwork — from Google Trends ingestion to Prophet forecasting and a live multi-page Streamlit dashboard.</p>
+    <div class="case-meta">
+      <span class="meta-tag hi">Streamlit</span>
+      <span class="meta-tag hi">Prophet</span>
+      <span class="meta-tag hi">Python</span>
+      <span class="meta-tag">PyTrends</span>
+      <span class="meta-tag">Pandas</span>
+      <span class="meta-tag">Automation</span>
+      <span class="meta-tag">Time Series</span>
+      <span class="meta-tag">Trend Analysis</span>
+      <span class="meta-tag">Google Trends</span>
+    </div>
+    <div class="case-links">
+      <a href="https://meditationtrendpulse.streamlit.app/" target="_blank" class="case-link lp">↗ Live App</a>
+      <a href="https://github.com/saayedalam/Meditation-Trend-Pulse" target="_blank" class="case-link ls">⌥ GitHub Repo</a>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row fade-in">
+    <div class="stat-box"><span class="stat-val">3</span><span class="stat-label">Dashboard Pages</span></div>
+    <div class="stat-box"><span class="stat-val">9</span><span class="stat-label">Cleaned Datasets</span></div>
+    <div class="stat-box"><span class="stat-val">Daily</span><span class="stat-label">Auto-Updates</span></div>
+    <div class="stat-box"><span class="stat-val">Prophet</span><span class="stat-label">Forecasting Engine</span></div>
+  </div>
+
+  <!-- LIVE EMBED -->
+  <div class="cs fade-in">
+    <div class="st">Live App</div>
+    <div class="embed-wrap">
+      <div class="embed-bar">
+        <div class="embed-bar-left">
+          <div style="display:flex;gap:0.4rem;">
+            <span style="width:10px;height:10px;border-radius:50%;background:#f78166;display:block;"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#e3b341;display:block;"></span>
+            <span style="width:10px;height:10px;border-radius:50%;background:#3fb950;display:block;"></span>
+          </div>
+          <span class="embed-label">Meditation Trend Pulse — Streamlit Community Cloud</span>
+        </div>
+        <a href="https://meditationtrendpulse.streamlit.app/" target="_blank" class="embed-link">↗ Open full screen</a>
+      </div>
+      <div class="embed-container">
+        <div class="embed-loading" id="embed-loading">
+          <div class="embed-spinner"></div>
+          <span>Loading app...</span>
+        </div>
+        <iframe
+          id="streamlit-iframe"
+          src="https://meditationtrendpulse.streamlit.app/?embed=true"
+          allowfullscreen
+          onload="handleEmbedLoad()"
+          onerror="showEmbedFallback()"
+        ></iframe>
+        <div class="embed-blocked" id="embed-blocked">
+          <p>Streamlit's embedding policy may prevent inline display. Open the live app directly for the full interactive experience.</p>
+          <a href="https://meditationtrendpulse.streamlit.app/" target="_blank">↗ Open Live App</a>
+        </div>
+      </div>
+      <div class="embed-note">⚡ Fully interactive — navigate pages using the sidebar · <a href="https://meditationtrendpulse.streamlit.app/" target="_blank" class="embed-link">open full screen</a> for best experience</div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="cs fade-in">
+    <div class="st">The Problem</div>
+    <div class="prose">
+      <p>Meditation and mindfulness have gone mainstream — but which practices are actually growing, which are plateauing, and which are fading? Google Trends captures this signal in real time, but raw trend data is noisy, hard to interpret, and gone the moment you stop looking at it.</p>
+      <p>The goal was to build something that <strong>automatically collects, cleans, and stores</strong> Google Trends data daily — then surfaces it in a dashboard that answers real questions: Where in the world is mindfulness growing fastest? What's the forecast for breathwork over the next year? Which related queries are rising right now?</p>
+    </div>
+  </div>
+
+  <!-- APPROACH -->
+  <div class="cs fade-in">
+    <div class="st">Approach</div>
+    <div class="process-list">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Automated Data Ingestion</div>
+          <div class="step-desc">Built a daily automation pipeline using PyTrends to pull Google Trends data for meditation, mindfulness, and breathwork. The script only overwrites datasets when fresh data is available — keeping the repo lightweight and reproducible.</div>
+          <div class="step-tags"><span class="step-tag">PyTrends</span><span class="step-tag">Automation</span><span class="step-tag">Python Scripts</span><span class="step-tag">Scheduling</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">EDA & Time Series Analysis</div>
+          <div class="step-desc">Cleaned and transformed 9 datasets covering global trends, country-level interest, and related queries. Applied smoothing, peak detection, percent change calculations, and monthly heatmaps to surface meaningful patterns in noisy trend data.</div>
+          <div class="step-tags"><span class="step-tag">Pandas</span><span class="step-tag">NumPy</span><span class="step-tag">Smoothing</span><span class="step-tag">Peak Detection</span><span class="step-tag">Heatmaps</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Prophet Forecasting</div>
+          <div class="step-desc">Trained Facebook Prophet models on the cleaned time series to project future global search interest. Visuals surface uncertainty intervals and trend direction — giving the dashboard a predictive layer beyond descriptive stats.</div>
+          <div class="step-tags"><span class="step-tag">Prophet</span><span class="step-tag">Time Series</span><span class="step-tag">Forecasting</span><span class="step-tag">Uncertainty Intervals</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">Multi-Page Streamlit Dashboard</div>
+          <div class="step-desc">Built a 3-page Streamlit app with custom chakra-themed UI components, Altair charts, and a polished layout. Each page answers a distinct analytical question — global trends, country breakdowns, and related query analysis.</div>
+          <div class="step-tags"><span class="step-tag">Streamlit</span><span class="step-tag">Altair</span><span class="step-tag">Custom UI</span><span class="step-tag">Multi-page</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DASHBOARD PAGES -->
+  <div class="cs fade-in">
+    <div class="st">Dashboard Pages</div>
+    <div class="pages-grid">
+      <div class="page-card">
+        <span class="page-icon">🌍</span>
+        <div class="page-name">Global Trends</div>
+        <div class="page-desc">5-year search interest over time, smoothed trend lines, % change table, peak interest dates, and Prophet forecasts for each keyword.</div>
+      </div>
+      <div class="page-card">
+        <span class="page-icon">🗺️</span>
+        <div class="page-name">Country Trends</div>
+        <div class="page-desc">Top countries by practice, cross-keyword comparisons, share of global interest, and how different regions engage with each topic.</div>
+      </div>
+      <div class="page-card" style="grid-column:1/-1;">
+        <span class="page-icon">🔍</span>
+        <div class="page-name">Related Queries</div>
+        <div class="page-desc">Top and rising search queries associated with each keyword — surfacing what people are actually searching alongside meditation and mindfulness, including shared interest signals across keywords.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINDINGS -->
+  <div class="cs fade-in">
+    <div class="st">Key Findings</div>
+    <div class="findings-list">
+      <div class="finding"><strong>Mindfulness consistently outperforms meditation and breathwork</strong> in global search interest over the 5-year window — but breathwork shows the steepest recent growth rate among the three.</div>
+      <div class="finding"><strong>Interest spikes reliably in January</strong> across all three keywords — driven by New Year wellness resolutions — making it the single most predictable peak in the annual cycle.</div>
+      <div class="finding">Country-level analysis reveals <strong>Australia, Canada, and the UK lead per-capita interest</strong> in mindfulness, while Southeast Asian countries show rising engagement with meditation specifically.</div>
+      <div class="finding">Prophet forecasts project <strong>continued moderate growth</strong> for all three keywords over the next 12 months, with widening uncertainty intervals — reflecting genuine ambiguity in post-pandemic wellness trends.</div>
+      <div class="finding">Related queries analysis surfaces <strong>"meditation for anxiety" and "breathwork techniques"</strong> as the fastest-rising associated searches — pointing to a shift from general interest to specific, need-driven queries.</div>
+    </div>
+  </div>
+
+  <!-- BUSINESS IMPLICATION -->
+  <div class="cs fade-in">
+    <div class="st">Business Implication</div>
+    <div class="prose">
+      <p>This project demonstrates the full data engineering lifecycle — not just analysis. The automation layer means the dashboard stays current without manual intervention, which is the difference between a one-time analysis and a <strong>living data product</strong>.</p>
+      <p>For a wellness brand, content platform, or market research team, this pipeline could power <strong>content strategy, regional campaign targeting, and trend forecasting</strong> — all derived from a free public data source, refreshed daily, with no manual effort.</p>
+    </div>
+  </div>
+
+  <div class="case-footer fade-in">
+    <a href="index.html#projects" class="footer-back">← back to all projects</a>
+    <span class="footer-note">Built by Saayed Alam · 2025</span>
+  </div>
+
+</main>
+
+<script>
+function handleEmbedLoad() {
+  // Give Streamlit a moment to render, then hide spinner
+  setTimeout(() => {
+    const loading = document.getElementById('embed-loading');
+    const iframe = document.getElementById('streamlit-iframe');
+    // Check if iframe has content or was blocked
+    try {
+      const h = iframe.contentWindow.document.body.innerHTML;
+      if (!h || h.length < 100) showEmbedFallback();
+      else loading.classList.add('hidden');
+    } catch(e) {
+      // Cross-origin — assume it loaded fine
+      loading.classList.add('hidden');
+    }
+  }, 4000);
+}
+
+function showEmbedFallback() {
+  document.getElementById('embed-loading').classList.add('hidden');
+  document.getElementById('streamlit-iframe').style.display = 'none';
+  const blocked = document.getElementById('embed-blocked');
+  blocked.style.display = 'flex';
+}
+
+// Fallback timeout — if nothing happens in 12s, show the open button
+setTimeout(() => {
+  const loading = document.getElementById('embed-loading');
+  if (!loading.classList.contains('hidden')) {
+    loading.classList.add('hidden');
+  }
+}, 12000);
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  if (html.classList.contains('light')) {
+    html.classList.remove('light');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme','dark');
+  } else {
+    html.classList.add('light');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme','light');
+  }
+}
+
+(function(){
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.classList.add('light');
+    document.getElementById('theme-toggle').textContent = '☀️';
+  }
+})();
+
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

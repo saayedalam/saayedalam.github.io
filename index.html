@@ -306,6 +306,24 @@ function toggleMobileNav() {
     cursor: default;
   }
   .skill-chip:hover { border-color: var(--accent); color: var(--accent); }
+
+  a.skill-link {
+    text-decoration: none;
+    position: relative;
+  }
+  a.skill-link::after {
+    content: ' ↗';
+    font-size: 9px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  a.skill-link:hover::after { opacity: 1; }
+  a.skill-link:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(88,166,255,0.08);
+  }
+
   .skill-chip.primary { border-color: var(--accent); color: var(--accent); background: rgba(88,166,255,0.07); }
   html.light .skill-chip.primary { background: rgba(9,105,218,0.07); }
   /* keep bar classes for JS compat but hidden */
@@ -689,7 +707,7 @@ function toggleMobileNav() {
     <div class="skill-group">
       <div class="skill-group-title">BI & Visualization</div>
       <div class="skill-chips">
-        <span class="skill-chip primary">Tableau</span>
+        <a href="credit-risk.html" class="skill-chip primary skill-link" title="See this skill in action → Credit Risk project">Tableau</a>
         <span class="skill-chip primary">Power BI</span>
         <span class="skill-chip">Streamlit</span>
         <span class="skill-chip">Dashboard Design</span>
@@ -700,13 +718,13 @@ function toggleMobileNav() {
     <div class="skill-group">
       <div class="skill-group-title">Python & ML</div>
       <div class="skill-chips">
-        <span class="skill-chip primary">Python</span>
-        <span class="skill-chip">Pandas</span>
-        <span class="skill-chip">NumPy</span>
-        <span class="skill-chip">LightGBM</span>
-        <span class="skill-chip">SHAP</span>
+        <a href="credit-risk.html" class="skill-chip primary skill-link" title="See this skill in action → Credit Risk project">Python</a>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Pandas</a>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">NumPy</a>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">LightGBM</a>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">SHAP</a>
         <span class="skill-chip">Prophet</span>
-        <span class="skill-chip">Scikit-learn</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Scikit-learn</a>
       </div>
     </div>
 
@@ -729,7 +747,7 @@ function toggleMobileNav() {
         <span class="skill-chip primary">BigQuery</span>
         <span class="skill-chip">Data Modeling</span>
         <span class="skill-chip">Pipeline Design</span>
-        <span class="skill-chip">MLflow</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
         <span class="skill-chip">Lineage</span>
       </div>
     </div>
@@ -741,8 +759,8 @@ function toggleMobileNav() {
         <span class="skill-chip">JupyterLab</span>
         <span class="skill-chip">Excel / VBA</span>
         <span class="skill-chip">Notion</span>
-        <span class="skill-chip">Optuna</span>
-        <span class="skill-chip">MLflow</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Optuna</a>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
       </div>
     </div>
 
@@ -754,7 +772,7 @@ function toggleMobileNav() {
         <span class="skill-chip">Market Research</span>
         <span class="skill-chip">Healthcare Analytics</span>
         <span class="skill-chip">Survey Methodology</span>
-        <span class="skill-chip">Risk Analysis</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Risk Analysis</a>
         <span class="skill-chip">Brand Analytics</span>
       </div>
     </div>
@@ -767,7 +785,7 @@ function toggleMobileNav() {
         <span class="skill-chip">Data Warehousing</span>
         <span class="skill-chip">Star Schema</span>
         <span class="skill-chip">ELT Pipelines</span>
-        <span class="skill-chip">Risk Analytics</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Risk Analytics</a>
         <span class="skill-chip">Model Documentation</span>
       </div>
     </div>

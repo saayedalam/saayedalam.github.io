@@ -759,9 +759,9 @@ function toggleMobileNav() {
     <div class="skill-group">
       <div class="skill-group-title">Workflow & Tools</div>
       <div class="skill-chips">
-        <span class="skill-chip">Git / GitHub</span>
+        <span class="skill-chip">GitHub</span>
         <span class="skill-chip">JupyterLab</span>
-        <span class="skill-chip">Excel / VBA</span>
+        <span class="skill-chip">Excel</span>
         <span class="skill-chip">Notion</span>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Optuna</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
@@ -840,7 +840,7 @@ const modes = {
     tr: '"Data Analyst"', ts: '["SQL","Python","Tableau","Power BI"]',
     tt: '["fintech","banking","market-research","healthcare"]',
     note: 'I\'m actively looking for <strong style="color:var(--text)">Data Analyst roles</strong> in fintech, banking, market research, and healthcare — in Toronto or remote. If you\'re hiring or want to connect, I respond within 24 hours.',
-    ticker: '&nbsp;&nbsp;SQL · Python · Power BI · Tableau · Data Analysis · A/B Testing · Statistical Modeling · Stakeholder Reporting · Visualization · Fintech · Banking · Market Research · Healthcare · Insights · Dashboards · KPIs · SQL · Python · Power BI · Tableau · Data Analysis · A/B Testing · Statistical Modeling · Stakeholder Reporting · Visualization · Fintech · Banking · Market Research · Healthcare · Insights · Dashboards · KPIs ·&nbsp;&nbsp;'
+    ticker: null
   },
   ae: {
     role: 'Analytics Engineer · dbt · BigQuery · Power BI',
@@ -849,7 +849,7 @@ const modes = {
     tr: '"Analytics Engineer"', ts: '["dbt","BigQuery","SQL","Power BI"]',
     tt: '["fintech","banking","data-engineering"]',
     note: 'I\'m actively looking for <strong style="color:var(--text)">Analytics Engineering roles</strong> in fintech and banking — in Toronto or remote. If you\'re hiring or want to connect, I respond within 24 hours.',
-    ticker: '&nbsp;&nbsp;dbt · BigQuery · Power BI · Analytics Engineering · Data Modeling · SQL · Pipeline Design · Lineage · Tableau · Python · Staging · Marts · Testing · Documentation · dbt · BigQuery · Power BI · Analytics Engineering · Data Modeling · SQL · Pipeline Design · Lineage · Tableau · Python · Staging · Marts · Testing · Documentation ·&nbsp;&nbsp;'
+    ticker: null
   }
 };
 
@@ -863,7 +863,13 @@ function setMode(mode) {
   document.getElementById('s3v').textContent = m.s3v;
   document.getElementById('s3l').textContent = m.s3l;
   document.getElementById('contact-note').innerHTML = m.note;
-  document.getElementById('ticker-text').innerHTML = m.ticker;
+  // Build ticker dynamically from all skill chips
+  const chips = Array.from(document.querySelectorAll('.skill-chips .skill-chip, .skill-chips a.skill-link'))
+    .map(el => el.textContent.replace('↗','').trim())
+    .filter(t => t.length > 1);
+  const unique = [...new Set(chips)];
+  const text = '&nbsp;&nbsp;' + unique.join(' · ') + ' ·';
+  document.getElementById('ticker-text').innerHTML = text + text;
   const grid = document.getElementById('projects-grid');
   Array.from(grid.querySelectorAll('.project-card')).forEach(card => {
     const cardModes = card.dataset.modes.split(' ');

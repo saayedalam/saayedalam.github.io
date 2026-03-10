@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Medicare Hospital SQL Analysis — Saayed Alam</title>
+<meta name="description" content="Case study: SQL analysis of 6K+ Medicare-registered U.S. hospitals using PostgreSQL and Tableau — exploring quality ratings, emergency coverage, and geographic disparities."/>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2QNCLVX354"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-2QNCLVX354');
+</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+:root {
+  --bg:#080c10;--surface:#0d1117;--surface2:#161b22;
+  --border:#21262d;--accent:#58a6ff;--accent2:#3fb950;
+  --text:#e6edf3;--muted:#7d8590;
+  --mono:'JetBrains Mono',monospace;--sans:'Syne',sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--mono);font-size:14px;line-height:1.6;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(88,166,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(88,166,255,0.03) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0;}
+
+/* LIGHT THEME */
+html.light {
+  --bg:#ffffff;--surface:#f6f8fa;--surface2:#eaeef2;
+  --border:#d0d7de;--accent:#0969da;--accent2:#1a7f37;
+  --text:#1f2328;--muted:#656d76;
+}
+html.light body::before{background-image:linear-gradient(rgba(9,105,218,0.05) 1px,transparent 1px),linear-gradient(90deg,rgba(9,105,218,0.05) 1px,transparent 1px);}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 2rem;height:56px;background:rgba(8,12,16,0.92);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+html.light nav{background:rgba(255,255,255,0.92);}
+.nav-logo{font-weight:700;font-size:13px;color:var(--accent);letter-spacing:0.05em;text-decoration:none;}
+.nav-logo span{color:var(--muted);}
+.nav-right{display:flex;align-items:center;gap:0.75rem;}
+.nav-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.nav-back:hover{color:var(--accent);}
+.theme-toggle{display:flex;align-items:center;justify-content:center;width:32px;height:32px;background:transparent;border:1px solid var(--border);border-radius:2px;cursor:pointer;font-size:14px;transition:all 0.2s;flex-shrink:0;}
+.theme-toggle:hover{border-color:var(--accent);}
+
+main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem 4rem;}
+
+/* HEADER */
+.case-label{font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;display:flex;align-items:center;gap:0.5rem;margin-bottom:1rem;}
+.case-label::before{content:'//';color:var(--muted);}
+.case-title{font-family:var(--sans);font-size:clamp(1.8rem,5vw,3rem);font-weight:800;letter-spacing:-0.02em;line-height:1.1;margin-bottom:1rem;}
+.case-subtitle{font-size:13px;color:var(--muted);line-height:1.7;max-width:620px;margin-bottom:1.25rem;}
+.case-meta{display:flex;flex-wrap:wrap;gap:0.5rem;margin-bottom:1.25rem;}
+.meta-tag{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;padding:0.25rem 0.65rem;border:1px solid var(--border);color:var(--muted);background:var(--surface2);}
+.meta-tag.hi{border-color:var(--accent);color:var(--accent);}
+.case-links{display:flex;gap:0.75rem;flex-wrap:wrap;padding-bottom:2.5rem;border-bottom:1px solid var(--border);margin-bottom:2.5rem;}
+.case-link{font-size:11px;text-decoration:none;letter-spacing:0.06em;display:inline-flex;align-items:center;gap:0.4rem;padding:0.45rem 1rem;border:1px solid;transition:all 0.2s;}
+.lp{border-color:var(--accent);color:var(--accent);}
+.lp:hover{background:var(--accent);color:var(--bg);}
+.ls{border-color:var(--border);color:var(--muted);}
+.ls:hover{border-color:var(--muted);color:var(--text);}
+
+/* STATS */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--border);border:1px solid var(--border);margin-bottom:2.5rem;}
+.stat-box{background:var(--surface);padding:1.25rem;display:flex;flex-direction:column;gap:0.25rem;}
+.stat-val{font-family:var(--sans);font-size:1.5rem;font-weight:700;color:var(--accent);line-height:1;}
+.stat-label{font-size:10px;color:var(--muted);letter-spacing:0.06em;text-transform:uppercase;margin-top:0.2rem;}
+
+/* SECTION TITLE */
+.st{font-size:11px;letter-spacing:0.2em;color:var(--accent);text-transform:uppercase;margin-bottom:1rem;display:flex;align-items:center;gap:0.5rem;}
+.st::before{content:'//';color:var(--muted);}
+.st::after{content:'';flex:1;height:1px;background:var(--border);}
+.cs{margin-bottom:2.5rem;}
+
+/* TABLEAU EMBED */
+.tableau-wrap{border:1px solid var(--border);margin-bottom:0;background:var(--surface);}
+.tableau-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:0.6rem 1rem;display:flex;align-items:center;justify-content:space-between;}
+.tableau-bar-left{display:flex;align-items:center;gap:0.75rem;}
+.tableau-label{font-size:11px;color:var(--muted);letter-spacing:0.05em;}
+.tableau-link{font-size:11px;color:var(--accent);text-decoration:none;letter-spacing:0.05em;}
+.tableau-link:hover{text-decoration:underline;}
+.tableau-embed-container{position:relative;width:100%;background:var(--surface2);}
+.tableau-embed-container iframe{width:100%;border:none;display:block;min-height:600px;}
+.tableau-loading{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.75rem;background:var(--surface2);font-size:12px;color:var(--muted);letter-spacing:0.06em;pointer-events:none;transition:opacity 0.4s;}
+.tableau-loading.hidden{opacity:0;}
+.tableau-spinner{width:24px;height:24px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.tableau-note{background:var(--surface2);border-top:1px solid var(--border);padding:0.5rem 1rem;font-size:10px;color:var(--muted);letter-spacing:0.05em;}
+
+/* COLLAPSIBLE */
+.collapsible-toggle{width:100%;background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:0.15em;text-transform:uppercase;padding:0.75rem 1rem;cursor:pointer;display:flex;align-items:center;justify-content:space-between;transition:all 0.2s;margin-top:0;}
+.collapsible-toggle:hover{border-color:var(--accent);color:var(--accent);}
+.collapsible-icon{font-size:11px;letter-spacing:0.1em;color:var(--accent);}
+.collapsible-body{overflow:hidden;max-height:0;transition:max-height 0.4s ease;}
+.collapsible-body.open{max-height:3000px;}
+.collapsible-body .carousel{border-top:none;}
+
+/* CAROUSEL */
+.carousel{border:1px solid var(--border);background:var(--surface);position:relative;}
+.carousel-header{background:var(--surface2);border-bottom:1px solid var(--border);padding:0.6rem 1rem;display:flex;align-items:center;justify-content:space-between;}
+.carousel-dots-row{display:flex;align-items:center;gap:0.75rem;}
+.browser-dots{display:flex;gap:0.4rem;}
+.bd{width:10px;height:10px;border-radius:50%;}
+.bd-r{background:#f78166;}.bd-y{background:#e3b341;}.bd-g{background:#3fb950;}
+.carousel-tab-label{font-size:11px;color:var(--muted);letter-spacing:0.05em;}
+.carousel-open{font-size:11px;color:var(--accent);text-decoration:none;}
+.carousel-open:hover{text-decoration:underline;}
+.carousel-track-wrap{overflow:hidden;}
+.carousel-track{display:flex;transition:transform 0.4s cubic-bezier(0.4,0,0.2,1);}
+.carousel-slide{min-width:100%;position:relative;}
+.carousel-slide img{width:100%;display:block;}
+.slide-caption{position:absolute;bottom:0;left:0;right:0;background:rgba(8,12,16,0.82);border-top:1px solid var(--border);padding:0.5rem 1rem;font-size:11px;color:var(--muted);letter-spacing:0.04em;}
+.carousel-controls{display:flex;align-items:center;justify-content:space-between;padding:0.75rem 1rem;border-top:1px solid var(--border);}
+.carousel-btn{background:none;border:1px solid var(--border);color:var(--muted);font-family:var(--mono);font-size:11px;letter-spacing:0.08em;padding:0.35rem 0.85rem;cursor:pointer;transition:all 0.2s;}
+.carousel-btn:hover{border-color:var(--accent);color:var(--accent);}
+.carousel-btn:disabled{opacity:0.25;cursor:default;}
+.carousel-dots{display:flex;gap:0.5rem;align-items:center;}
+.cdot{width:6px;height:6px;border-radius:50%;background:var(--border);cursor:pointer;transition:all 0.2s;border:none;padding:0;}
+.cdot.active{background:var(--accent);width:18px;border-radius:3px;}
+
+/* PROCESS */
+.process-list{display:flex;flex-direction:column;gap:1px;background:var(--border);border:1px solid var(--border);}
+.process-step{background:var(--surface);padding:1.25rem 1.5rem;display:grid;grid-template-columns:40px 1fr;gap:1rem;align-items:start;transition:background 0.2s;}
+.process-step:hover{background:var(--surface2);}
+.step-num{font-family:var(--sans);font-size:1.1rem;font-weight:800;color:var(--accent);opacity:0.35;line-height:1;padding-top:0.15rem;}
+.step-title{font-size:13px;color:var(--text);font-weight:600;margin-bottom:0.3rem;}
+.step-desc{font-size:12px;color:var(--muted);line-height:1.65;}
+.step-tags{display:flex;flex-wrap:wrap;gap:0.35rem;margin-top:0.5rem;}
+.step-tag{font-size:10px;padding:0.15rem 0.5rem;background:var(--surface2);border:1px solid var(--border);color:var(--muted);}
+
+/* FINDINGS */
+.findings-list{display:flex;flex-direction:column;gap:0.5rem;}
+.finding{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent2);padding:1rem 1.25rem;font-size:12.5px;color:#8b949e;line-height:1.7;}
+.finding strong{color:var(--text);}
+
+/* PROSE */
+.prose{font-size:13px;color:#8b949e;line-height:1.85;}
+.prose p+p{margin-top:1rem;}
+.prose strong{color:var(--text);}
+
+/* FOOTER */
+.case-footer{border-top:1px solid var(--border);padding-top:2rem;margin-top:3rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem;}
+.footer-back{font-size:12px;color:var(--muted);text-decoration:none;letter-spacing:0.06em;transition:color 0.2s;}
+.footer-back:hover{color:var(--accent);}
+.footer-note{font-size:11px;color:var(--muted);}
+
+/* FADE */
+.fade-in{opacity:0;transform:translateY(16px);transition:opacity 0.5s ease,transform 0.5s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+@media(max-width:768px){
+  main{padding:4rem 1rem 3rem;}
+  nav{padding:0 1rem;}
+  .stats-row{grid-template-columns:1fr 1fr;}
+  .process-step{grid-template-columns:30px 1fr;}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">saayedalam<span>.me</span></a>
+  <div class="nav-right">
+    <a href="index.html#projects" class="nav-back">← back to portfolio</a>
+    <button class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+  </div>
+</nav>
+
+<main>
+
+  <!-- HEADER -->
+  <div class="fade-in">
+    <div class="case-label">Case Study · SQL & Visualization</div>
+    <h1 class="case-title">Medicare Hospital SQL Analysis</h1>
+    <p class="case-subtitle">A 28-query PostgreSQL analysis of 6,000+ Medicare-registered U.S. hospitals — exploring quality ratings, emergency service coverage, and geographic disparities, translated into a 5-dashboard Tableau story.</p>
+    <div class="case-meta">
+      <span class="meta-tag hi">SQL</span>
+      <span class="meta-tag hi">PostgreSQL</span>
+      <span class="meta-tag hi">Tableau</span>
+      <span class="meta-tag">Python</span>
+      <span class="meta-tag">Pandas</span>
+      <span class="meta-tag">Window Functions</span>
+      <span class="meta-tag">CTEs</span>
+      <span class="meta-tag">Healthcare Analytics</span>
+      <span class="meta-tag">CMS Dataset</span>
+    </div>
+    <div class="case-links">
+      <a href="https://public.tableau.com/app/profile/saayed.alam/viz/CMSHospitalDataDashboardSQLAnalysisVisualization/Story1" target="_blank" class="case-link lp">↗ Live Dashboard</a>
+      <a href="https://nbviewer.org/github/saayedalam/CMS-Hospital-SQL-Analysis/blob/cac15c757c06c62a16c2d769a65e05b3765a21d1/notebooks/02_sql_analysis.ipynb" target="_blank" class="case-link ls">⌥ SQL Notebook</a>
+      <a href="https://github.com/saayedalam/CMS-Hospital-SQL-Analysis" target="_blank" class="case-link ls">⌥ GitHub Repo</a>
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row fade-in">
+    <div class="stat-box"><span class="stat-val">6K+</span><span class="stat-label">Hospitals Analyzed</span></div>
+    <div class="stat-box"><span class="stat-val">28</span><span class="stat-label">SQL Queries</span></div>
+    <div class="stat-box"><span class="stat-val">5</span><span class="stat-label">Tableau Dashboards</span></div>
+    <div class="stat-box"><span class="stat-val">50+</span><span class="stat-label">States & Territories</span></div>
+  </div>
+
+  <!-- LIVE TABLEAU EMBED -->
+  <div class="cs fade-in">
+    <div class="st">Live Dashboard</div>
+    <div class="tableau-wrap">
+      <div class="tableau-bar">
+        <div class="tableau-bar-left">
+          <div class="browser-dots"><span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span></div>
+          <span class="tableau-label">CMS Hospital Dashboard — Tableau Public</span>
+        </div>
+        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/CMSHospitalDataDashboardSQLAnalysisVisualization/Story1" target="_blank" class="tableau-link">↗ Open full screen</a>
+      </div>
+      <div class="tableau-embed-container">
+        <div class="tableau-loading" id="tableau-loading">
+          <div class="tableau-spinner"></div>
+          <span>Loading dashboard...</span>
+        </div>
+        <iframe
+          src="https://public.tableau.com/views/CMSHospitalDataDashboardSQLAnalysisVisualization/Story1?:embed=y&:showVizHome=no&:tabs=yes&:toolbar=yes&:animate_transition=yes&:display_static_image=no&:display_spinner=no&:display_overlay=yes&:display_count=yes&:language=en-US"
+          id="tableau-iframe"
+          allowfullscreen
+          onload="document.getElementById('tableau-loading').classList.add('hidden')"
+        ></iframe>
+      </div>
+      <div class="tableau-note">⚡ Fully interactive — navigate all 5 story pages using the tabs above the dashboard · <a href="https://public.tableau.com/app/profile/saayed.alam/viz/CMSHospitalDataDashboardSQLAnalysisVisualization/Story1" target="_blank" class="tableau-link">open in Tableau Public</a> for best experience</div>
+    </div>
+
+    <!-- COLLAPSIBLE SCREENSHOTS -->
+    <button class="collapsible-toggle" id="screenshots-toggle" onclick="toggleScreenshots()">
+      <span>// Screenshot Walkthrough</span>
+      <span class="collapsible-icon" id="screenshots-icon">▸ show</span>
+    </button>
+    <div class="collapsible-body" id="screenshots-body">
+      <div class="carousel">
+        <div class="carousel-header">
+          <div class="carousel-dots-row">
+            <div class="browser-dots"><span class="bd bd-r"></span><span class="bd bd-y"></span><span class="bd bd-g"></span></div>
+            <span class="carousel-tab-label" id="tab-label">Story Overview</span>
+          </div>
+          <a href="https://public.tableau.com/app/profile/saayed.alam/viz/CMSHospitalDataDashboardSQLAnalysisVisualization/Story1" target="_blank" class="carousel-open">↗ Open in Tableau</a>
+        </div>
+        <div class="carousel-track-wrap">
+          <div class="carousel-track" id="carousel-track">
+            <div class="carousel-slide">
+              <img src="assets/cms-0-overview.png" alt="Dashboard Story Overview"/>
+              <div class="slide-caption">Story Overview — 5-dashboard narrative with key findings and navigation guide</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="assets/cms-1-quality-map.png" alt="Hospital Counts and Quality Ratings by State"/>
+              <div class="slide-caption">Hospital Counts & Quality Ratings — Choropleth map with toggle between count and average rating per state</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="assets/cms-2-emergency.png" alt="Emergency Services and Deviation by State"/>
+              <div class="slide-caption">Emergency Coverage & Deviation — State rankings by emergency service % and diverging bar vs. national average</div>
+            </div>
+            <div class="carousel-slide">
+              <img src="assets/cms-3-type-ownership.png" alt="Hospital Counts by Type and Ownership"/>
+              <div class="slide-caption">Type & Ownership Matrix — Treemap by state + cross-tab of hospital type vs. ownership structure</div>
+            </div>
+          </div>
+        </div>
+        <div class="carousel-controls">
+          <button class="carousel-btn" id="prev-btn" disabled>← prev</button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <button class="carousel-btn" id="next-btn">next →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- THE PROBLEM -->
+  <div class="cs fade-in">
+    <div class="st">The Problem</div>
+    <div class="prose">
+      <p>Federal healthcare data is publicly available but rarely made accessible. The CMS Hospital General Information dataset covers every Medicare-registered hospital in the U.S. — but in its raw form it's just a flat file. No stakeholder can act on a CSV with 6,000 rows.</p>
+      <p>The goal was to use SQL to ask the questions a healthcare analyst, policy researcher, or hospital administrator would actually care about: <strong>Which states are underserved? Where are emergency services lacking? How does ownership structure shape what types of hospitals exist — and where?</strong> Then make those answers interactive.</p>
+    </div>
+  </div>
+
+  <!-- APPROACH -->
+  <div class="cs fade-in">
+    <div class="st">Approach</div>
+    <div class="process-list">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div>
+          <div class="step-title">Data Ingestion & Cleaning</div>
+          <div class="step-desc">Loaded the CMS Hospital General Information dataset into PostgreSQL. Used Python and Pandas to scaffold and clean the data — handling missing ratings, standardizing state codes, and preparing the table for SQL analysis.</div>
+          <div class="step-tags"><span class="step-tag">PostgreSQL</span><span class="step-tag">Pandas</span><span class="step-tag">Data Cleaning</span><span class="step-tag">Python</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div>
+          <div class="step-title">28-Query SQL Analysis</div>
+          <div class="step-desc">Built a structured notebook of 28 interview-ready SQL queries covering the full spectrum — from basic aggregations to window functions, CTEs, pivot-style queries, set operations, and string/date functions. Each query is framed around a real stakeholder question.</div>
+          <div class="step-tags"><span class="step-tag">Window Functions</span><span class="step-tag">CTEs</span><span class="step-tag">Pivot Queries</span><span class="step-tag">LAG / LEAD</span><span class="step-tag">Set Operations</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div>
+          <div class="step-title">Geographic & Ownership Analysis</div>
+          <div class="step-desc">Aggregated hospitals by state, type, and ownership to surface geographic disparities. Calculated each state's deviation from the national average in emergency hospital count — revealing which states are structurally underserved.</div>
+          <div class="step-tags"><span class="step-tag">GROUP BY</span><span class="step-tag">Deviation Analysis</span><span class="step-tag">Geographic Aggregation</span></div>
+        </div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div>
+          <div class="step-title">5-Dashboard Tableau Story</div>
+          <div class="step-desc">Translated SQL outputs into a 5-page interactive Tableau story — a choropleth quality map, emergency coverage rankings, diverging deviation bars, type/state treemap, and an ownership cross-tab matrix. Designed for non-technical stakeholders.</div>
+          <div class="step-tags"><span class="step-tag">Tableau</span><span class="step-tag">Story Points</span><span class="step-tag">Choropleth Map</span><span class="step-tag">Dashboard Design</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- FINDINGS -->
+  <div class="cs fade-in">
+    <div class="st">Key Findings</div>
+    <div class="findings-list">
+      <div class="finding"><strong>Texas (459) and California</strong> lead in Medicare-registered hospital count — but their emergency coverage rates vary widely, showing that volume alone doesn't equal access.</div>
+      <div class="finding"><strong>Rural and tribal hospitals</strong> are significantly less likely to offer emergency services, highlighting a structural gap in healthcare access that federal data makes visible but policy rarely addresses.</div>
+      <div class="finding"><strong>Private non-profit hospitals dominate</strong> most facility types with 1,472 acute care facilities alone — while government-run hospitals concentrate in psychiatric and critical access care.</div>
+      <div class="finding"><strong>Utah leads in average quality rating (4.29)</strong>, while the U.S. Virgin Islands sits at the bottom (1.0 average across 2 hospitals) — a disparity that points to resource allocation gaps in territories.</div>
+      <div class="finding">The deviation analysis shows <strong>Texas (+295) and California (+201) far exceed the national average</strong> in emergency hospitals, while states like Arkansas (−11) and Arizona fall well below — actionable insight for healthcare infrastructure planning.</div>
+    </div>
+  </div>
+
+  <!-- BUSINESS IMPLICATION -->
+  <div class="cs fade-in">
+    <div class="st">Business Implication</div>
+    <div class="prose">
+      <p>This project demonstrates the full analyst workflow: raw federal data → structured SQL questions → visual story for decision-makers. The 28 queries aren't just analysis — they're a reusable template for any healthcare stakeholder asking the same questions about access, quality, and coverage.</p>
+      <p>For a policy team or hospital network, the geographic deviation analysis alone could inform <strong>where to prioritize infrastructure investment, which states need emergency capacity, and how ownership type shapes care availability</strong> — all derived from a single public dataset with SQL.</p>
+    </div>
+  </div>
+
+  <div class="case-footer fade-in">
+    <a href="index.html#projects" class="footer-back">← back to all projects</a>
+    <span class="footer-note">Built by Saayed Alam · 2025</span>
+  </div>
+
+</main>
+
+<script>
+function toggleScreenshots() {
+  const body = document.getElementById('screenshots-body');
+  const icon = document.getElementById('screenshots-icon');
+  const isOpen = body.classList.toggle('open');
+  icon.textContent = isOpen ? '▾ hide' : '▸ show';
+}
+
+function toggleTheme() {
+  const html = document.documentElement;
+  const btn = document.getElementById('theme-toggle');
+  if (html.classList.contains('light')) {
+    html.classList.remove('light');
+    btn.textContent = '🌙';
+    localStorage.setItem('theme', 'dark');
+  } else {
+    html.classList.add('light');
+    btn.textContent = '☀️';
+    localStorage.setItem('theme', 'light');
+  }
+}
+
+// Restore saved theme
+(function() {
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    document.documentElement.classList.add('light');
+    document.getElementById('theme-toggle').textContent = '☀️';
+  }
+})();
+
+// Carousel
+const slides = document.querySelectorAll('.carousel-slide');
+const track = document.getElementById('carousel-track');
+const prevBtn = document.getElementById('prev-btn');
+const nextBtn = document.getElementById('next-btn');
+const dotsContainer = document.getElementById('carousel-dots');
+const tabLabel = document.getElementById('tab-label');
+
+const labels = [
+  'Story Overview',
+  'Hospital Counts & Quality Ratings by State',
+  'Emergency Coverage & Deviation by State',
+  'Hospital Counts by Type & Ownership'
+];
+
+let current = 0;
+
+slides.forEach((_, i) => {
+  const dot = document.createElement('button');
+  dot.className = 'cdot' + (i === 0 ? ' active' : '');
+  dot.addEventListener('click', () => goTo(i));
+  dotsContainer.appendChild(dot);
+});
+
+function goTo(n) {
+  current = n;
+  track.style.transform = `translateX(-${current * 100}%)`;
+  tabLabel.textContent = labels[current];
+  prevBtn.disabled = current === 0;
+  nextBtn.disabled = current === slides.length - 1;
+  document.querySelectorAll('.cdot').forEach((d, i) => d.classList.toggle('active', i === current));
+}
+
+prevBtn.addEventListener('click', () => goTo(current - 1));
+nextBtn.addEventListener('click', () => goTo(current + 1));
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowLeft' && current > 0) goTo(current - 1);
+  if (e.key === 'ArrowRight' && current < slides.length - 1) goTo(current + 1);
+});
+
+let touchStartX = 0;
+track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, {passive:true});
+track.addEventListener('touchend', e => {
+  const dx = e.changedTouches[0].clientX - touchStartX;
+  if (dx < -50 && current < slides.length - 1) goTo(current + 1);
+  if (dx > 50 && current > 0) goTo(current - 1);
+}, {passive:true});
+
+// Fade in
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, {threshold:0.1});
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

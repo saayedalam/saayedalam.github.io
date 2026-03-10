@@ -205,15 +205,26 @@ function toggleMobileNav() {
     transition: filter 0.3s;
   }
   .photo-status {
-    position: absolute; bottom: 0; left: 0; right: 0;
-    background: rgba(8,12,16,0.78);
+    position: absolute; bottom: 0; left: 0;
+    background: rgba(8,12,16,0.82);
     border-top: 1px solid rgba(63,185,80,0.4);
+    border-right: 1px solid rgba(63,185,80,0.4);
     color: var(--accent2); font-size: 10px; letter-spacing: 0.1em;
-    text-transform: uppercase; padding: 0.4rem 0.85rem;
+    text-transform: uppercase; padding: 0.35rem 0.85rem;
     display: flex; align-items: center; gap: 0.5rem;
+    white-space: nowrap;
   }
-  html.light .photo-status { background: rgba(255,255,255,0.85); }
+  html.light .photo-status { background: rgba(255,255,255,0.88); }
   .photo-status-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent2); animation: pulse 2s infinite; flex-shrink: 0; }
+  .photo-corner-tag {
+    position: absolute; top: 0; right: 0;
+    background: rgba(8,12,16,0.82);
+    border-bottom: 1px solid rgba(88,166,255,0.4);
+    border-left: 1px solid rgba(88,166,255,0.4);
+    color: var(--accent); font-size: 10px; letter-spacing: 0.12em;
+    text-transform: uppercase; padding: 0.35rem 0.85rem;
+  }
+  html.light .photo-corner-tag { background: rgba(255,255,255,0.88); }
   html.light .photo-block img { filter: grayscale(10%) contrast(1.02); }
 
 
@@ -492,6 +503,7 @@ function toggleMobileNav() {
     <div class="photo-block">
       <div class="photo-inner">
         <img src="photo.JPG" alt="Saayed Alam" />
+        <div class="photo-corner-tag">DA · 2025</div>
         <div class="photo-status"><span class="photo-status-dot"></span>Actively Looking · Toronto · Open to Remote</div>
       </div>
     </div>

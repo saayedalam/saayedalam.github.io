@@ -500,7 +500,57 @@ function toggleMobileNav() {
   <a href="#skills" onclick="toggleMobileNav()">skills</a>
   <a href="#contact" onclick="toggleMobileNav()">contact</a>
   <div style="display:flex;gap:0.75rem;padding-top:0.5rem;">
-    <button type="button" class="toggle-btn active" id="mob-btn-da" onclick="setMode('da');toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA</button>
+    <button type="button" class="toggle-btn active" id="mob-btn-da" onclick="setMode('da');
+
+// ── GA Event Tracking ──────────────────────────────────────
+function gaEvent(event_name, params) {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', event_name, params);
+  }
+}
+
+// Resume download
+document.getElementById('resume-link').addEventListener('click', function() {
+  const mode = document.getElementById('btn-ae') && document.getElementById('btn-ae').classList.contains('active') ? 'ae' : 'da';
+  gaEvent('resume_download', { mode: mode, file: mode === 'ae' ? 'AE_Resume' : 'DA_Resume' });
+});
+
+// DA/AE toggle
+document.getElementById('btn-da').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'da' }));
+document.getElementById('btn-ae').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'ae' }));
+
+// Project card clicks
+document.querySelectorAll('.project-link').forEach(link => {
+  link.addEventListener('click', function() {
+    const card = this.closest('.project-card');
+    const project = card ? card.querySelector('.project-name')?.textContent?.trim() : 'unknown';
+    const type = this.classList.contains('link-demo') ? 'case_study' :
+                 this.classList.contains('link-github') ? 'github' :
+                 this.classList.contains('link-tableau') ? 'dashboard' : 'other';
+    gaEvent('project_click', { project: project, link_type: type });
+  });
+});
+
+// Dawnly strip click
+const dawnlyLink = document.querySelector('.dawnly-link');
+if (dawnlyLink) dawnlyLink.addEventListener('click', () => gaEvent('dawnly_click', { source: 'strip' }));
+
+// Contact links
+document.querySelectorAll('.contact-card').forEach(link => {
+  link.addEventListener('click', function() {
+    const label = this.querySelector('.contact-label')?.textContent?.trim() || this.href;
+    gaEvent('contact_click', { link: label });
+  });
+});
+
+// Skill chip clicks (linked ones)
+document.querySelectorAll('a.skill-link').forEach(chip => {
+  chip.addEventListener('click', function() {
+    gaEvent('skill_chip_click', { skill: this.textContent.replace('↗','').trim(), destination: this.href });
+  });
+});
+// ── End GA Event Tracking ───────────────────────────────────
+toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA</button>
     <button type="button" class="toggle-btn" id="mob-btn-ae" onclick="setMode('ae');toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">AE</button>
   </div>
 </div>
@@ -1039,6 +1089,56 @@ const obs = new IntersectionObserver(entries => {
 document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
 
 setMode('da');
+
+// ── GA Event Tracking ──────────────────────────────────────
+function gaEvent(event_name, params) {
+  if (typeof gtag !== 'undefined') {
+    gtag('event', event_name, params);
+  }
+}
+
+// Resume download
+document.getElementById('resume-link').addEventListener('click', function() {
+  const mode = document.getElementById('btn-ae') && document.getElementById('btn-ae').classList.contains('active') ? 'ae' : 'da';
+  gaEvent('resume_download', { mode: mode, file: mode === 'ae' ? 'AE_Resume' : 'DA_Resume' });
+});
+
+// DA/AE toggle
+document.getElementById('btn-da').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'da' }));
+document.getElementById('btn-ae').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'ae' }));
+
+// Project card clicks
+document.querySelectorAll('.project-link').forEach(link => {
+  link.addEventListener('click', function() {
+    const card = this.closest('.project-card');
+    const project = card ? card.querySelector('.project-name')?.textContent?.trim() : 'unknown';
+    const type = this.classList.contains('link-demo') ? 'case_study' :
+                 this.classList.contains('link-github') ? 'github' :
+                 this.classList.contains('link-tableau') ? 'dashboard' : 'other';
+    gaEvent('project_click', { project: project, link_type: type });
+  });
+});
+
+// Dawnly strip click
+const dawnlyLink = document.querySelector('.dawnly-link');
+if (dawnlyLink) dawnlyLink.addEventListener('click', () => gaEvent('dawnly_click', { source: 'strip' }));
+
+// Contact links
+document.querySelectorAll('.contact-card').forEach(link => {
+  link.addEventListener('click', function() {
+    const label = this.querySelector('.contact-label')?.textContent?.trim() || this.href;
+    gaEvent('contact_click', { link: label });
+  });
+});
+
+// Skill chip clicks (linked ones)
+document.querySelectorAll('a.skill-link').forEach(chip => {
+  chip.addEventListener('click', function() {
+    gaEvent('skill_chip_click', { skill: this.textContent.replace('↗','').trim(), destination: this.href });
+  });
+});
+// ── End GA Event Tracking ───────────────────────────────────
+
 
 // Restore saved theme
 (function() {

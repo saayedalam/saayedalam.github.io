@@ -1202,6 +1202,26 @@ document.addEventListener('keydown', e => {
 
 renderSQLSlide(0);
 
+
+// ── GA Event Tracking ──────────────────────────────────────
+function gaEvent(event_name, params) {
+  if (typeof gtag !== 'undefined') { gtag('event', event_name, params); }
+}
+// Track all external link clicks on this page
+document.querySelectorAll('a[target="_blank"]').forEach(link => {
+  link.addEventListener('click', function() {
+    gaEvent('external_link_click', {
+      page: window.location.pathname,
+      destination: this.href,
+      label: this.textContent.trim().substring(0, 50)
+    });
+  });
+});
+// Track collapsible toggle
+const colBtn = document.getElementById('screenshots-toggle');
+if (colBtn) colBtn.addEventListener('click', () => gaEvent('screenshots_toggle', { page: window.location.pathname }));
+// ── End GA Event Tracking ───────────────────────────────────
+
 // Fade in
 const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });

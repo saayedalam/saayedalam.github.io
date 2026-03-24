@@ -666,10 +666,7 @@ function toggleMobileNav() {
         <div class="exp-bullet">Analyzed 6,000+ CMS hospitals using 28 advanced SQL queries — window functions, CTEs, pivots — to surface regional infrastructure gaps visualized in Tableau. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
         <div class="exp-bullet">Developed automated Google Trends pipeline with Prophet forecasting and live Streamlit dashboard tracking global meditation interest across 50+ countries. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
       </div>
-        <div class="exp-bullet">Engineered automated data pipeline tracking global mindfulness trends via Google Trends API — implemented Prophet forecasting and deployed a live Streamlit dashboard with daily automated cron updates. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Implemented ELT pipelines and dimensional modeling via complex SQL transformations across 6,000+ hospitals — optimized 28 queries supporting a multi-view Tableau reporting suite. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Built and tuned a credit risk model using LightGBM and Optuna — integrated SHAP explainability and deployed results to interactive dashboards improving model governance. <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-      </div>
+
       <div class="exp-tags" >
         <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Streamlit</span><span class="tag">Prophet</span>
       </div>
@@ -716,6 +713,7 @@ function toggleMobileNav() {
       </div>
     </div>
 
+  </div>
 </section>
 
 <!-- EDUCATION -->
@@ -792,19 +790,7 @@ function toggleMobileNav() {
       </div>
     </div>
 
-      <div class="skill-chips">
-        <span class="skill-chip">dbt Cloud</span>
-        <span class="skill-chip">BigQuery</span>
-        <span class="skill-chip">ELT Pipelines</span>
-        <span class="skill-chip">Dimensional Modeling</span>
-        <span class="skill-chip">Star Schema</span>
-        <span class="skill-chip">Data Quality Testing</span>
-        <span class="skill-chip">Model Documentation</span>
-        <span class="skill-chip">DAG Lineage</span>
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
-        <span class="skill-chip">Lineage</span>
-      </div>
-    </div>
+
 
     <div class="skill-group">
       <div class="skill-group-title">Workflow & Tools</div>
@@ -831,6 +817,7 @@ function toggleMobileNav() {
       </div>
     </div>
 
+  </div>
 </section>
 
 <!-- CONTACT -->
@@ -879,6 +866,32 @@ function buildTicker() {
   if (el) el.innerHTML = text + text;
 }
 buildTicker();
+
+// Fade in observer
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+// Active nav highlighting on scroll
+const sections = ['intro','projects','experience','education','skills','contact'];
+const navLinks = document.querySelectorAll('.nav-links a, #mobile-menu a');
+const scrollObs = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      navLinks.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id);
+      });
+    }
+  });
+}, { threshold: 0.4 });
+sections.forEach(id => { const el = document.getElementById(id); if(el) scrollObs.observe(el); });
+
+// Back to top visibility
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('back-to-top');
+  if (btn) btn.classList.toggle('visible', window.scrollY > 400);
+});
 
 // ── GA Event Tracking ──────────────────────────────────────
 function gaEvent(event_name, params) {

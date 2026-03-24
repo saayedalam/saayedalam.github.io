@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<link rel="icon" type="image/png" href="data:image/png;base64,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"/>
 <link rel="canonical" href="https://saayedalam.me/"/>
+<meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Saayed Alam — Data Analyst</title>
 <meta name="description" content="Saayed Alam — Data Analyst · SQL · Python · Tableau. Based in Toronto, open to remote. Previously at Ipsos serving Visa and Microsoft." />
-<meta property="og:title" content="Saayed Alam — Data Analyst · SQL · Python · Tableau" />
+<meta property="og:title" content="Saayed Alam — Data Analyst" />
 <meta property="og:description" content="Data Analyst · SQL · Python · Tableau. Formerly at Ipsos. Visa and Microsoft client work. Based in Toronto, open to remote." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://saayedalam.me" />
@@ -133,7 +132,7 @@ function toggleMobileNav() {
   .hamburger span { display: block; height: 1px; background: var(--muted); transition: all 0.2s; }
 
   #mobile-menu {
-    display: none; position: fixed; top: 96px; left: 0; right: 0; z-index: 101;
+    display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 98;
     background: var(--bg); border-bottom: 1px solid var(--border);
     padding: 1rem 2rem; flex-direction: column; gap: 1rem;
   }
@@ -141,36 +140,6 @@ function toggleMobileNav() {
   #mobile-menu a { color: var(--muted); text-decoration: none; font-size: 13px; letter-spacing: 0.08em; padding: 0.5rem 0; border-bottom: 1px solid var(--border); }
   #mobile-menu a:last-child { border-bottom: none; }
   #mobile-menu a.active { color: var(--accent); }
-
-
-  /* DAWNLY STRIP */
-  .dawnly-wrap { max-width:1100px; margin:0 auto; padding:0 2rem 1rem; }
-  .dawnly-strip {
-    border: 1px solid rgba(63,185,80,0.3);
-    border-left: 3px solid var(--accent2);
-    background: rgba(63,185,80,0.04);
-    padding: 1rem 1.5rem;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 0.75rem;
-    transition: background 0.2s;
-  }
-  .dawnly-strip:hover { background: rgba(63,185,80,0.07); }
-  html.light .dawnly-strip { background: rgba(26,127,55,0.04); border-color: rgba(26,127,55,0.3); border-left-color: var(--accent2); }
-  html.light .dawnly-strip:hover { background: rgba(26,127,55,0.07); }
-  .dawnly-left { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .dawnly-badge {
-    font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase;
-    padding: 0.2rem 0.65rem; background: rgba(63,185,80,0.1);
-    border: 1px solid rgba(63,185,80,0.4); color: var(--accent2);
-    display: flex; align-items: center; gap: 0.4rem; white-space: nowrap;
-  }
-  .dawnly-pulse { width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite;flex-shrink:0; }
-  .dawnly-title { font-size: 13px; color: var(--text); font-weight: 600; letter-spacing: 0.03em; }
-  .dawnly-desc { font-size: 12px; color: var(--muted); }
-  .dawnly-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-  .dawnly-tag { font-size: 10px; padding: 0.15rem 0.5rem; border: 1px solid var(--border); color: var(--muted); background: var(--surface2); }
-  .dawnly-link { font-size: 11px; text-decoration: none; letter-spacing: 0.06em; padding: 0.4rem 0.9rem; border: 1px solid var(--accent2); color: var(--accent2); transition: all 0.2s; white-space: nowrap; }
-  .dawnly-link:hover { background: var(--accent2); color: var(--bg); }
 
   /* TICKER */
   .ticker { position: fixed; top: 56px; left: 0; right: 0; z-index: 99; background: var(--bg); border-bottom: 1px solid var(--border); padding: 0.5rem 0; overflow: hidden; white-space: nowrap; }
@@ -463,11 +432,10 @@ function toggleMobileNav() {
 
     /* GENERAL */
     section { padding: 2rem 1rem; }
-    .dawnly-wrap { padding: 0 1rem 1.25rem; }
     .back-to-top { bottom: 1rem; right: 1rem; }
   }
 </style>
-<meta property="og:image" content="https://saayedalam.me/assets/og-image.png"/>
+<link rel="icon" type="image/png" href="data:image/png;base64,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"/>
 </head>
 <body>
 
@@ -479,8 +447,8 @@ function toggleMobileNav() {
       <li><a href="#projects">projects</a></li>
       <li><a href="#experience">experience</a></li>
       <li><a href="#skills">skills</a></li>
-      <li><a href="blog.html">blogs</a></li>
       <li><a href="#contact">contact</a></li>
+      <li><a href="blog.html">blogs</a></li>
     </ul>
     <div class="profile-toggle">
       <button type="button" class="toggle-btn active" id="btn-da" onclick="setMode('da')" data-tip="Data Analyst">DA</button>
@@ -497,58 +465,43 @@ function toggleMobileNav() {
 <!-- MOBILE MENU -->
 <div id="mobile-menu">
   <a href="#projects" onclick="toggleMobileNav()">projects</a>
-  <a href="#experience" onclick="toggleMobileNav()">experience</a>
+  <a href="#experience" onclick="toggleMobileNav()">projects</a>
   <a href="#skills" onclick="toggleMobileNav()">skills</a>
-  <a href="blog.html" onclick="toggleMobileNav()">blogs</a>
   <a href="#contact" onclick="toggleMobileNav()">contact</a>
+  <a href="blog.html" onclick="toggleMobileNav()">blogs</a>
   <div style="display:flex;gap:0.75rem;padding-top:0.5rem;">
     <button type="button" class="toggle-btn active" id="mob-btn-da" onclick="setMode('da');
 
 // ── GA Event Tracking ──────────────────────────────────────
 function gaEvent(event_name, params) {
-  if (typeof gtag !== 'undefined') {
-    gtag('event', event_name, params);
-  }
+  if (typeof gtag !== 'undefined') { gtag('event', event_name, params); }
 }
-
-// Resume download
-document.getElementById('resume-link').addEventListener('click', function() {
-  const mode = document.getElementById('btn-ae') && document.getElementById('btn-ae').classList.contains('active') ? 'ae' : 'da';
-  gaEvent('resume_download', { mode: mode, file: mode === 'ae' ? 'AE_Resume' : 'DA_Resume' });
-});
-
-// DA/AE toggle
-document.getElementById('btn-da').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'da' }));
-document.getElementById('btn-ae').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'ae' }));
-
-// Project card clicks
-document.querySelectorAll('.project-link').forEach(link => {
-  link.addEventListener('click', function() {
-    const card = this.closest('.project-card');
-    const project = card ? card.querySelector('.project-name')?.textContent?.trim() : 'unknown';
-    const type = this.classList.contains('link-demo') ? 'case_study' :
-                 this.classList.contains('link-github') ? 'github' :
-                 this.classList.contains('link-tableau') ? 'dashboard' : 'other';
-    gaEvent('project_click', { project: project, link_type: type });
+document.addEventListener('DOMContentLoaded', function() {
+  const resumeEl = document.getElementById('resume-link');
+  if (resumeEl) resumeEl.addEventListener('click', function() {
+    const mode = document.getElementById('btn-ae') && document.getElementById('btn-ae').classList.contains('active') ? 'ae' : 'da';
+    gaEvent('resume_download', { mode: mode, file: mode === 'ae' ? 'AE_Resume' : 'DA_Resume' });
   });
-});
-
-// Dawnly strip click
-const dawnlyLink = document.querySelector('.dawnly-link');
-if (dawnlyLink) dawnlyLink.addEventListener('click', () => gaEvent('dawnly_click', { source: 'strip' }));
-
-// Contact links
-document.querySelectorAll('.contact-card').forEach(link => {
-  link.addEventListener('click', function() {
-    const label = this.querySelector('.contact-label')?.textContent?.trim() || this.href;
-    gaEvent('contact_click', { link: label });
+  document.getElementById('btn-da').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'da' }));
+  document.getElementById('btn-ae').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'ae' }));
+  document.querySelectorAll('.project-link').forEach(link => {
+    link.addEventListener('click', function() {
+      const card = this.closest('.project-card');
+      const project = card ? card.querySelector('.project-name')?.textContent?.trim() : 'unknown';
+      const type = this.classList.contains('link-demo') ? 'case_study' : this.classList.contains('link-github') ? 'github' : 'dashboard';
+      gaEvent('project_click', { project: project, link_type: type });
+    });
   });
-});
-
-// Skill chip clicks (linked ones)
-document.querySelectorAll('a.skill-link').forEach(chip => {
-  chip.addEventListener('click', function() {
-    gaEvent('skill_chip_click', { skill: this.textContent.replace('↗','').trim(), destination: this.href });
+  document.querySelectorAll('.contact-card').forEach(link => {
+    link.addEventListener('click', function() {
+      const label = this.querySelector('.contact-label')?.textContent?.trim() || this.href;
+      gaEvent('contact_click', { link: label });
+    });
+  });
+  document.querySelectorAll('a.skill-link').forEach(chip => {
+    chip.addEventListener('click', function() {
+      gaEvent('skill_chip_click', { skill: this.textContent.replace('↗','').trim(), destination: this.href });
+    });
   });
 });
 // ── End GA Event Tracking ───────────────────────────────────
@@ -571,10 +524,8 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
   <div class="intro-left">
 
 
-    <h1 class="hero-name" aria-label="Saayed Alam">
-      Saayed<br/>
-      <span class="hl">Alam</span>
-    </h1>
+    <div class="hero-name"><h1>Saayed<br/>
+      <span class="hl">Alam</span></h1></div>
 
     <div class="hero-role" id="hero-role">Data Analyst · SQL · Python · Tableau</div>
 
@@ -594,8 +545,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
     </div>
 
     <div class="about-text" id="bio-da">
-      <p>Data Analyst with 3+ years of experience, including client-facing work at <strong>Ipsos</strong> serving Fortune 500 brands like <strong>Visa and Microsoft</strong>. I translate complex datasets into clear decisions — across SQL, Python, Excel, Tableau, and Power BI.</p>
-      <p style="margin-top:0.75rem">Targeting roles in <strong>fintech, banking, and market research</strong> where rigorous analysis drives real outcomes.</p>
+      <p>Background in market research analytics supporting Fortune 500 brand tracking, with hands-on experience in <strong>credit risk modeling</strong> and consumer trend analysis. Experienced building end-to-end analytical workflows — from data cleaning and modeling to dashboards and executive reporting.</p>
     </div>
     <div class="about-text" id="bio-ae" style="display:none">
       <p>Data Analyst with 3+ years of experience transitioning into Analytics Engineering — applying hands-on work with <strong>dbt Cloud, BigQuery, and ELT pipelines</strong> to build tested, documented, and BI-ready data models. Comfortable bridging the gap between raw data and business-ready datasets.</p>
@@ -620,28 +570,6 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
   </div>
 </section>
 
-
-<!-- DAWNLY STRIP -->
-<div class="dawnly-wrap">
-<div class="dawnly-strip">
-  <div class="dawnly-left">
-    <div class="dawnly-badge"><span class="dawnly-pulse"></span>Currently Building</div>
-    <div>
-      <div class="dawnly-title">Dawnly — Daily News Digest</div>
-      <div class="dawnly-desc">Top 10 global stories, ranked and summarized daily using feedparser, sentence-transformers, DBSCAN clustering, and Claude AI · automated pipeline · GitHub Pages</div>
-    </div>
-    <div class="dawnly-tags">
-      <span class="dawnly-tag">Python</span>
-      <span class="dawnly-tag">Claude API</span>
-      <span class="dawnly-tag">NLP</span>
-      <span class="dawnly-tag">GitHub Actions</span>
-      <span class="dawnly-tag">GitHub Pages</span>
-    </div>
-  </div>
-  <a href="https://saayedalam.me/dawnly" target="_blank" rel="noopener noreferrer" class="dawnly-link">↗ dawnly.news</a>
-</div>
-</div>
-
 <!-- PROJECTS -->
 <section id="projects">
   <div class="section-label">projects</div>
@@ -652,7 +580,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
     <div class="project-card flagship" data-modes="ae" data-order-ae="0">
       <span class="flagship-label">flagship</span>
       <div class="project-header">
-        <div class="project-icon">⬡</div>
+        <div class="project-icon">🏦</div>
         <div class="project-badges">
           <span class="project-badge badge-sql">dbt</span>
           <span class="project-badge badge-tableau" style="border-color:#f0b429;color:#f0b429">BigQuery</span>
@@ -669,7 +597,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
       </div>
     </div>
 
-    <div class="project-card flagship" data-modes="da" data-order-da="0">
+    <div class="project-card flagship" data-modes="da ae" data-order-da="0" data-order-ae="1">
       <span class="flagship-label">flagship</span>
       <div class="project-header">
         <div class="project-icon">◈</div>
@@ -690,7 +618,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
       </div>
     </div>
 
-    <div class="project-card" data-modes="da ae" data-order-da="1" data-order-ae="1">
+    <div class="project-card" data-modes="da ae" data-order-da="1" data-order-ae="2">
       <div class="project-header">
         <div class="project-icon">⬕</div>
         <div class="project-badges">
@@ -699,7 +627,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
         </div>
       </div>
       <div class="project-name">CMS Hospital SQL Analysis</div>
-      <div class="project-desc">Used 20+ advanced SQL queries to analyze 6,000+ US hospitals — uncovering regional infrastructure gaps, service disparities, and quality patterns. Findings visualized in a Tableau story designed for non-technical decision makers.</div>
+      <div class="project-desc">Used 28 advanced SQL queries to analyze 6,000+ US hospitals — uncovering regional infrastructure gaps, service disparities, and quality patterns. Findings visualized in a Tableau story designed for non-technical decision makers.</div>
       <div class="project-tags">
         <span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">Tableau</span><span class="tag">Healthcare</span>
       </div>
@@ -751,13 +679,13 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
       </div>
       <div class="exp-bullets" id="ind-bullets-da">
         <div class="exp-bullet">Built end-to-end ML pipeline predicting loan default risk across 300K+ applicants using LightGBM and SHAP, with Tableau dashboard for non-technical stakeholders. <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Analyzed 6,000+ CMS hospitals using 20+ advanced SQL queries — window functions, CTEs, pivots — to surface regional infrastructure gaps visualized in Tableau. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Analyzed 6,000+ CMS hospitals using 28 advanced SQL queries — window functions, CTEs, pivots — to surface regional infrastructure gaps visualized in Tableau. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
         <div class="exp-bullet">Developed automated Google Trends pipeline with Prophet forecasting and live Streamlit dashboard tracking global meditation interest across 50+ countries. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
       </div>
       <div class="exp-bullets" id="ind-bullets-ae" style="display:none">
         <div class="exp-bullet">Designed end-to-end analytics engineering workflow for U.S. mortgage credit risk using dbt Cloud and BigQuery — built tested, version-controlled, and documented semantic marts for BI consumption. <a href="fintech-ae.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
         <div class="exp-bullet">Engineered automated data pipeline tracking global mindfulness trends via Google Trends API — implemented Prophet forecasting and deployed a live Streamlit dashboard with daily automated cron updates. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Implemented ELT pipelines and dimensional modeling via complex SQL transformations across 6,000+ hospitals — optimized 28+ queries supporting a multi-view Tableau reporting suite. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Implemented ELT pipelines and dimensional modeling via complex SQL transformations across 6,000+ hospitals — optimized 28 queries supporting a multi-view Tableau reporting suite. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
         <div class="exp-bullet">Built and tuned a credit risk model using LightGBM and Optuna — integrated SHAP explainability and deployed results to interactive dashboards improving model governance. <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
       </div>
       <div class="exp-tags" id="ind-tags-da">
@@ -852,7 +780,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
       <div class="skill-chips">
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">SQL</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">PostgreSQL</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">BigQuery</a>
+        <span class="skill-chip">BigQuery</span>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Window Functions</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">CTEs</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Pivot Queries</a>
@@ -863,7 +791,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
       <div class="skill-group-title">BI & Visualization</div>
       <div class="skill-chips">
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Tableau</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Power BI</a>
+        <span class="skill-chip">Power BI</span>
         <a href="meditation-trends.html" class="skill-chip skill-link" title="See this skill in action → Meditation Trend Pulse">Streamlit</a>
         <span class="skill-chip">Dashboard Design</span>
         <span class="skill-chip">Data Storytelling</span>
@@ -898,14 +826,16 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
     <div class="skill-group" data-mode="ae">
       <div class="skill-group-title">Data Engineering</div>
       <div class="skill-chips">
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">dbt Cloud</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">BigQuery</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">ELT Pipelines</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Dimensional Modeling</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Star Schema</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Data Quality Testing</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Model Documentation</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">DAG Lineage</a>
+        <span class="skill-chip">dbt Cloud</span>
+        <span class="skill-chip">BigQuery</span>
+        <span class="skill-chip">ELT Pipelines</span>
+        <span class="skill-chip">Dimensional Modeling</span>
+        <span class="skill-chip">Star Schema</span>
+        <span class="skill-chip">Data Quality Testing</span>
+        <span class="skill-chip">Model Documentation</span>
+        <span class="skill-chip">DAG Lineage</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
+        <span class="skill-chip">Lineage</span>
       </div>
     </div>
 
@@ -940,10 +870,10 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
         <span class="skill-chip">Fintech</span>
         <span class="skill-chip">Banking</span>
         <span class="skill-chip">Data Warehousing</span>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Star Schema</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">ELT Pipelines</a>
+        <span class="skill-chip">Star Schema</span>
+        <span class="skill-chip">ELT Pipelines</span>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Risk Analytics</a>
-        <a href="fintech-ae.html" class="skill-chip skill-link" title="See this skill in action → Fintech AE project">Model Documentation</a>
+        <span class="skill-chip">Model Documentation</span>
       </div>
     </div>
 
@@ -980,7 +910,7 @@ toggleMobileNav()" style="border:1px solid var(--border);border-radius:2px;">DA<
 </section>
 
 <footer>
-  <span>© 2025 Saayed Alam</span>
+  <span>© 2026 Saayed Alam</span>
   <span style="color:var(--border)">saayedalam.me</span>
 </footer>
 
@@ -1024,8 +954,6 @@ function setMode(mode) {
   const text = '&nbsp;&nbsp;' + unique.join(' · ') + ' ·';
   document.getElementById('ticker-text').innerHTML = text + text;
   const grid = document.getElementById('projects-grid');
-  // Switch to 2-col grid in AE mode (only 2 projects), 3-col in DA mode
-  grid.style.gridTemplateColumns = mode === 'ae' ? 'repeat(2, 1fr)' : '';
   Array.from(grid.querySelectorAll('.project-card')).forEach(card => {
     const cardModes = card.dataset.modes.split(' ');
     card.classList.toggle('hidden', !cardModes.includes(mode));
@@ -1094,49 +1022,34 @@ setMode('da');
 
 // ── GA Event Tracking ──────────────────────────────────────
 function gaEvent(event_name, params) {
-  if (typeof gtag !== 'undefined') {
-    gtag('event', event_name, params);
-  }
+  if (typeof gtag !== 'undefined') { gtag('event', event_name, params); }
 }
-
-// Resume download
-document.getElementById('resume-link').addEventListener('click', function() {
-  const mode = document.getElementById('btn-ae') && document.getElementById('btn-ae').classList.contains('active') ? 'ae' : 'da';
-  gaEvent('resume_download', { mode: mode, file: mode === 'ae' ? 'AE_Resume' : 'DA_Resume' });
-});
-
-// DA/AE toggle
-document.getElementById('btn-da').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'da' }));
-document.getElementById('btn-ae').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'ae' }));
-
-// Project card clicks
-document.querySelectorAll('.project-link').forEach(link => {
-  link.addEventListener('click', function() {
-    const card = this.closest('.project-card');
-    const project = card ? card.querySelector('.project-name')?.textContent?.trim() : 'unknown';
-    const type = this.classList.contains('link-demo') ? 'case_study' :
-                 this.classList.contains('link-github') ? 'github' :
-                 this.classList.contains('link-tableau') ? 'dashboard' : 'other';
-    gaEvent('project_click', { project: project, link_type: type });
+document.addEventListener('DOMContentLoaded', function() {
+  const resumeEl = document.getElementById('resume-link');
+  if (resumeEl) resumeEl.addEventListener('click', function() {
+    const mode = document.getElementById('btn-ae') && document.getElementById('btn-ae').classList.contains('active') ? 'ae' : 'da';
+    gaEvent('resume_download', { mode: mode, file: mode === 'ae' ? 'AE_Resume' : 'DA_Resume' });
   });
-});
-
-// Dawnly strip click
-const dawnlyLink = document.querySelector('.dawnly-link');
-if (dawnlyLink) dawnlyLink.addEventListener('click', () => gaEvent('dawnly_click', { source: 'strip' }));
-
-// Contact links
-document.querySelectorAll('.contact-card').forEach(link => {
-  link.addEventListener('click', function() {
-    const label = this.querySelector('.contact-label')?.textContent?.trim() || this.href;
-    gaEvent('contact_click', { link: label });
+  document.getElementById('btn-da').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'da' }));
+  document.getElementById('btn-ae').addEventListener('click', () => gaEvent('toggle_mode', { mode: 'ae' }));
+  document.querySelectorAll('.project-link').forEach(link => {
+    link.addEventListener('click', function() {
+      const card = this.closest('.project-card');
+      const project = card ? card.querySelector('.project-name')?.textContent?.trim() : 'unknown';
+      const type = this.classList.contains('link-demo') ? 'case_study' : this.classList.contains('link-github') ? 'github' : 'dashboard';
+      gaEvent('project_click', { project: project, link_type: type });
+    });
   });
-});
-
-// Skill chip clicks (linked ones)
-document.querySelectorAll('a.skill-link').forEach(chip => {
-  chip.addEventListener('click', function() {
-    gaEvent('skill_chip_click', { skill: this.textContent.replace('↗','').trim(), destination: this.href });
+  document.querySelectorAll('.contact-card').forEach(link => {
+    link.addEventListener('click', function() {
+      const label = this.querySelector('.contact-label')?.textContent?.trim() || this.href;
+      gaEvent('contact_click', { link: label });
+    });
+  });
+  document.querySelectorAll('a.skill-link').forEach(chip => {
+    chip.addEventListener('click', function() {
+      gaEvent('skill_chip_click', { skill: this.textContent.replace('↗','').trim(), destination: this.href });
+    });
   });
 });
 // ── End GA Event Tracking ───────────────────────────────────

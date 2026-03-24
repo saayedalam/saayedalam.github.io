@@ -142,29 +142,6 @@ function toggleMobileNav() {
   #mobile-menu a.active { color: var(--accent); }
 
 
-  /* DAWNLY STRIP */
-  .dawnly-wrap { max-width:1100px; margin:0 auto; padding:0 2rem 1rem; }
-  .dawnly-strip {
-    border: 1px solid rgba(63,185,80,0.3);
-    border-left: 3px solid var(--accent2);
-    background: rgba(63,185,80,0.04);
-    padding: 1rem 1.5rem;
-    display: flex; align-items: center; justify-content: space-between;
-    flex-wrap: wrap; gap: 0.75rem;
-    transition: background 0.2s;
-  }
-  .dawnly-strip:hover { background: rgba(63,185,80,0.07); }
-  html.light .dawnly-strip { background: rgba(26,127,55,0.04); border-color: rgba(26,127,55,0.3); border-left-color: var(--accent2); }
-  html.light .dawnly-strip:hover { background: rgba(26,127,55,0.07); }
-  .dawnly-left { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .dawnly-badge { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.2rem 0.65rem; background: rgba(63,185,80,0.1); border: 1px solid rgba(63,185,80,0.4); color: var(--accent2); display: flex; align-items: center; gap: 0.4rem; white-space: nowrap; }
-  .dawnly-pulse { width:6px;height:6px;border-radius:50%;background:var(--accent2);animation:pulse 2s infinite;flex-shrink:0; }
-  .dawnly-title { font-size: 13px; color: var(--text); font-weight: 600; letter-spacing: 0.03em; }
-  .dawnly-desc { font-size: 12px; color: var(--muted); }
-  .dawnly-tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
-  .dawnly-tag { font-size: 10px; padding: 0.15rem 0.5rem; border: 1px solid var(--border); color: var(--muted); background: var(--surface2); }
-  .dawnly-link { font-size: 11px; text-decoration: none; letter-spacing: 0.06em; padding: 0.4rem 0.9rem; border: 1px solid var(--accent2); color: var(--accent2); transition: all 0.2s; white-space: nowrap; }
-  .dawnly-link:hover { background: var(--accent2); color: var(--bg); }
 
   /* TICKER */
   .ticker { position: fixed; top: 56px; left: 0; right: 0; z-index: 99; background: var(--bg); border-bottom: 1px solid var(--border); padding: 0.5rem 0; overflow: hidden; white-space: nowrap; }
@@ -536,6 +513,12 @@ function toggleMobileNav() {
       <a href="#experience" class="btn btn-primary">› view my work</a>
       <a href="#contact" class="btn btn-secondary">› get in touch</a>
     </div>
+    <div style="font-size:11px;color:var(--accent2);letter-spacing:0.06em;">
+      <span style="opacity:0.6;color:var(--muted)">// </span>currently building: <a href="https://saayed.me/dawnly" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">Dawnly</a> — daily global news digest
+    </div>
+    <div style="font-size:11px;color:var(--accent2);letter-spacing:0.06em;margin-top:0.25rem;">
+      <span style="opacity:0.5;color:var(--muted)">// </span>currently building: <a href="https://saayed.me/dawnly" target="_blank" rel="noopener noreferrer" style="color:var(--accent2);text-decoration:none;">Dawnly</a> — daily global news digest
+    </div>
   </div>
 
   <!-- RIGHT: photo only -->
@@ -551,26 +534,6 @@ function toggleMobileNav() {
 </section>
 
 
-<!-- DAWNLY STRIP -->
-<div class="dawnly-wrap">
-<div class="dawnly-strip">
-  <div class="dawnly-left">
-    <div class="dawnly-badge"><span class="dawnly-pulse"></span>Currently Building</div>
-    <div>
-      <div class="dawnly-title">Dawnly — Daily News Digest</div>
-      <div class="dawnly-desc">Top 10 global stories, ranked and summarized daily using feedparser, sentence-transformers, DBSCAN clustering, and Claude AI · automated pipeline · GitHub Pages</div>
-    </div>
-    <div class="dawnly-tags">
-      <span class="dawnly-tag">Python</span>
-      <span class="dawnly-tag">Claude API</span>
-      <span class="dawnly-tag">NLP</span>
-      <span class="dawnly-tag">GitHub Actions</span>
-      <span class="dawnly-tag">GitHub Pages</span>
-    </div>
-  </div>
-  <a href="https://saayedalam.me/dawnly" target="_blank" rel="noopener noreferrer" class="dawnly-link">↗ dawnly.news</a>
-</div>
-</div>
 
 <!-- PROJECTS -->
 <section id="projects">
@@ -661,10 +624,10 @@ function toggleMobileNav() {
         <div class="exp-period">Jan 2025 — Present</div>
         <div class="exp-location">Toronto, ON</div>
       </div>
-      <div class="exp-bullets" >
-        <div class="exp-bullet">Built end-to-end ML pipeline predicting loan default risk across 300K+ applicants using LightGBM and SHAP, with Tableau dashboard for non-technical stakeholders. <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Analyzed 6,000+ CMS hospitals using 28 advanced SQL queries — window functions, CTEs, pivots — to surface regional infrastructure gaps visualized in Tableau. <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Developed automated Google Trends pipeline with Prophet forecasting and live Streamlit dashboard tracking global meditation interest across 50+ countries. <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Built a LightGBM classification model across 5 iterations to predict loan default probability on 300K+ applicants, achieving ROC-AUC of 0.76 on highly imbalanced data (91% non-default) <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Wrote 28 stakeholder-framed SQL queries in PostgreSQL using CTEs, window functions, aggregations, and CASE logic to analyze quality ratings, ownership structures, and emergency service coverage across 6,000+ hospitals <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
+        <div class="exp-bullet">Built an automated data pipeline ingesting Google Trends data via API daily, processing and versioning 9 cleaned datasets across global trends, country-level interest, and related queries <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
       </div>
 
       <div class="exp-tags" >
@@ -681,12 +644,11 @@ function toggleMobileNav() {
         <div class="exp-period">Aug 2022 — Jan 2025</div>
         <div class="exp-location">Toronto, ON</div>
       </div>
-      <div class="exp-bullets" >
-        <div class="exp-bullet">Delivered analytics and reporting for Fortune 500 clients including Visa and Microsoft, supporting brand performance tracking and strategic decision-making.</div>
-        <div class="exp-bullet">Selected as SME to operationalize a Random Forest–based driver analysis solution — co-authored internal training materials and supported model interpretation across teams.</div>
-        <div class="exp-bullet">Led high-volume production of 30+ survey-based reports per month while managing multiple concurrent projects under tight client deadlines.</div>
-        <div class="exp-bullet">Built Excel automation to validate incoming survey datasets, reducing manual errors and improving processing speed across the data quality pipeline.</div>
-        <div class="exp-bullet">Trusted to own the Visa account end-to-end — technical deliverables, stakeholder communication, and offshore team coordination.</div>
+      <div class="exp-bullets">
+        <div class="exp-bullet">Led resolution of a high-priority delayed project with VP-level visibility, coordinating across analyst, client services, and data processing teams; directly recognized by management for navigating competing priorities and driving it to completion</div>
+        <div class="exp-bullet">Delivered 30+ survey-based analytics reports per month for Fortune 500 clients including Visa, Microsoft, Samsung, and Subway — managing end-to-end execution from data validation and cleaning through analysis and final delivery</div>
+        <div class="exp-bullet">Selected alongside senior leadership as one of two analysts to support rollout of a Random Forest driver analysis solution; co-developed internal training materials and served as a point of contact for methodology questions during launch</div>
+        <div class="exp-bullet">Built Excel-based templates to validate incoming datasets from the data processing team, saving ~30 minutes per dataset and reducing data integrity issues before the analysis stage</div>
       </div>
 
       <div class="exp-tags" >
@@ -704,9 +666,9 @@ function toggleMobileNav() {
         <div class="exp-location">New York, NY</div>
       </div>
       <div class="exp-bullets">
-        <div class="exp-bullet">Promoted to analyst within 6 months after improving investigation workflows, reducing case retrieval time by ~50%.</div>
-        <div class="exp-bullet">Investigated 40–60 transactions per day using OSINT techniques to validate purchaser identities and reduce fraud exposure for e-commerce clients.</div>
-        <div class="exp-bullet">Identified emerging fraud patterns and presented findings to leadership, directly influencing client onboarding decisions and risk policy thresholds.</div>
+        <div class="exp-bullet">Promoted into analyst role within 6 months after improving investigation workflows, reducing case retrieval time by ~50%</div>
+        <div class="exp-bullet">Investigated 40–60 transactions per day using OSINT techniques to validate purchaser identities and reduce fraud exposure for client e-commerce stores</div>
+        <div class="exp-bullet">Identified emerging fraud patterns and presented findings to leadership, influencing client onboarding decisions and risk policy thresholds</div>
       </div>
       <div class="exp-tags">
         <span class="tag">Excel</span><span class="tag">Salesforce</span><span class="tag">Google Analytics</span><span class="tag">OSINT</span><span class="tag">Risk Analysis</span>

@@ -216,7 +216,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
   <!-- STATS -->
   <div class="stats-row fade-in">
     <div class="stat-box"><span class="stat-val">300K+</span><span class="stat-label">Loan Applicants</span></div>
-    <div class="stat-box"><span class="stat-val">0.30</span><span class="stat-label">Optimized Threshold</span></div>
+    <div class="stat-box"><span class="stat-val">0.25</span><span class="stat-label">Optimized Threshold</span></div>
     <div class="stat-box"><span class="stat-val">6</span><span class="stat-label">Dashboard Views</span></div>
     <div class="stat-box"><span class="stat-val">SHAP</span><span class="stat-label">Explainability Layer</span></div>
   </div>
@@ -325,7 +325,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
         <div class="step-num">02</div>
         <div>
           <div class="step-title">LightGBM Modeling with Optuna Tuning</div>
-          <div class="step-desc">Trained a LightGBM classifier with automated hyperparameter optimization via Optuna. Tuned the decision threshold to 0.30 to maximize recall — prioritizing detection of actual defaulters over false precision.</div>
+          <div class="step-desc">Trained a LightGBM classifier with automated hyperparameter optimization via Optuna. Tuned the decision threshold to 0.25 to maximize recall — prioritizing detection of actual defaulters over false precision.</div>
           <div class="step-tags"><span class="step-tag">LightGBM</span><span class="step-tag">Optuna</span><span class="step-tag">Threshold Tuning</span><span class="step-tag">AUC-ROC</span></div>
         </div>
       </div>
@@ -352,10 +352,10 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
   <div class="cs fade-in">
     <div class="st">Key Findings</div>
     <div class="findings-list">
-      <div class="finding">A threshold of <strong>0.30 rather than the default 0.50</strong> significantly improved recall — catching more actual defaulters at the cost of some precision. In credit risk, missing a true default is far more costly than a false positive.</div>
+      <div class="finding">A threshold of <strong>0.25 rather than the default 0.50</strong> significantly improved recall — catching more actual defaulters at the cost of some precision. In credit risk, missing a true default is far more costly than a false positive.</div>
       <div class="finding"><strong>External credit scores (EXT_SOURCE_2, EXT_SOURCE_3) and credit annuity ratio</strong> emerged as the strongest global predictors — consistent with domain intuition, which validates the model's behavior to risk managers.</div>
       <div class="finding">SHAP values revealed that <strong>the same features drive risk differently across Low, Medium, and High risk bands</strong> — a finding that wouldn't surface from global importance alone, with direct implications for segmented lending policy.</div>
-      <div class="finding">The confusion matrix shows <strong>843 true positives vs. 4,122 false negatives</strong> at threshold 0.30 — a deliberate trade-off favoring default detection in a class-imbalanced dataset (91% non-default).</div>
+      <div class="finding">The confusion matrix shows <strong>843 true positives vs. 4,122 false negatives</strong> at threshold 0.25 — a deliberate trade-off favoring default detection in a class-imbalanced dataset (91% non-default).</div>
       <div class="finding">Exporting structured CSVs from the modeling pipeline into Tableau made the model's outputs <strong>accessible to compliance, product, and executive audiences</strong> — no code required.</div>
     </div>
   </div>
@@ -371,7 +371,7 @@ main{position:relative;z-index:1;max-width:860px;margin:0 auto;padding:5rem 2rem
 
   <div class="case-footer fade-in">
     <a href="index.html#projects" class="footer-back">← back to all projects</a>
-    <span class="footer-note">Built by Saayed Alam · 2025</span>
+    <span class="footer-note">Built by Saayed Alam · 2026</span>
   </div>
 
 </main>

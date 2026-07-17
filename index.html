@@ -5,9 +5,9 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Saayed Alam — Data Analyst</title>
-<meta name="description" content="Saayed Alam — Data Analyst · SQL · Python · Tableau. Based in Toronto, open to remote. Previously at Ipsos serving Visa and Microsoft." />
+<meta name="description" content="Saayed Alam — Data Analyst with 4+ years across market research, reporting, risk operations, and data quality. Based in Toronto and open to remote roles." />
 <meta property="og:title" content="Saayed Alam — Data Analyst" />
-<meta property="og:description" content="Data Analyst · SQL · Python · Tableau. Formerly at Ipsos. Visa and Microsoft client work. Based in Toronto, open to remote." />
+<meta property="og:description" content="Data Analyst with professional experience in reporting, data quality, market research, and risk operations, plus hands-on SQL and BI portfolio work." />
 <meta property="og:type" content="website" />
 <meta property="og:url" content="https://saayedalam.me" />
 <!-- Google tag (gtag.js) -->
@@ -259,12 +259,18 @@ function toggleMobileNav() {
   .exp-tags { grid-column: 1/-1; display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.5rem; }
 
   /* PROJECTS */
-  .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px,1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .portfolio-context { background: var(--surface); border: 1px solid var(--border); padding: 1.25rem 1.5rem; margin-bottom: 1rem; }
+  .portfolio-context-title { font-family: var(--sans); font-size: 1rem; font-weight: 700; color: var(--text); }
+  .portfolio-context-meta { font-size: 11px; color: var(--accent); letter-spacing: 0.06em; margin-top: 0.25rem; }
+  .portfolio-context-copy { font-size: 12.5px; color: var(--muted); line-height: 1.75; margin-top: 0.65rem; }
+  .projects-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .project-card { background: var(--surface); padding: 1.75rem; display: flex; flex-direction: column; gap: 1rem; transition: background 0.2s; position: relative; }
   .project-card:hover { background: var(--surface2); }
   .project-card.hidden { display: none; }
-  .project-card.flagship { border-top: 2px solid var(--accent); }
-  .flagship-label { position: absolute; top: -1px; right: 1.5rem; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent); color: var(--bg); padding: 0.15rem 0.6rem; font-weight: 700; }
+  .project-card.featured { grid-column: span 2; border-top: 2px solid var(--accent); }
+  .project-card.supporting { grid-column: span 3; }
+  .project-card.lead { background: linear-gradient(145deg, var(--surface2), var(--surface)); }
+  .project-label { position: absolute; top: -1px; right: 1.5rem; font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; background: var(--accent); color: var(--bg); padding: 0.15rem 0.6rem; font-weight: 700; }
   .project-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 0.5rem; flex-wrap: wrap; }
   .project-icon { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-size: 16px; color: var(--accent); background: var(--surface2); flex-shrink: 0; }
   .project-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
@@ -274,6 +280,9 @@ function toggleMobileNav() {
   .badge-python{border-color:var(--accent3);color:var(--accent3)}
   .badge-streamlit{border-color:#58a6ff;color:#58a6ff}
   .badge-tableau{border-color:#e97627;color:#e97627}
+  .badge-dbt{border-color:#ff694b;color:#ff694b}
+  .badge-powerbi{border-color:#f2c811;color:#f2c811}
+  .badge-product{border-color:var(--accent2);color:var(--accent2)}
   .project-name { font-family: var(--sans); font-size: 1.05rem; font-weight: 700; color: var(--text); line-height: 1.3; }
   .project-desc { font-size: 12.5px; color: var(--muted); line-height: 1.75; }
   .project-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: auto; }
@@ -288,7 +297,7 @@ function toggleMobileNav() {
   .link-tableau:hover { background: #e97627; color: var(--bg); }
 
   /* EDUCATION */
-  .edu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .edu-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); }
   .edu-card { background: var(--surface); padding: 1.5rem 1.75rem; display: flex; flex-direction: column; gap: 0.4rem; transition: background 0.2s; }
   .edu-card:hover { background: var(--surface2); }
   .edu-degree { font-family: var(--sans); font-size: 1rem; font-weight: 700; color: var(--text); line-height: 1.3; }
@@ -297,10 +306,15 @@ function toggleMobileNav() {
 
   /* SKILLS */
   .skills-layout { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); }
+  .skills-note { max-width: 860px; margin: -0.75rem 0 1.5rem; color: var(--muted); font-size: 12px; line-height: 1.75; }
   .skill-group { background: var(--surface); padding: 1.25rem 1.5rem; }
   .skill-group.hidden { display: none; }
   .skill-group-title { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
   .skill-group-title::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+  .skill-evidence { font-size: 8px; letter-spacing: 0.08em; padding: 0.12rem 0.35rem; border: 1px solid var(--border); color: var(--muted); white-space: nowrap; }
+  .skill-evidence.professional { border-color: var(--accent2); color: var(--accent2); }
+  .skill-evidence.portfolio { border-color: var(--accent4); color: var(--accent4); }
+  .skill-evidence.mixed { border-color: var(--accent); color: var(--accent); }
   .skill-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .skill-chip {
     font-size: 11px; padding: 0.3rem 0.7rem;
@@ -368,6 +382,12 @@ function toggleMobileNav() {
   .fade-in.visible { opacity: 1; transform: translateY(0); }
 
   /* RESPONSIVE */
+  @media(max-width: 980px) and (min-width: 769px) {
+    .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .project-card.featured, .project-card.supporting { grid-column: span 1; }
+    .project-card.lead { grid-column: span 2; }
+  }
+
   @media(max-width: 768px) {
     /* NAV */
     nav { padding: 0 1rem; }
@@ -417,6 +437,10 @@ function toggleMobileNav() {
     .exp-card { grid-template-columns: 1fr; }
     .exp-period, .exp-location { text-align: left; }
 
+    /* PROJECTS */
+    .projects-grid { grid-template-columns: 1fr; }
+    .project-card.featured, .project-card.supporting { grid-column: span 1; }
+
     /* EDUCATION */
     .edu-grid { grid-template-columns: 1fr; }
 
@@ -464,7 +488,7 @@ function toggleMobileNav() {
 <!-- MOBILE MENU -->
 <div id="mobile-menu">
   <a href="#projects" onclick="toggleMobileNav()">projects</a>
-  <a href="#experience" onclick="toggleMobileNav()">projects</a>
+  <a href="#experience" onclick="toggleMobileNav()">experience</a>
   <a href="#skills" onclick="toggleMobileNav()">skills</a>
   <a href="#contact" onclick="toggleMobileNav()">contact</a>
   <a href="blog.html" onclick="toggleMobileNav()">blogs</a>
@@ -474,7 +498,7 @@ function toggleMobileNav() {
 <!-- TICKER -->
 <div class="ticker">
   <span class="ticker-inner" id="ticker-text">
-    &nbsp;&nbsp;SQL · Python · Power BI · Tableau · Data Analysis · A/B Testing · Statistical Modeling · Stakeholder Reporting · Visualization · Fintech · Banking · Market Research · Healthcare · Insights · Dashboards · KPIs · SQL · Python · Power BI · Tableau · Data Analysis · A/B Testing · Statistical Modeling · Stakeholder Reporting · Visualization · Fintech · Banking · Market Research · Healthcare · Insights · Dashboards · KPIs ·&nbsp;&nbsp;
+    &nbsp;&nbsp;Reporting · Data Validation · Data Quality · KPI Analysis · SQL · Excel · Power BI · Tableau · Stakeholder Delivery · Risk Analytics · Fraud Analysis · Market Research · Consumer Insights · Dashboard Design · Process Improvement · Reporting · Data Validation · Data Quality · KPI Analysis · SQL · Excel · Power BI · Tableau · Stakeholder Delivery · Risk Analytics · Fraud Analysis · Market Research · Consumer Insights · Dashboard Design · Process Improvement ·&nbsp;&nbsp;
   </span>
 </div>
 
@@ -488,31 +512,31 @@ function toggleMobileNav() {
     <div class="hero-name"><h1>Saayed<br/>
       <span class="hl">Alam</span></h1></div>
 
-    <div class="hero-role" >Data Analyst · SQL · Python · Tableau</div>
+    <div class="hero-role" >Data Analyst · Reporting · Data Quality · Business Insights</div>
 
     <div class="hero-grid">
       <div class="hero-stat">
-        <span class="hero-stat-val">3+</span>
-        <span class="hero-stat-label">Years in Analytics</span>
+        <span class="hero-stat-val">4+</span>
+        <span class="hero-stat-label">Analytics Experience</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-val">F500</span>
-        <span class="hero-stat-label">Visa · Microsoft</span>
+        <span class="hero-stat-val">2.5</span>
+        <span class="hero-stat-label">Years at Ipsos</span>
       </div>
       <div class="hero-stat">
-        <span class="hero-stat-val" id="s3v">Ipsos</span>
-        <span class="hero-stat-label" id="s3l">Fortune 500 Clients</span>
+        <span class="hero-stat-val" id="s3v">F500</span>
+        <span class="hero-stat-label" id="s3l">Visa · Microsoft</span>
       </div>
     </div>
 
     <div class="about-text">
-      <p>Background in market research analytics supporting Fortune 500 brand tracking, with hands-on experience in <strong>credit risk modeling</strong> and consumer trend analysis. Experienced building end-to-end analytical workflows — from data cleaning and modeling to dashboards and executive reporting.</p>
+      <p>Analytics professional with <strong>4+ years across market research, data analysis, and risk operations</strong>, including 2.5 years as a Data Analyst at Ipsos. I turn stakeholder questions and complex data into validated reporting, KPI analysis, dashboards, and clear business findings. My recent portfolio adds hands-on SQL, Power BI, Tableau, and Python evidence across financial services, healthcare, and consumer insights.</p>
     </div>
 
     <div class="hero-cta">
-      <a href="#experience" class="btn btn-primary">› view my work</a>
+      <a href="#projects" class="btn btn-primary">› view my work</a>
       <a href="#contact" class="btn btn-secondary">› get in touch</a>
-      <a href="https://saayedalam.me/dawnly" target="_blank" rel="noopener noreferrer" class="btn" style="border-color:var(--accent2);color:var(--accent2);">› currently building: Dawnly</a>
+      <a href="https://dawnly.news" target="_blank" rel="noopener noreferrer" class="btn" style="border-color:var(--accent2);color:var(--accent2);">› explore Dawnly — live daily product</a>
     </div>
   </div>
 
@@ -535,32 +559,36 @@ function toggleMobileNav() {
   <div class="section-label">projects</div>
   <h2 class="section-heading">Featured Work</h2>
   <div class="section-divider"></div>
+  <div class="portfolio-context fade-in">
+    <div class="portfolio-context-title">Self-Directed Portfolio Development</div>
+    <div class="portfolio-context-meta">July–December 2025</div>
+    <div class="portfolio-context-copy">Following family and caregiving responsibilities after Ipsos, I spent approximately six months building five self-directed analytics projects and this portfolio website. After an intentional personal break, I am now actively returning to data analytics roles.</div>
+  </div>
   <div class="projects-grid fade-in" id="projects-grid">
 
 
 
-    <div class="project-card flagship">
-      <span class="flagship-label">flagship</span>
+    <div class="project-card featured lead">
+      <span class="project-label">lead project</span>
       <div class="project-header">
-        <div class="project-icon">◈</div>
+        <div class="project-icon">▦</div>
         <div class="project-badges">
-          <span class="project-badge badge-ml">ML</span>
-          <span class="project-badge badge-tableau">Tableau</span>
+          <span class="project-badge badge-dbt">dbt</span>
+          <span class="project-badge badge-powerbi">Power BI</span>
         </div>
       </div>
-      <div class="project-name">Interpretable Credit Risk Scoring</div>
-      <div class="project-desc">Predicted loan default risk across 300K+ applicants using LightGBM — then made the model explainable with SHAP so non-technical stakeholders could act on it. Live Tableau dashboard covers model results, feature importance, and risk segmentation.</div>
+      <div class="project-name">Fintech Analytics Engineering Platform</div>
+      <div class="project-desc">Built a layered dbt and BigQuery workflow that transforms historical Freddie Mac and FRED data into tested, documented marts for Power BI mortgage delinquency analysis. The included project evidence records 8 models and 24 passing tests.</div>
       <div class="project-tags">
-        <span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Python</span><span class="tag">Tableau</span><span class="tag">PD Modeling</span><span class="tag">Fintech</span>
+        <span class="tag">SQL</span><span class="tag">dbt Cloud</span><span class="tag">BigQuery</span><span class="tag">Power BI</span><span class="tag">Data Quality</span><span class="tag">Mortgage Risk</span>
       </div>
       <div class="project-links">
-        <a href="credit-risk.html" class="project-link link-demo">› Case Study</a>
-        <a href="https://github.com/saayedalam/Interpretable-Home-Credit-Risk" class="project-link link-github" target="_blank" rel="noopener noreferrer">⌥ GitHub</a>
-        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/LoanDefaultRiskAnalysisModelResultsSHAPMetrics/0-Overview" class="project-link link-tableau" target="_blank" rel="noopener noreferrer">↗ Dashboard</a>
+        <a href="fintech-ae.html" class="project-link link-demo">› Case Study</a>
+        <a href="https://github.com/saayedalam/fintech-ae-platform" class="project-link link-github" target="_blank" rel="noopener noreferrer">⌥ GitHub</a>
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card featured">
       <div class="project-header">
         <div class="project-icon">⬕</div>
         <div class="project-badges">
@@ -569,7 +597,7 @@ function toggleMobileNav() {
         </div>
       </div>
       <div class="project-name">CMS Hospital SQL Analysis</div>
-      <div class="project-desc">Used 28 advanced SQL queries to analyze 6,000+ US hospitals — uncovering regional infrastructure gaps, service disparities, and quality patterns. Findings visualized in a Tableau story designed for non-technical decision makers.</div>
+      <div class="project-desc">Used 28 SQL queries to analyze a snapshot of 6,000+ Medicare-registered U.S. hospitals across facility counts, ownership, quality ratings, and reported emergency services. Findings are presented descriptively in a Tableau story.</div>
       <div class="project-tags">
         <span class="tag">SQL</span><span class="tag">PostgreSQL</span><span class="tag">Tableau</span><span class="tag">Healthcare</span>
       </div>
@@ -580,7 +608,47 @@ function toggleMobileNav() {
       </div>
     </div>
 
-    <div class="project-card">
+    <div class="project-card featured">
+      <div class="project-header">
+        <div class="project-icon">◈</div>
+        <div class="project-badges">
+          <span class="project-badge badge-ml">ML</span>
+          <span class="project-badge badge-tableau">Tableau</span>
+        </div>
+      </div>
+      <div class="project-name">Interpretable Credit Risk Scoring</div>
+      <div class="project-desc">Built a proof-of-concept LightGBM model across 300K+ applications, evaluated threshold trade-offs, and used SHAP plus Tableau to make model results and feature contributions reviewable.</div>
+      <div class="project-tags">
+        <span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Python</span><span class="tag">Tableau</span><span class="tag">PD Modeling</span><span class="tag">Fintech</span>
+      </div>
+      <div class="project-links">
+        <a href="credit-risk.html" class="project-link link-demo">› Case Study</a>
+        <a href="https://github.com/saayedalam/Interpretable-Home-Credit-Risk" class="project-link link-github" target="_blank" rel="noopener noreferrer">⌥ GitHub</a>
+        <a href="https://public.tableau.com/app/profile/saayed.alam/viz/LoanDefaultRiskAnalysisModelResultsSHAPMetrics/0-Overview" class="project-link link-tableau" target="_blank" rel="noopener noreferrer">↗ Dashboard</a>
+      </div>
+    </div>
+
+    <div class="project-card supporting">
+      <div class="project-header">
+        <div class="project-icon">◫</div>
+        <div class="project-badges">
+          <span class="project-badge badge-product">Live Product</span>
+          <span class="project-badge badge-python">Python</span>
+        </div>
+      </div>
+      <div class="project-name">Dawnly</div>
+      <div class="project-desc">Built a live daily news product that fetches from 50 curated RSS sources, clusters related coverage, ranks story groups, generates Claude summaries, and publishes a fixed top-10 edition. Its automated pipeline, archive, and subscriber newsletter are in active use.</div>
+      <div class="project-tags">
+        <span class="tag">Python</span><span class="tag">NLP</span><span class="tag">Claude</span><span class="tag">GitHub Actions</span><span class="tag">Newsletter</span><span class="tag">Product Delivery</span>
+      </div>
+      <div class="project-links">
+        <a href="dawnly.html" class="project-link link-demo">› Case Study</a>
+        <a href="https://dawnly.news" class="project-link link-demo" target="_blank" rel="noopener noreferrer">↗ Live Product</a>
+        <a href="https://github.com/saayedalam/dawnly" class="project-link link-github" target="_blank" rel="noopener noreferrer">⌥ GitHub</a>
+      </div>
+    </div>
+
+    <div class="project-card supporting">
       <div class="project-header">
         <div class="project-icon">〜</div>
         <div class="project-badges">
@@ -589,14 +657,13 @@ function toggleMobileNav() {
         </div>
       </div>
       <div class="project-name">Meditation Trend Pulse</div>
-      <div class="project-desc">Tracked shifting global interest in meditation across 50+ countries using Google Trends data — with Prophet forecasting to project future momentum. Automated daily pipeline feeds a live multi-page Streamlit dashboard.</div>
+      <div class="project-desc">Built a reproducible workflow for normalized Google Trends relative-interest data, with configurable updates, Prophet forecast demonstrations, and a multi-page Streamlit dashboard.</div>
       <div class="project-tags">
         <span class="tag">Python</span><span class="tag">Prophet</span><span class="tag">Streamlit</span><span class="tag">Forecasting</span><span class="tag">Automation</span>
       </div>
       <div class="project-links">
         <a href="meditation-trends.html" class="project-link link-demo">› Case Study</a>
         <a href="https://github.com/saayedalam/Meditation-Trend-Pulse" class="project-link link-github" target="_blank" rel="noopener noreferrer">⌥ GitHub</a>
-        <a href="https://meditationtrendpulse.streamlit.app/" class="project-link link-tableau" target="_blank" rel="noopener noreferrer">↗ Dashboard</a>
       </div>
     </div>
 
@@ -609,26 +676,6 @@ function toggleMobileNav() {
   <h2 class="section-heading">Work History</h2>
   <div class="section-divider"></div>
   <div class="experience-list fade-in">
-
-    <div class="exp-card">
-      <div>
-        <div class="exp-company">Independent Analytics Projects</div>
-        <div class="exp-title">Self-Directed · Data Analyst</div>
-      </div>
-      <div>
-        <div class="exp-period">Jan 2025 — Present</div>
-        <div class="exp-location">Toronto, ON</div>
-      </div>
-      <div class="exp-bullets">
-        <div class="exp-bullet">Built a LightGBM classification model across 5 iterations to predict loan default probability on 300K+ applicants, achieving ROC-AUC of 0.76 on highly imbalanced data (91% non-default) <a href="credit-risk.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Wrote 28 stakeholder-framed SQL queries in PostgreSQL using CTEs, window functions, aggregations, and CASE logic to analyze quality ratings, ownership structures, and emergency service coverage across 6,000+ hospitals <a href="hospital-sql.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-        <div class="exp-bullet">Built an automated data pipeline ingesting Google Trends data via API daily, processing and versioning 9 cleaned datasets across global trends, country-level interest, and related queries <a href="meditation-trends.html" style="color:var(--accent);text-decoration:none;font-size:11px;">↗ case study</a></div>
-      </div>
-
-      <div class="exp-tags" >
-        <span class="tag">Python</span><span class="tag">SQL</span><span class="tag">Tableau</span><span class="tag">LightGBM</span><span class="tag">SHAP</span><span class="tag">Streamlit</span><span class="tag">Prophet</span>
-      </div>
-    </div>
 
     <div class="exp-card">
       <div>
@@ -685,7 +732,12 @@ function toggleMobileNav() {
       <div class="edu-meta">New York, NY · 2020</div>
     </div>
     <div class="edu-card">
-      <div class="edu-degree">Bachelor of Science in Applied Mathematics & Computer Science</div>
+      <div class="edu-degree">Bachelor of Science in Applied Mathematics</div>
+      <div class="edu-school">City Tech, CUNY</div>
+      <div class="edu-meta">New York, NY · 2018</div>
+    </div>
+    <div class="edu-card">
+      <div class="edu-degree">Associate of Science in Computer Science</div>
       <div class="edu-school">City Tech, CUNY</div>
       <div class="edu-meta">New York, NY · 2018</div>
     </div>
@@ -695,82 +747,84 @@ function toggleMobileNav() {
 <!-- SKILLS -->
 <section id="skills">
   <div class="section-label">skills</div>
-  <h2 class="section-heading">Technical Stack</h2>
+  <h2 class="section-heading">Analyst Toolkit</h2>
   <div class="section-divider"></div>
+  <p class="skills-note">Professional strengths are listed first. SQL, BI, Python, and machine-learning tools are supported mainly by self-directed portfolio or academic work unless noted.</p>
   <div class="skills-layout fade-in" id="skills-grid">
 
     <div class="skill-group">
-      <div class="skill-group-title">SQL & Databases</div>
+      <div class="skill-group-title">Reporting &amp; Data Quality <span class="skill-evidence professional">professional</span></div>
       <div class="skill-chips">
-        <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">SQL</a>
+        <span class="skill-chip primary">Data Validation</span>
+        <span class="skill-chip primary">Quality Control</span>
+        <span class="skill-chip primary">Recurring Reporting</span>
+        <span class="skill-chip">Ad Hoc Analysis</span>
+        <span class="skill-chip">KPI Reporting</span>
+        <span class="skill-chip">Excel</span>
+        <span class="skill-chip">SPSS</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Business Analysis &amp; Delivery <span class="skill-evidence professional">professional</span></div>
+      <div class="skill-chips">
+        <span class="skill-chip primary">Stakeholder Requirements</span>
+        <span class="skill-chip primary">Cross-Team Delivery</span>
+        <span class="skill-chip">Process Improvement</span>
+        <span class="skill-chip">Issue Resolution</span>
+        <span class="skill-chip">Deadline Management</span>
+        <span class="skill-chip">Data Storytelling</span>
+        <span class="skill-chip">Documentation</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">Risk &amp; Research <span class="skill-evidence professional">professional</span></div>
+      <div class="skill-chips">
+        <span class="skill-chip primary">Risk Analysis</span>
+        <span class="skill-chip primary">Fraud Investigation</span>
+        <span class="skill-chip primary">Market Research</span>
+        <span class="skill-chip">Consumer Insights</span>
+        <span class="skill-chip">Survey Analytics</span>
+        <span class="skill-chip">Brand Tracking</span>
+        <span class="skill-chip">Segmentation</span>
+      </div>
+    </div>
+
+    <div class="skill-group">
+      <div class="skill-group-title">SQL &amp; Data Platforms <span class="skill-evidence portfolio">portfolio</span></div>
+      <div class="skill-chips">
+        <a href="hospital-sql.html" class="skill-chip skill-link primary" title="See this skill in action → Hospital SQL project">SQL</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">PostgreSQL</a>
         <span class="skill-chip">BigQuery</span>
+        <span class="skill-chip">dbt</span>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Window Functions</a>
         <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">CTEs</a>
-        <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Pivot Queries</a>
+        <span class="skill-chip">Data Modeling</span>
       </div>
     </div>
 
     <div class="skill-group">
-      <div class="skill-group-title">BI & Visualization</div>
+      <div class="skill-group-title">BI &amp; Visualization <span class="skill-evidence mixed">professional + portfolio</span></div>
       <div class="skill-chips">
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Tableau</a>
+        <span class="skill-chip primary">Dashboard Design</span>
+        <span class="skill-chip primary">Stakeholder Reporting</span>
         <span class="skill-chip">Power BI</span>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Tableau</a>
+        <span class="skill-chip">PowerPoint</span>
         <a href="meditation-trends.html" class="skill-chip skill-link" title="See this skill in action → Meditation Trend Pulse">Streamlit</a>
-        <span class="skill-chip">Dashboard Design</span>
-        <span class="skill-chip">Data Storytelling</span>
       </div>
     </div>
 
     <div class="skill-group">
-      <div class="skill-group-title">Python & ML</div>
+      <div class="skill-group-title">Python &amp; Applied ML <span class="skill-evidence portfolio">portfolio + academic</span></div>
       <div class="skill-chips">
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Python</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Pandas</a>
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">NumPy</a>
+        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Scikit-learn</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">LightGBM</a>
         <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">SHAP</a>
         <a href="meditation-trends.html" class="skill-chip skill-link" title="See this skill in action → Meditation Trend Pulse">Prophet</a>
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Scikit-learn</a>
-      </div>
-    </div>
-
-    <div class="skill-group">
-      <div class="skill-group-title">Analysis & Stats</div>
-      <div class="skill-chips">
-        <span class="skill-chip">A/B Testing</span>
-        <span class="skill-chip">Hypothesis Testing</span>
-        <span class="skill-chip">Research Analytics</span>
-        <span class="skill-chip">KPI Reporting</span>
-        <a href="meditation-trends.html" class="skill-chip skill-link" title="See this skill in action → Meditation Trend Pulse">Trend Analysis</a>
-        <span class="skill-chip">Variance Analysis</span>
-      </div>
-    </div>
-
-
-
-    <div class="skill-group">
-      <div class="skill-group-title">Workflow & Tools</div>
-      <div class="skill-chips">
-        <span class="skill-chip">GitHub</span>
-        <span class="skill-chip">JupyterLab</span>
-        <span class="skill-chip">Excel</span>
-        <span class="skill-chip">Notion</span>
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Optuna</a>
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">MLflow</a>
-      </div>
-    </div>
-
-    <div class="skill-group">
-      <div class="skill-group-title">Domain Knowledge</div>
-      <div class="skill-chips">
-        <span class="skill-chip">Fintech</span>
-        <span class="skill-chip">Banking</span>
-        <span class="skill-chip">Market Research</span>
-        <a href="hospital-sql.html" class="skill-chip skill-link" title="See this skill in action → Hospital SQL project">Healthcare Analytics</a>
-        <span class="skill-chip">Survey Methodology</span>
-        <a href="credit-risk.html" class="skill-chip skill-link" title="See this skill in action → Credit Risk project">Risk Analysis</a>
-        <span class="skill-chip">Brand Analytics</span>
       </div>
     </div>
 

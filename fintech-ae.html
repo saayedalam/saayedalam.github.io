@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="canonical" href="https://saayedalam.me/fintech-ae"/>
+<link rel="icon" href="favicon.ico"/>
+<title>Fintech Analytics Engineering Platform — Saayed Alam</title>
+<meta name="description" content="Case study: A dbt, BigQuery, and Power BI mortgage delinquency analytics workflow built from a historical Freddie Mac and FRED data snapshot."/>
+<meta property="og:title" content="Fintech Analytics Engineering Platform — Saayed Alam"/>
+<meta property="og:description" content="Layered dbt models, data-quality tests, BigQuery marts, and a Power BI mortgage delinquency dashboard built from a historical portfolio snapshot."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://saayedalam.me/fintech-ae"/>
+<meta property="og:image" content="https://saayedalam.me/assets/og-image.png"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2QNCLVX354"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2QNCLVX354');</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="case-study.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">saayedalam<span>.me</span></a>
+  <div class="nav-right">
+    <a href="index.html#projects" class="nav-back">← back to portfolio</a>
+    <button type="button" class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+  </div>
+</nav>
+<main>
+  <header class="fade-in">
+    <div class="case-label">Case Study · Lead Analyst Project</div>
+    <h1 class="case-title">Fintech Analytics Engineering Platform</h1>
+    <p class="case-subtitle">A portfolio workflow that transforms a historical Freddie Mac and FRED data snapshot into tested, documented, BI-ready mortgage delinquency marts using dbt Cloud, BigQuery, and Power BI.</p>
+    <div class="case-meta">
+      <span class="meta-tag hi">SQL</span><span class="meta-tag hi">dbt Cloud</span><span class="meta-tag hi">BigQuery</span><span class="meta-tag hi">Power BI</span>
+      <span class="meta-tag">Data Quality</span><span class="meta-tag">Data Modeling</span><span class="meta-tag">Mortgage Risk</span>
+    </div>
+    <div class="case-links">
+      <a href="https://github.com/saayedalam/fintech-ae-platform" target="_blank" rel="noopener noreferrer" class="case-link primary">⌥ GitHub Repo</a>
+      <a href="https://github.com/saayedalam/fintech-ae-platform/blob/main/powerbi/fintech-ae-powerbi.pbix" target="_blank" rel="noopener noreferrer" class="case-link secondary">↗ Power BI File</a>
+    </div>
+  </header>
+
+  <div class="stats-row fade-in">
+    <div class="stat-box"><span class="stat-val">8</span><span class="stat-label">Recorded dbt Models</span></div>
+    <div class="stat-box"><span class="stat-val">24</span><span class="stat-label">Recorded Passing Tests</span></div>
+    <div class="stat-box"><span class="stat-val">3</span><span class="stat-label">BI-Ready Marts</span></div>
+    <div class="stat-box"><span class="stat-val">Jan–Jun</span><span class="stat-label">2025 Dashboard Window</span></div>
+  </div>
+
+  <section class="section fade-in">
+    <div class="section-title">The Analytical Need</div>
+    <div class="prose">
+      <p>Mortgage delinquency reporting requires consistent definitions, reliable loan-month data, and traceable transformations before a dashboard can be trusted.</p>
+      <p>This project simulates how an analytics team could organize that work: clean raw financial and macroeconomic inputs, centralize delinquency logic, test key assumptions, document lineage, and expose curated marts to Power BI.</p>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">Data Flow</div>
+    <div class="process-list">
+      <div class="process-step"><div class="step-num">01</div><div><div class="step-title">Historical Source Snapshot</div><div class="step-desc">Uses Freddie Mac acquisition and monthly-performance inputs plus the FRED 30-year mortgage-rate series. The inspection notebook references Q1 2025 files, while the dashboard covers January through June 2025.</div><div class="step-tags"><span class="step-tag">Freddie Mac</span><span class="step-tag">FRED</span><span class="step-tag">Static Snapshot</span></div></div></div>
+      <div class="process-step"><div class="step-num">02</div><div><div class="step-title">Staging Models</div><div class="step-desc">Renames generic fields, applies explicit types, and creates clean one-to-one source representations without adding business aggregations.</div><div class="step-tags"><span class="step-tag">SQL</span><span class="step-tag">Type Casting</span><span class="step-tag">Source Cleanup</span></div></div></div>
+      <div class="process-step"><div class="step-num">03</div><div><div class="step-title">Reusable Delinquency Logic</div><div class="step-desc">Intermediate models align the data to a loan-month grain and centralize monthly delinquency flags so downstream calculations do not duplicate logic.</div><div class="step-tags"><span class="step-tag">dbt</span><span class="step-tag">Loan-Month Grain</span><span class="step-tag">Reusable Logic</span></div></div></div>
+      <div class="process-step"><div class="step-num">04</div><div><div class="step-title">Marts, Tests, and Power BI</div><div class="step-desc">Three fact marts support monthly, credit-band, and servicer analysis. YAML documentation, tests, lineage, and a dbt exposure connect the curated output to the included Power BI dashboard.</div><div class="step-tags"><span class="step-tag">BigQuery</span><span class="step-tag">Testing</span><span class="step-tag">Documentation</span><span class="step-tag">Power BI</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">Evidence in the Repository</div>
+    <div class="evidence-grid">
+      <div class="evidence-card"><div class="evidence-kicker">Quality</div><div class="evidence-title">Recorded dbt results</div><div class="evidence-copy">The included dbt Catalog screenshot records eight successful models and 24 passing tests at project completion.</div></div>
+      <div class="evidence-card"><div class="evidence-kicker">Lineage</div><div class="evidence-title">Documented transformations</div><div class="evidence-copy">Source, staging, intermediate, and mart layers are represented in the project DAG with model and selected column documentation.</div></div>
+      <div class="evidence-card"><div class="evidence-kicker">Reporting</div><div class="evidence-title">Mortgage delinquency dashboard</div><div class="evidence-copy">Power BI presents monthly delinquency rates, lending channels, state filtering, and mortgage-rate context from a curated mart.</div></div>
+      <div class="evidence-card"><div class="evidence-kicker">Governance</div><div class="evidence-title">Explicit BI exposure</div><div class="evidence-copy">A dbt exposure documents the dashboard owner, business context, and dependency on the mart used by the included report.</div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">Metric Interpretation</div>
+    <div class="findings-list">
+      <div class="finding">The mart is aggregated at one record per loan per reporting month. Dashboard volume cards represent <strong>loan-month observations</strong>, not distinct loans.</div>
+      <div class="finding">Delinquency rate is calculated as delinquent loan-month observations divided by total loan-month observations within the selected filters.</div>
+      <div class="finding">The credit-band and servicer marts support additional analysis, while the included dashboard is connected to the monthly delinquency mart.</div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">Limitations</div>
+    <div class="boundary"><strong>Portfolio boundary:</strong> this is a completed historical snapshot, not a live production pipeline. The raw Freddie Mac files and populated BigQuery source tables are not included, freshness status in the recorded dbt evidence is unknown, and the project is not scheduled for ongoing ingestion. Reproduction requires obtaining the source data, loading matching schemas, and supplying a BigQuery dbt profile.</div>
+  </section>
+
+  <footer class="case-footer fade-in"><a href="index.html#projects" class="footer-back">← back to all projects</a><span class="footer-note">Built by Saayed Alam · 2026</span></footer>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement,b=document.getElementById('theme-toggle');h.classList.toggle('light');const light=h.classList.contains('light');b.textContent=light?'☀️':'🌙';localStorage.setItem('theme',light?'light':'dark');}
+(function(){if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light');document.getElementById('theme-toggle').textContent='☀️';}})();
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');}),{threshold:.08});document.querySelectorAll('.fade-in').forEach(element=>observer.observe(element));
+</script>
+</body>
+</html>

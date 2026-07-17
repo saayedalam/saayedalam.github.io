@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<link rel="canonical" href="https://saayedalam.me/dawnly"/>
+<link rel="icon" href="favicon.ico"/>
+<title>Dawnly Case Study — Saayed Alam</title>
+<meta name="description" content="Case study: Dawnly is a live daily global-news digest with RSS ingestion, semantic clustering, coverage-based ranking, Claude summaries, archives, and subscriber delivery."/>
+<meta property="og:title" content="Dawnly Case Study — Saayed Alam"/>
+<meta property="og:description" content="A live daily news product with a scheduled Python pipeline, semantic clustering, coverage-based ranking, AI summaries, archives, and subscriber delivery."/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="https://saayedalam.me/dawnly"/>
+<meta property="og:image" content="https://saayedalam.me/assets/og-image.png"/>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-2QNCLVX354"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-2QNCLVX354');</script>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&amp;family=Syne:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="case-study.css"/>
+</head>
+<body>
+<nav>
+  <a href="index.html" class="nav-logo">saayedalam<span>.me</span></a>
+  <div class="nav-right">
+    <a href="index.html#projects" class="nav-back">← back to portfolio</a>
+    <button type="button" class="theme-toggle" id="theme-toggle" onclick="toggleTheme()" title="Toggle light/dark">🌙</button>
+  </div>
+</nav>
+<main>
+  <header class="fade-in">
+    <div class="case-label">Case Study · Live Daily Product</div>
+    <h1 class="case-title">Dawnly</h1>
+    <p class="case-subtitle">A calm daily top-10 global-news digest built as a complete product: scheduled RSS ingestion, semantic clustering, coverage-based ranking, Claude-generated summaries, a fixed daily edition, archives, and subscriber delivery.</p>
+    <div class="case-meta">
+      <span class="meta-tag hi">Live Product</span><span class="meta-tag hi">Python</span><span class="meta-tag hi">NLP</span><span class="meta-tag hi">GitHub Actions</span>
+      <span class="meta-tag">Claude Haiku</span><span class="meta-tag">RSS</span><span class="meta-tag">Newsletter</span><span class="meta-tag">GitHub Pages</span>
+    </div>
+    <div class="case-links">
+      <a href="https://dawnly.news" target="_blank" rel="noopener noreferrer" class="case-link primary">↗ Open Dawnly</a>
+      <a href="https://github.com/saayedalam/dawnly" target="_blank" rel="noopener noreferrer" class="case-link secondary">⌥ GitHub Repo</a>
+    </div>
+  </header>
+
+  <div class="stats-row fade-in">
+    <div class="stat-box"><span class="stat-val">50</span><span class="stat-label">Curated RSS Sources</span></div>
+    <div class="stat-box"><span class="stat-val">10</span><span class="stat-label">Stories Per Edition</span></div>
+    <div class="stat-box"><span class="stat-val">3</span><span class="stat-label">Ranking Signals</span></div>
+    <div class="stat-box"><span class="stat-val">Daily</span><span class="stat-label">Scheduled Edition</span></div>
+  </div>
+
+  <section class="section fade-in">
+    <div class="section-title">Product Idea</div>
+    <div class="prose">
+      <p>Dawnly is designed as a finite morning paper: one shared edition, ten stories, no breaking-news feed, no infinite scroll, and no personalization.</p>
+      <p>The product question was both editorial and technical: how can coverage from a curated source set be grouped, ranked, summarized, published, archived, and delivered reliably enough to support a real daily reading habit?</p>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">Daily Pipeline</div>
+    <div class="process-list">
+      <div class="process-step"><div class="step-num">01</div><div><div class="step-title">Fetch and Deduplicate</div><div class="step-desc">Pulls recent headlines asynchronously from 50 curated global, regional, and niche RSS sources with retry and deduplication handling.</div><div class="step-tags"><span class="step-tag">aiohttp</span><span class="step-tag">feedparser</span><span class="step-tag">RSS</span></div></div></div>
+      <div class="process-step"><div class="step-num">02</div><div><div class="step-title">Cluster Related Coverage</div><div class="step-desc">Uses sentence-BERT embeddings and DBSCAN to group semantically similar articles, with entity-aware grouping for major stories that span multiple clusters.</div><div class="step-tags"><span class="step-tag">sentence-transformers</span><span class="step-tag">DBSCAN</span><span class="step-tag">spaCy</span></div></div></div>
+      <div class="process-step"><div class="step-num">03</div><div><div class="step-title">Rank Story Groups</div><div class="step-desc">Scores clusters using normalized mention volume, source reach, and geographic spread. The formula measures coverage within Dawnly's selected source set—not objective importance.</div><div class="step-tags"><span class="step-tag">Coverage Signals</span><span class="step-tag">Weighted Ranking</span><span class="step-tag">Normalization</span></div></div></div>
+      <div class="process-step"><div class="step-num">04</div><div><div class="step-title">Summarize and Publish</div><div class="step-desc">Generates two-sentence summaries with Claude Haiku and falls back to source headlines if the API fails. The pipeline writes the daily edition, commits the output, and GitHub Pages serves the frontend.</div><div class="step-tags"><span class="step-tag">Claude Haiku</span><span class="step-tag">Fallback Logic</span><span class="step-tag">GitHub Pages</span></div></div></div>
+      <div class="process-step"><div class="step-num">05</div><div><div class="step-title">Archive and Deliver</div><div class="step-desc">Stores dated editions, sends the subscriber newsletter through a separate scheduled workflow, and runs weekly source-health reporting.</div><div class="step-tags"><span class="step-tag">Archive</span><span class="step-tag">Newsletter</span><span class="step-tag">Monitoring</span></div></div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">Product Decisions</div>
+    <div class="evidence-grid">
+      <div class="evidence-card"><div class="evidence-kicker">Cadence</div><div class="evidence-title">One fixed edition</div><div class="evidence-copy">Readers see the same ten-story edition until the next scheduled morning update rather than a continuously changing feed.</div></div>
+      <div class="evidence-card"><div class="evidence-kicker">Attention</div><div class="evidence-title">Finite by design</div><div class="evidence-copy">No infinite scroll, push alerts, or engagement-based personalization. The product is meant to be read once and put down.</div></div>
+      <div class="evidence-card"><div class="evidence-kicker">Resilience</div><div class="evidence-title">Visible fallbacks</div><div class="evidence-copy">The summarization step has headline fallback behavior, while source-health reporting helps identify availability problems.</div></div>
+      <div class="evidence-card"><div class="evidence-kicker">Delivery</div><div class="evidence-title">Website plus newsletter</div><div class="evidence-copy">The same daily edition supports the public web product, dated archives, and an active subscriber email workflow.</div></div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">What the Ranking Means</div>
+    <div class="findings-list">
+      <div class="finding">A higher score means a story received stronger coverage signals <strong>within Dawnly's selected RSS sources</strong>.</div>
+      <div class="finding">The ranking does not establish objective importance, truth, neutrality, or coverage of the full global news landscape.</div>
+      <div class="finding">Grouped-story source totals count all unique contributing sources, while each card displays up to three source links for readability.</div>
+    </div>
+  </section>
+
+  <section class="section fade-in">
+    <div class="section-title">Limitations and Operating Boundary</div>
+    <div class="boundary"><strong>Live-system boundary:</strong> source selection, reach weights, clustering thresholds, and ranking rules are human design choices that may introduce bias. AI-generated summaries can omit context or contain errors, so every story links to cited sources. Daily operation also depends on external RSS feeds, GitHub Actions, and API availability.</div>
+  </section>
+
+  <footer class="case-footer fade-in"><a href="index.html#projects" class="footer-back">← back to all projects</a><span class="footer-note">Built by Saayed Alam · 2026</span></footer>
+</main>
+<script>
+function toggleTheme(){const h=document.documentElement,b=document.getElementById('theme-toggle');h.classList.toggle('light');const light=h.classList.contains('light');b.textContent=light?'☀️':'🌙';localStorage.setItem('theme',light?'light':'dark');}
+(function(){if(localStorage.getItem('theme')==='light'){document.documentElement.classList.add('light');document.getElementById('theme-toggle').textContent='☀️';}})();
+const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting)entry.target.classList.add('visible');}),{threshold:.08});document.querySelectorAll('.fade-in').forEach(element=>observer.observe(element));
+</script>
+</body>
+</html>
